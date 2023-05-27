@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pull": "node scripts/import.mjs"
   },
   "dependencies": {
     "@prisma/client": "4.12.0",

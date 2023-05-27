@@ -10,8 +10,27 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+model Tag {
+  id      Int      @id @default(autoincrement())
+  slug    String   @unique
+  title   String
+  recipes Recipe[]
+}
+
+model Category {
+  id      Int      @id @default(autoincrement())
+  slug    String   @unique
+  title   String
+  recipes Recipe[]
+}
+
 model Recipe {
-  id    Int     @id @default(autoincrement())
-  slug  String  @unique
-  title String
+  id              Int      @id @default(autoincrement())
+  slug            String   @unique
+  title           String
+  headline        String
+  preparationTime Int
+  category        Category @relation(fields: [categoryId], references: [id])
+  categoryId      Int
+  tags            Tag[]
 }
