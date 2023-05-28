@@ -36,5 +36,5 @@ jobs:
           git add .
           git add --force .next
           git commit -m 'Update'
-          git push dokku master --force
+          git push dokku HEAD --force
 
