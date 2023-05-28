@@ -11,8 +11,31 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
       - name: Install dependencies
-        run: yarn install
+        run: yarn install  --frozen-lockfile
+      - name: Migrate db
+        run: yarn prisma migrate deploy
+      - name: Pull data
+        run: yarn pull
       - name: Build
         run: yarn build
+      - uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.DOKKU_DEPLOY_KEY }}
+      - run: echo '167.71.190.115 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEYg+BGxM8IdEoQ8fx7aDoclC0eNXSpI6l/QkLRMF/cvjJcSCk4kz/4LEkSU8eXFawp8IX/yNOyV11sJZtCVBCs=' >> ~/.ssh/known_hosts
+      - run: |
+          git config --global user.email "deploy-bot@ertrzyiks.me"
+          git config --global user.name "Deploy Bot"
+          git remote add dokku dokku@167.71.190.115:yummy-next
+          git add .
+          git add --force .next
+          git add --force prisma
+          git commit -m 'Update'
+          git push dokku HEAD --force
 
