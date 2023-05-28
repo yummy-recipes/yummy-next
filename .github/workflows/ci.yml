@@ -35,6 +35,7 @@ jobs:
           git remote add dokku dokku@167.71.190.115:yummy-next
           git add .
           git add --force .next
+          git add --force prisma
           git commit -m 'Update'
           git push dokku HEAD --force
 
