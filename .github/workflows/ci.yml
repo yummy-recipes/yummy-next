@@ -17,6 +17,8 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install  --frozen-lockfile
+      - name: Migrate db
+        run: yarn prisma migrate deploy
       - name: Build
         run: yarn build
 
