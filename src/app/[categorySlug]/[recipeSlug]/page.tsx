@@ -10,8 +10,14 @@ interface Props {
   params: Params
 }
 
-export default function Page({ params }: Props) {
-  if (params.categorySlug !== 'obiady') {
+export default async function Page({ params }: Props) {
+  const category = await prisma.category.findUnique({
+    where: {
+      slug: params.categorySlug,
+    }
+  })
+
+  if (!category) {
     return notFound()
   }
 
