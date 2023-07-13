@@ -23,6 +23,8 @@ jobs:
         run: yarn prisma migrate deploy
       - name: Pull data
         run: yarn pull
+        env:
+          HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
       - name: Build
         run: yarn build
       - uses: webfactory/ssh-agent@v0.4.1
