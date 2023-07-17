@@ -43,7 +43,35 @@ async function getOrCreateCategory({ title, slug }) {
   })
 }
 
-async function createOrUpdateRecipes({ title, slug, category, headline, preparationTime }) {
+
+async function createRecipeBlocks({ recipeId, ingredients, instructions }) {
+  for (const ingredient of ingredients) {
+    await prisma.recipeIngredientBlock.create({
+      data: {
+        content: ingredient.content,
+        recipe: {
+          connect: {
+            id: recipeId
+          }
+        }
+      }
+    })
+  }
+
+  for (const instruction of instructions) {
+    await prisma.recipeInstructionBlock.create({
+      data: {
+        content: instruction.content,
+        recipe: {
+          connect: {
+            id: recipeId
+          }
+        }
+      }
+    })
+  }
+}
+async function createOrUpdateRecipes({ title, slug, category, headline, preparationTime, ingredients, instructions }) {
   const recipe = await prisma.recipe.findUnique({
     where: {
       slug
@@ -51,6 +79,12 @@ async function createOrUpdateRecipes({ title, slug, category, headline, preparat
   })
 
   if (recipe) {
+    await prisma.recipeIngredientBlock.deleteMany({
+      where: {
+        recipeId: recipe.id
+      }
+    })
+
     await prisma.recipe.update({
       where: {
         id: recipe.id
@@ -67,10 +101,12 @@ async function createOrUpdateRecipes({ title, slug, category, headline, preparat
         }
       }
     })
+
+    await createRecipeBlocks({ recipeId: recipe.id, ingredients, instructions })
     return
   }
 
-  await prisma.recipe.create({
+  const result = await prisma.recipe.create({
     data: {
       title,
       slug,
@@ -83,6 +119,8 @@ async function createOrUpdateRecipes({ title, slug, category, headline, preparat
       }
     }
   })
+
+  await createRecipeBlocks({ recipeId: result.id, ingredients, instructions })
 }
 
 function loadCategories() {
@@ -109,6 +147,14 @@ function loadRecipes() {
         category {
           id
           slug
+        }
+        ingredients {
+          id
+          content
+        }
+        instructions {
+          id
+          content
         }
       }
     }
@@ -141,7 +187,9 @@ async function main() {
       slug: recipe.slug,
       headline: recipe.headline,
       preparationTime: recipe.preparationTime,
-      category: { id: categoryMap[recipe.category.slug].id }
+      category: { id: categoryMap[recipe.category.slug].id },
+      ingredients: recipe.ingredients,
+      instructions: recipe.instructions
     })
   }
 }

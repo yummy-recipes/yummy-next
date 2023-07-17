@@ -31,6 +31,22 @@ CREATE TABLE "_RecipeToTag" (
     CONSTRAINT "_RecipeToTag_B_fkey" FOREIGN KEY ("B") REFERENCES "Tag" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "RecipeIngredientBlock" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "recipeId" INTEGER NOT NULL,
+    "content" TEXT NOT NULL,
+    CONSTRAINT "RecipeIngredientBlock_recipeId_fkey" FOREIGN KEY ("recipeId") REFERENCES "Recipe" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "RecipeInstructionBlock" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "recipeId" INTEGER NOT NULL,
+    "content" TEXT NOT NULL,
+    CONSTRAINT "RecipeInstructionBlock_recipeId_fkey" FOREIGN KEY ("recipeId") REFERENCES "Recipe" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Tag_slug_key" ON "Tag"("slug");
 

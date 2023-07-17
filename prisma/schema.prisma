@@ -24,13 +24,29 @@ model Category {
   recipes Recipe[]
 }
 
+model RecipeIngredientBlock {
+  id       Int    @id @default(autoincrement())
+  recipeId Int
+  content  String
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+}
+
+model RecipeInstructionBlock {
+  id       Int    @id @default(autoincrement())
+  recipeId Int
+  content  String
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+}
+
 model Recipe {
-  id              Int      @id @default(autoincrement())
-  slug            String   @unique
+  id              Int                      @id @default(autoincrement())
+  slug            String                   @unique
   title           String
   headline        String
   preparationTime Int
-  category        Category @relation(fields: [categoryId], references: [id])
+  category        Category                 @relation(fields: [categoryId], references: [id])
   categoryId      Int
   tags            Tag[]
+  ingredients     RecipeIngredientBlock[]
+  instructions    RecipeInstructionBlock[]
 }
