@@ -1,8 +1,7 @@
 import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
-
 import Link from 'next/link'
 
+const prisma = new PrismaClient()
 
 export default async function Home() {
   const recipes = await prisma.recipe.findMany({
@@ -12,7 +11,7 @@ export default async function Home() {
   })
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="flex flex-col items-center">
 
       {recipes.map((recipe) => (
         <div key={recipe.id} className="flex place-items-center">

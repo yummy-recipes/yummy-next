@@ -85,6 +85,12 @@ async function createOrUpdateRecipes({ title, slug, category, headline, preparat
       }
     })
 
+    await prisma.recipeInstructionBlock.deleteMany({
+      where: {
+        recipeId: recipe.id
+      }
+    })
+
     await prisma.recipe.update({
       where: {
         id: recipe.id

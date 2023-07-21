@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link'
 import { prisma } from '@/data'
 
 interface Params {
@@ -20,7 +21,27 @@ export default async function Page({ params }: Props) {
     return notFound()
   }
 
-  return <div>Category {category.title}</div>
+  const recipes = await prisma.recipe.findMany({
+    where: {
+      categoryId: category.id
+    },
+    include: {
+      category: true,
+    }
+  })
+
+  return (
+    <main className="flex flex-col items-center">
+
+      {recipes.map((recipe) => (
+        <div key={recipe.id} className="flex place-items-center">
+          <Link href={`/${recipe.category.slug}/${recipe.slug}`}>
+            {recipe.title}
+          </Link>
+        </div>
+      ))}
+    </main >
+  )
 }
 
 export async function generateStaticParams() {
