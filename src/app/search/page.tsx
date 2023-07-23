@@ -1,10 +1,22 @@
 import { PrismaClient } from '@prisma/client'
 import Link from 'next/link'
+import { SearchForm } from '@/components/search-form'
 
 const prisma = new PrismaClient()
 
-export default async function Home() {
+interface Props {
+  searchParams: { query: string }
+}
+
+export default async function Home({ searchParams }: Props) {
+  const { query } = searchParams
+
   const recipes = await prisma.recipe.findMany({
+    where: {
+      OR: [
+        { title: { contains: query } }
+      ]
+    },
     include: {
       category: true,
     }
@@ -12,13 +24,7 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center">
-      <form action="/search" className="flex justify-center align-center">
-        <div className="border">
-          <input name="query" />
-          <button type="submit">Search</button>
-        </div>
-      </form>
-
+      <SearchForm query={query} />
 
       {recipes.map((recipe) => (
         <div key={recipe.id} className="flex place-items-center">

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { prisma } from '@/data'
-import { Recipe } from '@/lib/ui/recipe'
+import { Recipe } from '@/components/recipe'
 
 interface Params {
   categorySlug: string
