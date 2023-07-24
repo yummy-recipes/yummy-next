@@ -144,7 +144,7 @@ function loadCategories() {
 function loadRecipes() {
   return graphql(`
     query LoadRecipes {
-      recipes {
+      recipes(where: { documentInStages_some: { stage: PUBLISHED } }) {
         id
         title
         slug
