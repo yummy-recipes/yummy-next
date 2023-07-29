@@ -71,7 +71,7 @@ async function createRecipeBlocks({ recipeId, ingredients, instructions }) {
     })
   }
 }
-async function createOrUpdateRecipes({ title, slug, category, headline, preparationTime, ingredients, instructions }) {
+async function createOrUpdateRecipes({ title, slug, category, coverImage, headline, preparationTime, ingredients, instructions }) {
   const recipe = await prisma.recipe.findUnique({
     where: {
       slug
@@ -100,6 +100,7 @@ async function createOrUpdateRecipes({ title, slug, category, headline, preparat
         slug,
         headline,
         preparationTime,
+        coverImage,
         category: {
           connect: {
             id: category.id
@@ -117,6 +118,7 @@ async function createOrUpdateRecipes({ title, slug, category, headline, preparat
       title,
       slug,
       headline,
+      coverImage,
       preparationTime,
       category: {
         connect: {
@@ -150,6 +152,9 @@ function loadRecipes() {
         slug
         headline
         preparationTime
+        cover {
+          url
+        }
         category {
           id
           slug
@@ -191,6 +196,7 @@ async function main() {
     await createOrUpdateRecipes({
       title: recipe.title,
       slug: recipe.slug,
+      coverImage: recipe.cover?.url,
       headline: recipe.headline,
       preparationTime: recipe.preparationTime,
       category: { id: categoryMap[recipe.category.slug].id },

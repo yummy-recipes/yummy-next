@@ -1,14 +1,18 @@
+import Image from 'next/image'
 import { markdownToHtml } from '@/lib/markdown'
 
 interface Props {
   title: string
+  coverImage: string
   ingredients: { id: number, content: string }[]
   instructions: { id: number, content: string }[]
 }
 
-export function Recipe({ title, ingredients, instructions }: Props) {
+export function Recipe({ title, coverImage, ingredients, instructions }: Props) {
   return (
     <div>
+      <Image src={coverImage} width={40} height={30} alt={`Photo of ${title}`} />
+      
       <h1 className="text-lg m-2">{title}</h1>
 
       <div className="border p-2 m-2">

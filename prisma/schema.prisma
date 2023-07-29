@@ -41,6 +41,7 @@ model RecipeInstructionBlock {
 model Recipe {
   id              Int                      @id @default(autoincrement())
   slug            String                   @unique
+  coverImage      String
   title           String
   headline        String
   preparationTime Int
