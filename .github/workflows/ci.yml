@@ -5,39 +5,44 @@ on:
     branches: [master]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
           cache: 'yarn'
+
       - name: Install dependencies
         run: yarn install  --frozen-lockfile
-      - name: Migrate db
-        run: yarn prisma migrate deploy
-      - name: Pull data
-        run: yarn pull
-        env:
-          HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
-      - name: Build
-        run: yarn build
-      - uses: webfactory/ssh-agent@v0.4.1
-        with:
-          ssh-private-key: ${{ secrets.DOKKU_DEPLOY_KEY }}
-      - run: echo '167.71.190.115 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEYg+BGxM8IdEoQ8fx7aDoclC0eNXSpI6l/QkLRMF/cvjJcSCk4kz/4LEkSU8eXFawp8IX/yNOyV11sJZtCVBCs=' >> ~/.ssh/known_hosts
-      - run: |
-          git config --global user.email "deploy-bot@ertrzyiks.me"
-          git config --global user.name "Deploy Bot"
-          git remote add dokku dokku@167.71.190.115:yummy-next
-          git add .
-          git add --force .next
-          git add --force prisma
-          git commit -m 'Update'
-          git push dokku HEAD --force
 
+  tag:
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - name: Create tag
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/latest/production',
+              sha: context.sha
+            })
+
+  deploy:
+    needs:
+      - test
+      - tag
+    uses: ./.github/workflows/deploy.yml@master
