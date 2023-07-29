@@ -25,24 +25,10 @@ jobs:
       - name: Install dependencies
         run: yarn install  --frozen-lockfile
 
-  tag:
-    runs-on: ubuntu-latest
-    needs:
-      - test
-    steps:
-      - name: Create tag
-        uses: actions/github-script@v5
-        with:
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'refs/tags/latest/production',
-              sha: context.sha
-            })
-
   deploy:
     needs:
       - test
-      - tag
     uses: ./.github/workflows/deploy.yml
+    with:
+      ref: ${{ github.sha }}
+    secrets: inherit

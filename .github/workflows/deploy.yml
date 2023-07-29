@@ -2,35 +2,63 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Reference to deploy'
+        default: 'latest/production'
   workflow_call:
+    inputs:
+      ref:
+        description: 'Reference to deploy'
+        type: string
+        default: 'latest/production'
+    secrets:
+      HYGRAPH_AUTH_TOKEN:
+        required: true
+      DOKKU_DEPLOY_KEY:
+        required: true
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: master
+          ref: ${{ github.event.inputs.ref || 'latest/production' }}
+
+      - name: Create tag
+        uses: actions/github-script@v5
+        with:
+          script: |
+            console.log(context.payload.inputs.ref)
+
       - uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
           cache: 'yarn'
+
       - name: Install dependencies
         run: yarn install  --frozen-lockfile
+
       - name: Migrate db
         run: yarn prisma migrate deploy
+
       - name: Pull data
         run: yarn pull
         env:
           HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
+
       - name: Build
         run: yarn build
+
       - uses: webfactory/ssh-agent@v0.4.1
         with:
           ssh-private-key: ${{ secrets.DOKKU_DEPLOY_KEY }}
+
       - run: echo '167.71.190.115 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEYg+BGxM8IdEoQ8fx7aDoclC0eNXSpI6l/QkLRMF/cvjJcSCk4kz/4LEkSU8eXFawp8IX/yNOyV11sJZtCVBCs=' >> ~/.ssh/known_hosts
+
       - run: |
           git config --global user.email "deploy-bot@ertrzyiks.me"
           git config --global user.name "Deploy Bot"
@@ -41,3 +69,14 @@ jobs:
           git commit -m 'Update'
           git push dokku HEAD --force
 
+      # - name: Create tag
+      #   uses: actions/github-script@v5
+      #   if: github.event.inputs.ref && github.event.inputs.ref != 'latest/production'
+      #   with:
+      #     script: |
+      #       github.rest.git.createRef({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         ref: 'refs/tags/latest/production',
+      #         sha: context.payload.inputs.ref
+      #       })
