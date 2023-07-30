@@ -61,7 +61,7 @@ jobs:
           git add --force .next
           git add --force prisma
           git commit -m 'Update'
-          git push dokku HEAD --force
+          git push dokku HEAD:master --force
 
       - name: Create tag
         uses: actions/github-script@v6
