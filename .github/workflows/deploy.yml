@@ -2,10 +2,6 @@ name: Release
 
 on:
   workflow_dispatch:
-    inputs:
-      ref:
-        description: 'Reference to deploy'
-        default: 'latest/production'
   workflow_call:
     inputs:
       ref:
@@ -63,14 +59,11 @@ jobs:
           git commit -m 'Update'
           git push dokku HEAD:master --force
 
-      - name: Create tag
-        uses: actions/github-script@v6
+      - uses: rickstaa/action-create-tag@v1
         if: inputs.ref && inputs.ref != 'latest/production'
         with:
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'refs/tags/latest/production',
-              sha: '${{ inputs.ref }}'
-            })
+          commit_sha: ${{ inputs.ref }}
+          tag: 'latest/production'
+          tag_exists_error: false
+          message: 'Latest production release'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
