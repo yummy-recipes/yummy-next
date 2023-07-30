@@ -64,6 +64,6 @@ jobs:
         with:
           commit_sha: ${{ inputs.ref }}
           tag: 'latest/production'
-          tag_exists_error: false
+          force_push_tag: true
           message: 'Latest production release'
           github_token: ${{ secrets.GITHUB_TOKEN }}
