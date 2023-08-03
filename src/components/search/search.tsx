@@ -1,9 +1,9 @@
 'use client'
 import { Fragment, useState } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
+import { useRouter } from 'next/navigation'
 import {
   useQuery,
-  useQueryClient,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
@@ -22,30 +22,20 @@ function useSearch({ query }: { query: string }) {
   })
 }
 
-const people = [
-  { id: 1, name: 'Wade Cooper' },
-  { id: 2, name: 'Arlene Mccoy' },
-  { id: 3, name: 'Devon Webb' },
-  { id: 4, name: 'Tom Cook' },
-  { id: 5, name: 'Tanya Fox' },
-  { id: 6, name: 'Hellen Schmidt' },
-]
-
 interface Props {
   query: string
   onChange: (value: string) => void
+  onSelected: (value: string) => void
   loading?: boolean
   error?: string
   results?: { id: string, label: string, url: string }[]
 }
 
 
-function SearchForm({ query, onChange, loading, error, results = [] }: Props) {
-  const [selected, setSelected] = useState(null)
-
+function SearchForm({ query, onChange, onSelected, loading, error, results = [] }: Props) {
   return (
     <div className="top-16 w-72">
-      <Combobox value={selected} onChange={setSelected}>
+      <Combobox onChange={(recipe: { value: string }) => onSelected(recipe.value)}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
@@ -113,7 +103,7 @@ function SearchForm({ query, onChange, loading, error, results = [] }: Props) {
   )
 }
 
-function SearchWidget() {
+function SearchWidget({ onSelected }: { onSelected: (value: string) => void }) {
   const [query, setQuery] = useState('')
 
   const { status, data, error, isFetching } = useSearch({ query })
@@ -122,6 +112,7 @@ function SearchWidget() {
     <SearchForm
       query={query}
       onChange={(value) => setQuery(value)}
+      onSelected={onSelected}
       loading={isFetching}
       results={data?.data ?? []}
     />
@@ -129,9 +120,11 @@ function SearchWidget() {
 }
 
 export function Search() {
+  const router = useRouter()
+
   return (
     <QueryClientProvider client={queryClient}>
-      <SearchWidget />
+      <SearchWidget onSelected={url => router.push(url)} />
     </QueryClientProvider>
   )
 }

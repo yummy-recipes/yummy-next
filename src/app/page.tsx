@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import Link from 'next/link'
-import { Search } from '@/components/search'
+import { Search } from '@/components/search/search'
 
 const prisma = new PrismaClient()
 
