@@ -1,8 +1,6 @@
-import { PrismaClient } from '@prisma/client'
 import Link from 'next/link'
 import { SearchForm } from '@/components/search-form/search-form'
-
-const prisma = new PrismaClient()
+import { search } from '@/lib/search'
 
 interface Props {
   searchParams: { query: string }
@@ -11,16 +9,7 @@ interface Props {
 export default async function Home({ searchParams }: Props) {
   const { query } = searchParams
 
-  const recipes = await prisma.recipe.findMany({
-    where: {
-      OR: [
-        { title: { contains: query } }
-      ]
-    },
-    include: {
-      category: true,
-    }
-  })
+  const recipes = await search(query)
 
   return (
     <main className="flex flex-col items-center">
