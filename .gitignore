@@ -8,3 +8,11 @@ prisma/dev.db-journal
 
 .DS_Store
 strapi-export
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
