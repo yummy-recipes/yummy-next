@@ -196,7 +196,7 @@ async function main() {
     await createOrUpdateRecipes({
       title: recipe.title,
       slug: recipe.slug,
-      coverImage: recipe.cover?.url,
+      coverImage: recipe.cover?.url ?? 'https://media.graphassets.com/eiXZ15TaNlZO4H8DQQQB',
       headline: recipe.headline,
       preparationTime: recipe.preparationTime,
       category: { id: categoryMap[recipe.category.slug].id },
