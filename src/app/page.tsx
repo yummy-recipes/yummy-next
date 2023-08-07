@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
-import Link from 'next/link'
+import { RecipeListItem } from '@/components/recipe-list-item/recipe-list-item'
+import { RecipeList } from '@/components/recipe-list/recipe-list'
 import { Search } from '@/components/search/search'
 
 const prisma = new PrismaClient()
@@ -17,15 +18,15 @@ export default async function Home() {
         <Search />
       </div>
 
-      <div>
+      <RecipeList>
         {recipes.map((recipe) => (
-          <div key={recipe.id} className="flex place-items-center">
-            <Link href={`/${recipe.category.slug}/${recipe.slug}`}>
-              {recipe.title}
-            </Link>
-          </div>
+          <RecipeListItem
+            key={recipe.id}
+            href={`/${recipe.category.slug}/${recipe.slug}`}
+            title={recipe.title}
+          />
         ))}
-      </div>
+      </RecipeList>
     </main >
   )
 }
