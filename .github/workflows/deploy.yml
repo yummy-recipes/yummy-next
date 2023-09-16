@@ -86,7 +86,7 @@ jobs:
           message: 'Latest production release'
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Reindex'
-        if: inputs.reindex == 'true'
+        if: inputs.reindex == true
         env:
           HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
           ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
