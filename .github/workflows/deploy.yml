@@ -8,8 +8,14 @@ on:
         description: 'Reference to deploy'
         type: string
         default: 'latest/production'
+      reindex:
+        description: 'Should reindex data?'
+        type: boolean
+        default: true
     secrets:
       HYGRAPH_AUTH_TOKEN:
+        required: true
+      ALGOLIA_ADMIN_KEY:
         required: true
       DOKKU_DEPLOY_KEY:
         required: true
@@ -79,3 +85,10 @@ jobs:
           force_push_tag: true
           message: 'Latest production release'
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'Reindex'
+        if: inputs.reindex == 'true'
+        env:
+          HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
+          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+        run: |
+          yarn reindex
