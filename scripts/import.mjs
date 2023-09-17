@@ -143,10 +143,10 @@ function loadCategories() {
   `)
 }
 
-function loadRecipes() {
+function loadRecipes(after = null, limit) {
   return graphql(`
-    query LoadRecipes {
-      recipes(where: { documentInStages_some: { stage: PUBLISHED } }) {
+    query LoadRecipes($after: String, $limit: Int) {
+      recipes(first: $limit, after: $after, where: { documentInStages_some: { stage: PUBLISHED } }) {
         id
         title
         slug
@@ -169,7 +169,7 @@ function loadRecipes() {
         }
       }
     }
-  `)
+  `, { after, limit })
 }
 
 async function main() {
@@ -190,20 +190,32 @@ async function main() {
     categoryMap[category.slug] = cat
   }
 
-  const { data: recipesData } = await loadRecipes()
+  let after = null
+  const limit = 100
 
-  for (const recipe of recipesData.recipes) {
-    await createOrUpdateRecipes({
-      title: recipe.title,
-      slug: recipe.slug,
-      coverImage: recipe.cover?.url ?? 'https://media.graphassets.com/eiXZ15TaNlZO4H8DQQQB',
-      headline: recipe.headline,
-      preparationTime: recipe.preparationTime,
-      category: { id: categoryMap[recipe.category.slug].id },
-      ingredients: recipe.ingredients,
-      instructions: recipe.instructions
-    })
-  }
+  do {
+    const { data: recipesData } = await loadRecipes(after, limit)
+
+    for (const recipe of recipesData.recipes) {
+      if (!recipe.category) {
+        console.log(`Recipe ${recipe.title} has no category`)
+        continue
+      }
+
+      await createOrUpdateRecipes({
+        title: recipe.title,
+        slug: recipe.slug,
+        coverImage: recipe.cover?.url ?? 'https://media.graphassets.com/eiXZ15TaNlZO4H8DQQQB',
+        headline: recipe.headline,
+        preparationTime: recipe.preparationTime,
+        category: { id: categoryMap[recipe.category.slug].id },
+        ingredients: recipe.ingredients,
+        instructions: recipe.instructions
+      })
+    }
+
+    after = recipesData.recipes.length === limit ? recipesData.recipes[recipesData.recipes.length - 1].id : null
+  } while (after)
 }
 
 main()
