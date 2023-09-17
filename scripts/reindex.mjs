@@ -23,10 +23,10 @@ async function graphql(query, variables = {}) {
 }
 
 
-function loadRecipes() {
+function loadRecipes(after = null, limit = 100) {
   return graphql(`
-    query LoadRecipes {
-      recipes(where: { documentInStages_some: { stage: PUBLISHED } }) {
+    query LoadRecipes($after: String, $limit: Int) {
+      recipes(first: $limit, after: $after, where: { documentInStages_some: { stage: PUBLISHED } }) {
         id
         title
         slug
@@ -41,23 +41,31 @@ function loadRecipes() {
         }
       }
     }
-  `)
+  `, { after, limit })
 }
 
 async function main() {
-  const { data: recipesData } = await loadRecipes()
+  let after = null
+  const limit = 100
 
-  const dataset = recipesData.recipes.map(recipe => ({
-    objectID: recipe.id,
-    slug: recipe.slug,
-    title: recipe.title,
-    description: recipe.headline,
-    content: recipe.ingredients.map(ingredient => ingredient.content).join(' ') + ' ' + recipe.instructions.map(instruction => instruction.content).join(' '),
-    updated_at: updatedAt
-  }))
+  do {
+    const { data: recipesData } = await loadRecipes(after, limit)
 
-  const index = client.initIndex('prod_recipes')
-  await index.saveObjects(dataset, { autoGenerateObjectIDIfNotExist: true })
+    const dataset = recipesData.recipes.map(recipe => ({
+      objectID: recipe.id,
+      slug: recipe.slug,
+      title: recipe.title,
+      description: recipe.headline,
+      content: recipe.ingredients.map(ingredient => ingredient.content).join(' ') + ' ' + recipe.instructions.map(instruction => instruction.content).join(' '),
+      updated_at: updatedAt
+    }))
+
+    const index = client.initIndex('prod_recipes')
+    await index.saveObjects(dataset, { autoGenerateObjectIDIfNotExist: true })
+
+    after = recipesData.recipes.length === limit ? recipesData.recipes[recipesData.recipes.length - 1].id : null
+  } while (after)
+
 
   await index.deleteBy({
     filters: 'updated_at < ' + updatedAt
