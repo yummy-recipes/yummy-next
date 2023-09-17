@@ -14,8 +14,10 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center">
-      <div>
-        <Search />
+      <div className="w-full px-5 py-3">
+        <div className="w-96">
+          <Search />
+        </div>
       </div>
 
       <RecipeList>

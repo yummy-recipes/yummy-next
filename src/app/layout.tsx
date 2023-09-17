@@ -26,7 +26,7 @@ export default async function RootLayout({
             categories.map((category) => ({ href: `/${category.slug}`, label: category.title }))
           }
         />
-        <div>
+        <div className="w-full">
           {children}
         </div>
 
