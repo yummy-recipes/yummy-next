@@ -1,4 +1,4 @@
-const algoliasearch = require('algoliasearch')
+import algoliasearch from 'algoliasearch'
 
 const contentEndpoint = 'https://api-eu-central-1.hygraph.com/v2/ckzhgf7f30mi901xs88ok02gc/master'
 const client = algoliasearch('J8YFF4CZ4C', process.env.ALGOLIA_ADMIN_KEY)
