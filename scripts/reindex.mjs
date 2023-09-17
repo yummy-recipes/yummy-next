@@ -48,6 +48,8 @@ async function main() {
   let after = null
   const limit = 100
 
+  const index = client.initIndex('prod_recipes')
+
   do {
     const { data: recipesData } = await loadRecipes(after, limit)
 
@@ -60,7 +62,6 @@ async function main() {
       updated_at: updatedAt
     }))
 
-    const index = client.initIndex('prod_recipes')
     await index.saveObjects(dataset, { autoGenerateObjectIDIfNotExist: true })
 
     after = recipesData.recipes.length === limit ? recipesData.recipes[recipesData.recipes.length - 1].id : null
