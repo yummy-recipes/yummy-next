@@ -37,12 +37,14 @@ export default async function Page({ params }: Props) {
   }
 
   return (
-    <Recipe
-      title={recipe.title}
-      coverImage={recipe.coverImage}
-      ingredients={recipe.ingredients}
-      instructions={recipe.instructions}
-    />
+    <div className="max-w-screen-xl mx-auto">
+      <Recipe
+        title={recipe.title}
+        coverImage={recipe.coverImage}
+        ingredients={recipe.ingredients}
+        instructions={recipe.instructions}
+      />
+    </div>
   )
 }
 
