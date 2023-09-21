@@ -19,14 +19,16 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header>
-          <div className="w-96">
-            <Search />
-          </div>
-        </Header>
+        <div className="max-w-7xl mx-auto">
+          <Header>
+            <div className="w-full sm:w-96 max-w-sm">
+              <Search />
+            </div>
+          </Header>
 
-        <div className="w-full mt-3">
-          {children}
+          <div className="w-full mt-3">
+            {children}
+          </div>
         </div>
       </body>
     </html>

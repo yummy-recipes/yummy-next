@@ -34,7 +34,7 @@ export default async function Home() {
     <main className="flex flex-col items-center gap-8">
       {groups.map(({ category, recipes }) => (
         <div className="w-full px-2 flex flex-col gap-4" key={category.id}>
-          <h2 className="text-2xl font-bold">{category.title}</h2>
+          <h2 className="text-2xl">{category.title}</h2>
 
           <RecipeList>
             {recipes.map((recipe) => (

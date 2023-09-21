@@ -12,7 +12,7 @@ export default function Header({ children }: Props) {
           <Link href="/" className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:ring-2 focus:ring-sky-300 focus:ring-opacity-75">Yummy</Link>
         </div>
 
-        <div>
+        <div className='flex justify-center'>
           {children}
         </div>
       </div >
