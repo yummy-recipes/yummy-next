@@ -21,6 +21,7 @@ CREATE TABLE "Recipe" (
     "headline" TEXT NOT NULL,
     "preparationTime" INTEGER NOT NULL,
     "categoryId" INTEGER NOT NULL,
+    "publishedAt" DATETIME NOT NULL,
     CONSTRAINT "Recipe_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
