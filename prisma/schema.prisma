@@ -50,4 +50,5 @@ model Recipe {
   tags            Tag[]
   ingredients     RecipeIngredientBlock[]
   instructions    RecipeInstructionBlock[]
+  publishedAt     DateTime
 }

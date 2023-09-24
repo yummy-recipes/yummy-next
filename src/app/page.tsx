@@ -5,17 +5,27 @@ import { RecipeList } from '@/components/recipe-list/recipe-list'
 
 const prisma = new PrismaClient()
 
-export default async function Home() {
-  const categories = await prisma.category.findMany()
+const tagSlugs = ['makaron', 'wegetarianskie', 'drozdzowe', 'ciasta']
 
-  const groupLoaders = categories.map(async (category) => {
+const bySlugPosition = (tag1: { slug: string }, tag2: { slug: string }) => tagSlugs.indexOf(tag1.slug) - tagSlugs.indexOf(tag2.slug)
+
+const upperCaseFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
+
+export default async function Home() {
+  const tags = await prisma.tag.findMany({ where: { slug: { in: tagSlugs } } })
+
+  const groupLoaders = tags.sort(bySlugPosition).map(async (tag) => {
     const recipes = await prisma.recipe.findMany({
       where: {
-        categoryId: category.id
+        tags: {
+          some: {
+            id: tag.id
+          }
+        }
       },
       take: 4,
       orderBy: {
-        id: 'desc'
+        publishedAt: 'desc'
       },
       include: {
         category: true,
@@ -23,7 +33,7 @@ export default async function Home() {
     })
 
     return {
-      category,
+      tag,
       recipes
     }
   })
@@ -32,9 +42,9 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center gap-8">
-      {groups.map(({ category, recipes }) => (
-        <div className="w-full px-2 flex flex-col gap-4" key={category.id}>
-          <h2 className="text-2xl">{category.title}</h2>
+      {groups.map(({ tag, recipes }) => (
+        <div className="w-full px-2 flex flex-col gap-4" key={tag.id}>
+          <h2 className="text-2xl">{upperCaseFirstLetter(tag.title)}</h2>
 
           <RecipeList>
             {recipes.map((recipe) => (
@@ -47,7 +57,7 @@ export default async function Home() {
           </RecipeList>
 
           <div className="flex justify-end">
-            <Link href={`/${category.slug}`} className="text-md text-blue-600">Zobacz wszystkie w kategorii {category.title}</Link>
+            <Link href={`/tag/${tag.slug}`} className="text-md text-blue-600">Zobacz wszystkie w kategorii {tag.title}</Link>
           </div>
         </div>
       ))}

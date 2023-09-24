@@ -43,6 +43,28 @@ async function getOrCreateCategory({ title, slug }) {
   })
 }
 
+async function getOrCreateTag({ title, slug }) {
+  const tag = await prisma.tag.findUnique({
+    where: {
+      slug
+    }
+  })
+
+  if (tag) {
+    return tag
+  }
+
+  console.log(`Creating tag ${title}...`)
+
+  return await prisma.tag.create({
+    data: {
+      title,
+      slug,
+      recipes: undefined
+    }
+  })
+}
+
 
 async function createRecipeBlocks({ recipeId, ingredients, instructions }) {
   for (const ingredient of ingredients) {
@@ -71,7 +93,7 @@ async function createRecipeBlocks({ recipeId, ingredients, instructions }) {
     })
   }
 }
-async function createOrUpdateRecipes({ title, slug, category, coverImage, headline, preparationTime, ingredients, instructions }) {
+async function createOrUpdateRecipes({ title, slug, category, coverImage, headline, preparationTime, publishedAt, ingredients, instructions, tags }) {
   const recipe = await prisma.recipe.findUnique({
     where: {
       slug
@@ -101,10 +123,14 @@ async function createOrUpdateRecipes({ title, slug, category, coverImage, headli
         headline,
         preparationTime,
         coverImage,
+        publishedAt,
         category: {
           connect: {
             id: category.id
           }
+        },
+        tags: {
+          connect: tags.map(tag => ({ id: tag.id }))
         }
       }
     })
@@ -120,10 +146,14 @@ async function createOrUpdateRecipes({ title, slug, category, coverImage, headli
       headline,
       coverImage,
       preparationTime,
+      publishedAt,
       category: {
         connect: {
           id: category.id
         }
+      },
+      tags: {
+        connect: tags.map(tag => ({ id: tag.id }))
       }
     }
   })
@@ -146,12 +176,18 @@ function loadCategories() {
 function loadRecipes(after = null, limit) {
   return graphql(`
     query LoadRecipes($after: String, $limit: Int) {
-      recipes(first: $limit, after: $after, where: { documentInStages_some: { stage: PUBLISHED } }) {
+      recipes(first: $limit, after: $after, stage: PUBLISHED) {
         id
         title
         slug
         headline
         preparationTime
+        publishedAt
+        tags {
+          id
+          title
+          slug
+        }
         cover {
           url
         }
@@ -202,6 +238,17 @@ async function main() {
         continue
       }
 
+      const dbTags = []
+
+      for (const tag of recipe.tags) {
+        const dbTag = await getOrCreateTag({
+          title: tag.title,
+          slug: tag.slug
+        })
+
+        dbTags.push(dbTag)
+      }
+
       await createOrUpdateRecipes({
         title: recipe.title,
         slug: recipe.slug,
@@ -210,7 +257,9 @@ async function main() {
         preparationTime: recipe.preparationTime,
         category: { id: categoryMap[recipe.category.slug].id },
         ingredients: recipe.ingredients,
-        instructions: recipe.instructions
+        instructions: recipe.instructions,
+        publishedAt: recipe.publishedAt,
+        tags: dbTags
       })
     }
 
