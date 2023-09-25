@@ -51,6 +51,7 @@ export default async function Home() {
               <RecipeListItem
                 key={recipe.id}
                 href={`/${recipe.category.slug}/${recipe.slug}`}
+                coverImage={recipe.coverImage}
                 title={recipe.title}
               />
             ))}
