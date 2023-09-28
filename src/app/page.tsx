@@ -43,7 +43,7 @@ export default async function Home() {
   return (
     <main className="flex flex-col items-center gap-8">
       {groups.map(({ tag, recipes }) => (
-        <div className="w-full px-2 flex flex-col gap-4" key={tag.id}>
+        <div className="w-full flex flex-col gap-4" key={tag.id}>
           <h2 className="text-2xl">{upperCaseFirstLetter(tag.title)}</h2>
 
           <RecipeList>
