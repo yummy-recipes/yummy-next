@@ -25,3 +25,10 @@
     )
     rgb(var(--background-start-rgb));
 } */
+
+.text-gradient {
+  background: #2E90DB;
+  background: linear-gradient(to right, #2E90DB 0%, #CF13C2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
