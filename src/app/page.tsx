@@ -13,8 +13,10 @@ const upperCaseFirstLetter = (string: string) => string.charAt(0).toUpperCase() 
 
 export default async function Home() {
   const tags = await prisma.tag.findMany({ where: { slug: { in: tagSlugs } } })
+  const recipeCount = await prisma.recipe.count()
 
   const groupLoaders = tags.sort(bySlugPosition).map(async (tag) => {
+
     const recipes = await prisma.recipe.findMany({
       where: {
         tags: {
@@ -47,7 +49,7 @@ export default async function Home() {
           Przepisy kulinarne
         </h1>
         <h2 className='text-lg'>
-          Kolekcja 118 domowych przepisów na pyszne dania
+          Kolekcja {recipeCount} domowych przepisów na pyszne dania
         </h2>
       </div>
 
