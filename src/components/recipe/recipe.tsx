@@ -10,18 +10,20 @@ interface Props {
 
 export function Recipe({ title, coverImage, ingredients, instructions }: Props) {
   return (
-    <div>
-      <Image src={coverImage} width={40} height={30} alt={`Photo of ${title}`} />
-      
-      <h1 className="text-lg m-2">{title}</h1>
+    <div className='flex flex-col w-full'>
+      <div className='my-12'>
+        <h1 className="text-gradient uppercase inline text-4xl">{title}</h1>
+      </div>
 
-      <div className="border p-2 m-2">
+      <Image src={coverImage} width={40} height={30} alt={`Photo of ${title}`} />
+
+      <div className="p-2 m-2">
         {ingredients.map(ingredient => (
           <div key={ingredient.id} dangerouslySetInnerHTML={{ __html: markdownToHtml(ingredient.content) }}></div>
         ))}
       </div>
 
-      <div className="border p-2 m-2">
+      <div className="p-2 m-2">
         {instructions.map(instruction => (
           <div key={instruction.id} dangerouslySetInnerHTML={{ __html: markdownToHtml(instruction.content) }}></div>
         ))}
