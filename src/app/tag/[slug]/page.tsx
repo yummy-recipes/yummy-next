@@ -1,10 +1,10 @@
-import { notFound } from 'next/navigation';
+import { notFound } from 'next/navigation'
+import { prisma } from '@/data'
 import { RecipeListItem } from '@/components/recipe-list-item/recipe-list-item'
 import { RecipeList } from '@/components/recipe-list/recipe-list'
-import { prisma } from '@/data'
 
 interface Params {
-  categorySlug: string
+  slug: string
 }
 
 interface Props {
@@ -12,19 +12,23 @@ interface Props {
 }
 
 export default async function Page({ params }: Props) {
-  const category = await prisma.category.findUnique({
+  const tag = await prisma.tag.findUnique({
     where: {
-      slug: params.categorySlug
+      slug: params.slug
     }
   })
 
-  if (!category) {
+  if (!tag) {
     return notFound()
   }
 
   const recipes = await prisma.recipe.findMany({
     where: {
-      categoryId: category.id
+      tags: {
+        some: {
+          id: tag.id
+        }
+      }
     },
     include: {
       category: true,
@@ -33,7 +37,8 @@ export default async function Page({ params }: Props) {
 
   return (
     <main className="w-full">
-      <h2 className="text-2xl my-8">Przepisy w kategorii {category.title}</h2>
+      <h2 className="text-2xl my-8">Przepisy w kategorii {tag.title}</h2>
+
       <RecipeList>
         {recipes.map((recipe) => (
           <RecipeListItem
@@ -46,12 +51,4 @@ export default async function Page({ params }: Props) {
       </RecipeList>
     </main >
   )
-}
-
-export async function generateStaticParams() {
-  const categories = await prisma.category.findMany()
-
-  return categories.map(category => ({
-    categorySlug: category.slug
-  }))
 }
