@@ -16,19 +16,29 @@
   }
 }
 
-/* body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
-
 .text-gradient {
   background: #2E90DB;
   background: linear-gradient(to right, #2E90DB 0%, #CF13C2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.animation {
+  animation-timeline: view(block -300px 100%);
+  animation-name: hide;
+  animation-fill-mode: both;
+  animation-duration: 1ms; /* Firefox requires this to apply the animation */
+  animation-timing-function: linear;
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
 }
