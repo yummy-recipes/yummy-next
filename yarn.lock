@@ -6617,14 +6617,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:7.2.0":
-  version: 7.2.0
-  resolution: "chromatic@npm:7.2.0"
+"chromatic@npm:7.6.0":
+  version: 7.6.0
+  resolution: "chromatic@npm:7.6.0"
   bin:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: 0f6bcd7e92137eee30690428737d19c539e4aacadd2227ec271b77f3803a9f1271f2deffaf234d362717923bef8c2f9e66f3f36585e358663e193ed49aa3886c
+  checksum: 5f473385cc2c152b43487646803a213f0dc3fcf9f7755a051040e31b5f8e67486b8a80fff3bbe0752bdb0e41851ff965b587f122938b35acf5c5eba1d3d1b9e4
   languageName: node
   linkType: hard
 
@@ -14685,7 +14685,7 @@ __metadata:
     "@types/react-dom": 18.2.8
     algoliasearch: 4.20.0
     autoprefixer: 10.4.16
-    chromatic: 7.2.0
+    chromatic: 7.6.0
     dotenv: 16.3.1
     eslint: 8.50.0
     eslint-config-next: 13.4.19
