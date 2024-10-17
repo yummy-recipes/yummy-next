@@ -5000,10 +5000,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.15.11":
-  version: 18.15.11
-  resolution: "@types/node@npm:18.15.11"
-  checksum: 977b4ad04708897ff0eb049ecf82246d210939c82461922d20f7d2dcfd81bbc661582ba3af28869210f7e8b1934529dcd46bff7d448551400f9d48b9d3bddec3
+"@types/node@npm:18.19.56":
+  version: 18.19.56
+  resolution: "@types/node@npm:18.19.56"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: 2660aa2e50ddb77e4ea4e29e6b917e942ca49ecbd46b6333a7aeffdffafc5d7e48f8a731b6570a61bebdd0ba8dc104a250c432bea00e70aec5a4cb6e6f2df771
   languageName: node
   linkType: hard
 
@@ -14000,6 +14002,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5"
+  checksum: 3192ef6f3fd5df652f2dc1cd782b49d6ff14dc98e5dced492aa8a8c65425227da5da6aafe22523c67f035a272c599bb89cfe803c1db6311e44bed3042fc25487
+  languageName: node
+  linkType: hard
+
 "unicode-canonical-property-names-ecmascript@npm:^2.0.0":
   version: 2.0.0
   resolution: "unicode-canonical-property-names-ecmascript@npm:2.0.0"
@@ -14680,7 +14689,7 @@ __metadata:
     "@storybook/testing-library": 0.2.0
     "@tanstack/react-query": 4.35.3
     "@types/marked": 5.0.1
-    "@types/node": 18.15.11
+    "@types/node": 18.19.56
     "@types/react": 18.2.23
     "@types/react-dom": 18.2.8
     algoliasearch: 4.20.0
