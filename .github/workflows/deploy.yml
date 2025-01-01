@@ -2,14 +2,19 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      reindex:
+        description: "Should reindex data?"
+        type: boolean
+        default: true
   workflow_call:
     inputs:
       ref:
-        description: 'Reference to deploy'
+        description: "Reference to deploy"
         type: string
-        default: 'latest/production'
+        default: "latest/production"
       reindex:
-        description: 'Should reindex data?'
+        description: "Should reindex data?"
         type: boolean
         default: true
     secrets:
@@ -35,7 +40,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install  --frozen-lockfile
@@ -81,12 +86,12 @@ jobs:
         if: inputs.ref && inputs.ref != 'latest/production'
         with:
           commit_sha: ${{ inputs.ref }}
-          tag: 'latest/production'
+          tag: "latest/production"
           force_push_tag: true
-          message: 'Latest production release'
+          message: "Latest production release"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: 'Reindex'
-        if: inputs.reindex == true
+      - name: "Reindex"
+        if: inputs.reindex == true || github.event.inputs.reindex == true
         env:
           HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
           ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
