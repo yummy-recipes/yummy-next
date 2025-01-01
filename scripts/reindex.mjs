@@ -1,9 +1,11 @@
-import algoliasearch from 'algoliasearch'
+import algoliasearch from "algoliasearch";
+import "dotenv/config";
 
-const contentEndpoint = 'https://api-eu-central-1.hygraph.com/v2/ckzhgf7f30mi901xs88ok02gc/master'
-const client = algoliasearch('J8YFF4CZ4C', process.env.ALGOLIA_ADMIN_KEY)
+const contentEndpoint =
+  "https://api-eu-central-1.hygraph.com/v2/ckzhgf7f30mi901xs88ok02gc/master";
+const client = algoliasearch("J8YFF4CZ4C", process.env.ALGOLIA_ADMIN_KEY);
 
-const updatedAt = new Date().getTime()
+const updatedAt = new Date().getTime();
 
 async function graphql(query, variables = {}) {
   const res = await fetch(contentEndpoint, {
@@ -11,66 +13,87 @@ async function graphql(query, variables = {}) {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: process.env.HYGRAPH_AUTH_TOKEN
+      Authorization: process.env.HYGRAPH_AUTH_TOKEN,
     },
     body: JSON.stringify({
       query,
       variables,
     }),
-  })
+  });
 
-  return res.json()
+  return res.json();
 }
 
-
 function loadRecipes(after = null, limit = 100) {
-  return graphql(`
-    query LoadRecipes($after: String, $limit: Int) {
-      recipes(first: $limit, after: $after, where: { documentInStages_some: { stage: PUBLISHED } }) {
-        id
-        title
-        slug
-        headline
-        ingredients {
+  return graphql(
+    `
+      query LoadRecipes($after: String, $limit: Int) {
+        recipes(
+          first: $limit
+          after: $after
+          where: { documentInStages_some: { stage: PUBLISHED } }
+        ) {
           id
-          content
-        }
-        instructions {
-          id
-          content
+          title
+          slug
+          headline
+          category {
+            slug
+          }
+          tags {
+            slug
+          }
+          ingredients {
+            id
+            content
+          }
+          instructions {
+            id
+            content
+          }
         }
       }
-    }
-  `, { after, limit })
+    `,
+    { after, limit }
+  );
 }
 
 async function main() {
-  let after = null
-  const limit = 100
+  let after = null;
+  const limit = 100;
 
-  const index = client.initIndex('prod_recipes')
+  const index = client.initIndex(
+    process.env.ALGOLIA_SEARCH_INDEX || "prod_recipes"
+  );
 
   do {
-    const { data: recipesData } = await loadRecipes(after, limit)
+    const { data: recipesData, errors } = await loadRecipes(after, limit);
 
-    const dataset = recipesData.recipes.map(recipe => ({
+    const dataset = recipesData.recipes.map((recipe) => ({
       objectID: recipe.id,
       slug: recipe.slug,
       title: recipe.title,
+      category: recipe.category.slug,
+      tags: recipe.tags.map((tag) => tag.slug),
       description: recipe.headline,
-      content: recipe.ingredients.map(ingredient => ingredient.content).join(' ') + ' ' + recipe.instructions.map(instruction => instruction.content).join(' '),
-      updated_at: updatedAt
-    }))
+      content:
+        recipe.ingredients.map((ingredient) => ingredient.content).join(" ") +
+        " " +
+        recipe.instructions.map((instruction) => instruction.content).join(" "),
+      updated_at: updatedAt,
+    }));
 
-    await index.saveObjects(dataset, { autoGenerateObjectIDIfNotExist: true })
+    await index.saveObjects(dataset, { autoGenerateObjectIDIfNotExist: true });
 
-    after = recipesData.recipes.length === limit ? recipesData.recipes[recipesData.recipes.length - 1].id : null
-  } while (after)
-
+    after =
+      recipesData.recipes.length === limit
+        ? recipesData.recipes[recipesData.recipes.length - 1].id
+        : null;
+  } while (after);
 
   await index.deleteBy({
-    filters: 'updated_at < ' + updatedAt
-  })
+    filters: "updated_at < " + updatedAt,
+  });
 }
 
-main()
+main();
