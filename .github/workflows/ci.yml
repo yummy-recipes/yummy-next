@@ -28,7 +28,7 @@ jobs:
       - name: Migrate db
         run: yarn prisma migrate deploy
 
-      - name: Migrate db
+      - name: Seed database with dummy data
         run: yarn seed
 
       - name: Build
