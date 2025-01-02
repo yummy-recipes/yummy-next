@@ -1,13 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['media.graphassets.com'],
-    loader: 'custom',
-    loaderFile: './image-loader.js'
+    domains: ["media.graphassets.com"],
+    loader: "custom",
+    loaderFile: "./image-loader.js",
   },
-  experimental: {
-    appDir: true,
-  }
-}
+  experimental: {},
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

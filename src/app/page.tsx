@@ -80,7 +80,7 @@ export default async function Home() {
 
       <div className="w-full py-6 flex flex-row flex-wrap gap-4">
         {categories.map((category) => (
-          <div className="flex justify-center">
+          <div className="flex justify-center" key={category.id}>
             <Link href={`/${category.slug}`} className="text-md text-blue-600">
               {category.title}
             </Link>

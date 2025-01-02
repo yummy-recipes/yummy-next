@@ -1,35 +1,36 @@
-import { notFound } from 'next/navigation';
-import { RecipeListItem } from '@/components/recipe-list-item/recipe-list-item'
-import { RecipeList } from '@/components/recipe-list/recipe-list'
-import { prisma } from '@/data'
+import { notFound } from "next/navigation";
+import { RecipeListItem } from "@/components/recipe-list-item/recipe-list-item";
+import { RecipeList } from "@/components/recipe-list/recipe-list";
+import { prisma } from "@/data";
 
 interface Params {
-  categorySlug: string
+  categorySlug: string;
 }
 
 interface Props {
-  params: Params
+  params: Promise<Params>;
 }
 
 export default async function Page({ params }: Props) {
+  const { categorySlug } = await params;
   const category = await prisma.category.findUnique({
     where: {
-      slug: params.categorySlug
-    }
-  })
+      slug: categorySlug,
+    },
+  });
 
   if (!category) {
-    return notFound()
+    return notFound();
   }
 
   const recipes = await prisma.recipe.findMany({
     where: {
-      categoryId: category.id
+      categoryId: category.id,
     },
     include: {
       category: true,
-    }
-  })
+    },
+  });
 
   return (
     <main className="w-full">
@@ -44,14 +45,14 @@ export default async function Page({ params }: Props) {
           />
         ))}
       </RecipeList>
-    </main >
-  )
+    </main>
+  );
 }
 
 export async function generateStaticParams() {
-  const categories = await prisma.category.findMany()
+  const categories = await prisma.category.findMany();
 
-  return categories.map(category => ({
-    categorySlug: category.slug
-  }))
+  return categories.map((category) => ({
+    categorySlug: category.slug,
+  }));
 }
