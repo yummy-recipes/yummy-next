@@ -31,5 +31,4 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       ref: ${{ github.sha }}
-      reindex: true
     secrets: inherit
