@@ -1,7 +1,7 @@
 interface Props {
   title: string;
   href: string;
-  prepTime: string;
+  prepTime: number;
   description: string;
 }
 export function MenuSectionItem({ title, href, prepTime, description }: Props) {
