@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
-import { RecipeListItem } from "@/components/recipe-list-item/recipe-list-item";
-import { RecipeList } from "@/components/recipe-list/recipe-list";
+import { MenuSection } from "@/components/menu-section/menu-section";
+import { MenuSectionItem } from "@/components/menu-section-item/menu-section-item";
 
 const prisma = new PrismaClient();
 
@@ -57,18 +57,17 @@ export default async function Home() {
 
       {groups.map(({ tag, recipes }) => (
         <div className="w-full flex flex-col gap-4" key={tag.id}>
-          <h2 className="text-2xl">{upperCaseFirstLetter(tag.title)}</h2>
-
-          <RecipeList>
+          <MenuSection title={upperCaseFirstLetter(tag.title)}>
             {recipes.map((recipe) => (
-              <RecipeListItem
+              <MenuSectionItem
                 key={recipe.id}
                 href={`/${recipe.category.slug}/${recipe.slug}`}
-                coverImage={recipe.coverImage}
                 title={recipe.title}
+                description={recipe.headline}
+                prepTime={recipe.preparationTime}
               />
             ))}
-          </RecipeList>
+          </MenuSection>
 
           <div className="flex justify-end">
             <Link href={`/tag/${tag.slug}`} className="text-md text-blue-600">
