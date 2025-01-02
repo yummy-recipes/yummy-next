@@ -8,13 +8,14 @@ interface Params {
 }
 
 interface Props {
-  params: Params
+  params: Promise<Params>
 }
 
 export default async function Page({ params }: Props) {
+  const { slug } = await params
   const tag = await prisma.tag.findUnique({
     where: {
-      slug: params.slug
+      slug: slug
     }
   })
 
