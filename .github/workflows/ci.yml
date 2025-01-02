@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,17 +17,26 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install --immutable
 
+      - name: Migrate db
+        run: yarn prisma migrate deploy
+
+      - name: Migrate db
+        run: yarn seed
+
+      - name: Build
+        run: yarn build
+
   deploy:
     needs:
-      - test
+      - build
     uses: ./.github/workflows/deploy.yml
     with:
       ref: ${{ github.sha }}
