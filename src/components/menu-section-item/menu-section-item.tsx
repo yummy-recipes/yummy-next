@@ -7,7 +7,7 @@ interface Props {
 export function MenuSectionItem({ title, href, prepTime, description }: Props) {
   return (
     <a href={href} className="group block">
-      <div className="flex justify-between items-baseline mb-2">
+      <div className="flex justify-between items-start mb-2">
         <div className="flex-1">
           <h3 className="text-xl font-serif text-blue-800 group-hover:text-blue-600 inline-block mr-4">
             {title}
