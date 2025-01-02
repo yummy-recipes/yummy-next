@@ -47,7 +47,7 @@
     "@storybook/nextjs": "8.4.7",
     "@storybook/react": "8.4.7",
     "@storybook/test": "8.4.7",
-    "chromatic": "7.2.0",
+    "chromatic": "7.6.0",
     "dotenv": "16.3.1",
     "eslint-config-next": "next-14",
     "eslint-plugin-storybook": "0.6.13",
