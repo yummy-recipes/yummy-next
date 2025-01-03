@@ -50,7 +50,7 @@
     "@storybook/nextjs": "8.4.7",
     "@storybook/react": "8.4.7",
     "@storybook/test": "8.4.7",
-    "chromatic": "7.6.0",
+    "chromatic": "11.22.0",
     "dotenv": "16.4.7",
     "eslint-config-next": "next-14",
     "eslint-config-prettier": "^9.1.0",
