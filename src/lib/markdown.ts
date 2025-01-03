@@ -2,7 +2,7 @@ import { Tokens, marked } from "marked";
 
 class TailwindRenderer extends marked.Renderer {
   protected paragraphIndex: number;
-  protected insideList: boolean = false;
+  protected insideList: { ordered: boolean } | null = null;
 
   constructor({
     paragraphNumbers,
@@ -45,16 +45,25 @@ class TailwindRenderer extends marked.Renderer {
     let body = "";
     for (let j = 0; j < items.length; j++) {
       const item = items[j];
-      this.insideList = true;
+      this.insideList = { ordered };
       body += this.listitem(item);
-      this.insideList = false;
+      this.insideList = null;
     }
 
     if (ordered) {
       return `<ol class='list-decimal list-inside'>${body}</ol>`;
     }
 
-    return `<ul class='list-disc list-inside'>${body}</ul>`;
+    return `<ul>${body}</ul>`;
+  }
+
+  listitem(item: Tokens.ListItem): string {
+    const text = this.parser.parseInline(item.tokens);
+    if (this.insideList && !this.insideList.ordered) {
+      return `<li class="flex items-center gap-3 mb-2"><div class="w-1.5 h-1.5 bg-gray-300 rounded-full"></div>${text}</li>`;
+    }
+
+    return `<li>${text}</li>`;
   }
 
   // Reset the counter for each block element except space
@@ -80,7 +89,6 @@ class TailwindRenderer extends marked.Renderer {
     this.resetParagraphIndex();
     return super.checkbox(tokens);
   }
-
   table(tokens: Tokens.Table): string {
     this.resetParagraphIndex();
     return super.table(tokens);
