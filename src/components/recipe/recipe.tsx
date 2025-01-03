@@ -8,7 +8,7 @@ interface Props {
   instructions: { id: number; content: string }[];
 }
 
-export function Recipe({
+export async function Recipe({
   title,
   coverImage,
   ingredients,
@@ -29,22 +29,24 @@ export function Recipe({
 
       <div className="flex flex-col md:flex-row">
         <div className="flex-1 p-2 m-2">
-          {ingredients.map((ingredient) => (
+          {ingredients.map(async (ingredient) => (
             <div
               key={ingredient.id}
               dangerouslySetInnerHTML={{
-                __html: markdownToHtml(ingredient.content),
+                __html: await markdownToHtml(ingredient.content),
               }}
             ></div>
           ))}
         </div>
 
         <div className="flex-1 p-2 m-2">
-          {instructions.map((instruction, index) => (
+          {instructions.map(async (instruction, index) => (
             <div
               key={instruction.id}
               dangerouslySetInnerHTML={{
-                __html: markdownToHtml(instruction.content),
+                __html: await markdownToHtml(instruction.content, {
+                  paragraphNumbers: true,
+                }),
               }}
             ></div>
           ))}
