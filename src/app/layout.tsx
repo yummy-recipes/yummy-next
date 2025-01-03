@@ -1,10 +1,9 @@
 import Header from "./header";
-import { Inter } from "next/font/google";
+import { Exo } from "next/font/google";
 import "./globals.css";
 import { Search } from "@/components/search/search";
-import Image from "next/image";
 
-const inter = Inter({ subsets: ["latin"] });
+const exo = Exo({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Kuchnia Yummy",
@@ -18,7 +17,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={exo.className}>
         <div className="max-w-7xl mx-auto px-4 md:px-8 2xl:px-0">
           <Header>
             <div className="w-full sm:w-96 max-w-sm">
