@@ -1,18 +1,30 @@
-import { MarkedToken, Tokens, marked } from "marked";
+import { Tokens, marked } from "marked";
 
 class TailwindRenderer extends marked.Renderer {
   protected paragraphIndex: number;
   protected insideList: boolean = false;
 
-  constructor({ paragraphNumbers }: { paragraphNumbers?: boolean }) {
-    super();
+  constructor({
+    paragraphNumbers,
+    ...options
+  }: {
+    paragraphNumbers?: boolean;
+  }) {
+    super(options);
     this.paragraphIndex = paragraphNumbers ? 0 : -1;
   }
+  protected resetParagraphIndex() {
+    this.paragraphIndex = 0;
+  }
   heading({ tokens, depth }: Tokens.Heading) {
+    this.resetParagraphIndex();
+
     const text = this.parser.parseInline(tokens);
     return `<h${depth} class='text-2xl my-4'>${text}</h${depth}>`;
   }
-  paragraph({ text }: Tokens.Paragraph): string {
+  paragraph({ tokens }: Tokens.Paragraph): string {
+    const text = this.parser.parseInline(tokens);
+
     if (this.insideList) {
       return text;
     }
@@ -43,6 +55,44 @@ class TailwindRenderer extends marked.Renderer {
     }
 
     return `<ul class='list-disc list-inside'>${body}</ul>`;
+  }
+
+  // Reset the counter for each block element except space
+  blockquote(tokens: Tokens.Blockquote): string {
+    this.resetParagraphIndex();
+    return super.blockquote(tokens);
+  }
+  code(tokens: Tokens.Code): string {
+    this.resetParagraphIndex();
+    return super.code(tokens);
+  }
+  html(tokens: Tokens.HTML | Tokens.Tag): string {
+    this.resetParagraphIndex();
+    return super.html(tokens);
+  }
+
+  hr(token: Tokens.Hr): string {
+    this.resetParagraphIndex();
+    return super.hr(token);
+  }
+
+  checkbox(tokens: Tokens.Checkbox): string {
+    this.resetParagraphIndex();
+    return super.checkbox(tokens);
+  }
+
+  table(tokens: Tokens.Table): string {
+    this.resetParagraphIndex();
+    return super.table(tokens);
+  }
+
+  tablerow(tokens: Tokens.TableRow): string {
+    this.resetParagraphIndex();
+    return super.tablerow(tokens);
+  }
+  tablecell(tokens: Tokens.TableCell): string {
+    this.resetParagraphIndex();
+    return super.tablecell(tokens);
   }
 }
 
