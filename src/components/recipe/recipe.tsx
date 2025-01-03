@@ -40,7 +40,7 @@ export function Recipe({
         </div>
 
         <div className="flex-1 p-2 m-2">
-          {instructions.map((instruction) => (
+          {instructions.map((instruction, index) => (
             <div
               key={instruction.id}
               dangerouslySetInnerHTML={{

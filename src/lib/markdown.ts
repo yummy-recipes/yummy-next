@@ -1,11 +1,21 @@
 import { marked } from "marked";
 
 class TailwindRenderer extends marked.Renderer {
+  protected paragraphIndex: number;
+  constructor() {
+    super();
+    this.paragraphIndex = 0;
+  }
   heading(text: string, level: number) {
     return `<h${level} class='text-2xl my-4'>${text}</h${level}>`;
   }
   paragraph(text: string): string {
-    return `<p class='my-2'>${text}</p>`;
+    const index = this.paragraphIndex++;
+    const counterSpan = `<span class='font-mono text-gray-400 mr-2'>${String(
+      index + 1
+    ).padStart(2, "0")}</span>`;
+
+    return `<div class="flex my-4">${counterSpan}<p>${text}</p></div>`;
   }
 
   list(
@@ -22,12 +32,10 @@ class TailwindRenderer extends marked.Renderer {
   }
 }
 
-const renderer = new TailwindRenderer();
-
 export function markdownToHtml(markdown: string): string {
   return marked.parse(markdown, {
     mangle: false,
     headerIds: false,
-    renderer,
+    renderer: new TailwindRenderer(),
   });
 }
