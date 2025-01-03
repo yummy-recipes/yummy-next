@@ -12,7 +12,6 @@ export function MenuSectionItem({ title, href, prepTime, description }: Props) {
           <h3 className="text-xl font-serif text-blue-800 group-hover:text-blue-600 inline-block mr-4">
             {title}
           </h3>
-          <div className="border-b border-dotted border-gray-300 flex-grow inline-block mx-2"></div>
         </div>
         <div className="flex items-center gap-6 text-gray-600 text-sm min-w-fit ml-4">
           <div className="flex items-center">
