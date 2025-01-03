@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "test": "vitest",
     "start": "next start",
     "lint": "next lint",
     "pull": "node scripts/import.mjs",
@@ -52,7 +53,9 @@
     "eslint-config-next": "next-14",
     "eslint-plugin-storybook": "0.6.13",
     "prisma": "5.3.1",
-    "storybook": "8.4.7"
+    "storybook": "8.4.7",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^2.1.8"
   },
   "packageManager": "yarn@3.8.7"
 }
