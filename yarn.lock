@@ -4429,10 +4429,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.15.11":
-  version: 18.15.11
-  resolution: "@types/node@npm:18.15.11"
-  checksum: 10/ffadc25bea2c8c79db77ab6ad083938c976e2fc4a5ac52cfbdfe387df4404d02813e0f127a6666f5910f8975ff825f2225a8aba734bab7daa652ad60e6d34f45
+"@types/node@npm:18.19.69":
+  version: 18.19.69
+  resolution: "@types/node@npm:18.19.69"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 10/fe34976dd1b5ecb2183f196bcbd7dd22fc165268530425edb936f2fd593baaaf19bb93f1955104364ee9bcb2d368359b9df604382de4d8e6dc273e887dc90531
   languageName: node
   linkType: hard
 
@@ -13227,6 +13229,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5"
+  checksum: 10/0097779d94bc0fd26f0418b3a05472410408877279141ded2bd449167be1aed7ea5b76f756562cb3586a07f251b90799bab22d9019ceba49c037c76445f7cddd
+  languageName: node
+  linkType: hard
+
 "undici-types@npm:~6.20.0":
   version: 6.20.0
   resolution: "undici-types@npm:6.20.0"
@@ -13932,7 +13941,7 @@ __metadata:
     "@storybook/react": "npm:8.4.7"
     "@storybook/test": "npm:8.4.7"
     "@tanstack/react-query": "npm:4.36.1"
-    "@types/node": "npm:18.15.11"
+    "@types/node": "npm:18.19.69"
     "@types/react": "npm:19.0.2"
     "@types/react-dom": "npm:19.0.2"
     algoliasearch: "npm:4.20.0"
