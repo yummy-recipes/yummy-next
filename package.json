@@ -17,7 +17,8 @@
     "reindex": "node scripts/reindex.mjs",
     "heroku-postbuild": "echo OK",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepare": "husky"
   },
   "dependencies": {
     "@headlessui/react": "1.7.19",
