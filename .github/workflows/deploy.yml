@@ -16,7 +16,9 @@ on:
       DOKKU_DEPLOY_KEY:
         required: true
 
-concurrency: production
+concurrency:
+  group: production
+  cancel-in-progress: false
 
 jobs:
   build_and_deploy:
