@@ -21,10 +21,30 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     children: [
-      <RecipeListItem href="/" title="Recipe 1" coverImage={imageUrl} />,
-      <RecipeListItem href="/" title="Recipe 2" coverImage={imageUrl} />,
-      <RecipeListItem href="/" title="Recipe 3" coverImage={imageUrl} />,
-      <RecipeListItem href="/" title="Recipe 4" coverImage={imageUrl} />,
+      <RecipeListItem
+        key={1}
+        href="/"
+        title="Recipe 1"
+        coverImage={imageUrl}
+      />,
+      <RecipeListItem
+        key={2}
+        href="/"
+        title="Recipe 2"
+        coverImage={imageUrl}
+      />,
+      <RecipeListItem
+        key={3}
+        href="/"
+        title="Recipe 3"
+        coverImage={imageUrl}
+      />,
+      <RecipeListItem
+        key={4}
+        href="/"
+        title="Recipe 4"
+        coverImage={imageUrl}
+      />,
     ],
   },
 };

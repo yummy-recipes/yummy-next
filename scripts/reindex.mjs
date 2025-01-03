@@ -54,7 +54,7 @@ function loadRecipes(after = null, limit = 100) {
         }
       }
     `,
-    { after, limit }
+    { after, limit },
   );
 }
 
@@ -63,7 +63,7 @@ async function main() {
   const limit = 100;
 
   const index = client.initIndex(
-    process.env.ALGOLIA_SEARCH_INDEX || "prod_recipes"
+    process.env.ALGOLIA_SEARCH_INDEX || "prod_recipes",
   );
 
   do {

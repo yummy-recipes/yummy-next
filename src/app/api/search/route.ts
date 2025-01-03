@@ -3,7 +3,7 @@ import { search } from "@/lib/search";
 
 const getSearchResults = cache(
   (query: string) => search(query),
-  ["search-cache-key"]
+  ["search-cache-key"],
 );
 
 export async function GET(request: Request) {

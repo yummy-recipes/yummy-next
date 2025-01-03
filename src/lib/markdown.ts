@@ -35,7 +35,7 @@ class TailwindRenderer extends marked.Renderer {
 
     const index = this.paragraphIndex++;
     const counterSpan = `<span class='font-mono text-gray-400 mr-2'>${String(
-      index + 1
+      index + 1,
     ).padStart(2, "0")}</span>`;
 
     return `<div class="flex my-4">${counterSpan}<p>${text}</p></div>`;
@@ -109,7 +109,7 @@ interface Options {
 }
 export async function markdownToHtml(
   markdown: string,
-  options: Options = {}
+  options: Options = {},
 ): Promise<string> {
   return marked.parse(markdown, {
     renderer: new TailwindRenderer(options),
