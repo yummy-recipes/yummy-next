@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const client = algoliasearch("J8YFF4CZ4C", process.env.ALGOLIA_SEARCH_KEY);
 
 const index = client.initIndex(
-  process.env.ALGOLIA_SEARCH_INDEX || "prod_recipes"
+  process.env.ALGOLIA_SEARCH_INDEX || "prod_recipes",
 );
 
 export async function search(query: string) {
@@ -26,6 +26,6 @@ export async function search(query: string) {
     .slice()
     .sort(
       (recipe1, recipe2) =>
-        slugs.indexOf(recipe1.slug) - slugs.indexOf(recipe2.slug)
+        slugs.indexOf(recipe1.slug) - slugs.indexOf(recipe2.slug),
     );
 }

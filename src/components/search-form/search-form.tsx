@@ -1,5 +1,5 @@
 interface Props {
-  query?: string
+  query?: string;
 }
 
 export function SearchForm({ query }: Props) {
@@ -10,5 +10,5 @@ export function SearchForm({ query }: Props) {
         <button type="submit">Search</button>
       </div>
     </form>
-  )
+  );
 }

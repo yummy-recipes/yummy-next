@@ -1,49 +1,52 @@
-import fs from 'fs'
-import 'dotenv/config'
+import fs from "fs";
+import "dotenv/config";
 
-const contentEndpoint = 'https://api-eu-central-1.hygraph.com/v2/ckzhgf7f30mi901xs88ok02gc/master'
+const contentEndpoint =
+  "https://api-eu-central-1.hygraph.com/v2/ckzhgf7f30mi901xs88ok02gc/master";
 
-const baseFolder = './strapi-export'
+const baseFolder = "./strapi-export";
 
-const allFiles = fs.readdirSync(baseFolder)
+const allFiles = fs.readdirSync(baseFolder);
 
-const jsonFiles = allFiles.filter((file) => file.endsWith('.json'))
+const jsonFiles = allFiles.filter((file) => file.endsWith(".json"));
 
-const sources = ['Recipe'].map(sourceName => {
-  const sourceFile = jsonFiles.find(file => file.startsWith(sourceName))
+const sources = ["Recipe"].map((sourceName) => {
+  const sourceFile = jsonFiles.find((file) => file.startsWith(sourceName));
 
   if (!sourceFile) {
-    throw new Error(`No source file found for ${sourceName}`)
+    throw new Error(`No source file found for ${sourceName}`);
   }
 
-  return { name: sourceName, file: sourceFile }
-})
+  return { name: sourceName, file: sourceFile };
+});
 
 function getSourceFile(sourceName) {
-  const source = sources.find(({ name }) => name === sourceName)
+  const source = sources.find(({ name }) => name === sourceName);
 
   if (!source) {
-    throw new Error(`No source file found for ${sourceName}`)
+    throw new Error(`No source file found for ${sourceName}`);
   }
 
-  return source.file
+  return source.file;
 }
 
 function readExportFile(fileName) {
-  return JSON.parse(fs.readFileSync(`${baseFolder}/${fileName}`, 'utf-8').toString())
+  return JSON.parse(
+    fs.readFileSync(`${baseFolder}/${fileName}`, "utf-8").toString(),
+  );
 }
 
 async function upload(url) {
   const data = await fetch(`${contentEndpoint}/upload`, {
-    method: 'POST',
+    method: "POST",
     headers: {
       Authorization: `Bearer ${process.env.HYGRAPH_AUTH_TOKEN}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body: `url=${encodeURIComponent(url)}`,
-  })
+  });
 
-  return data.json()
+  return data.json();
 }
 
 async function graphql(query, variables = {}) {
@@ -52,102 +55,107 @@ async function graphql(query, variables = {}) {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: process.env.HYGRAPH_AUTH_TOKEN
+      Authorization: process.env.HYGRAPH_AUTH_TOKEN,
     },
     body: JSON.stringify({
       query,
       variables,
     }),
-  })
+  });
 
-  return res.json()
+  return res.json();
 }
 
 async function findAssetByFileName(fileName) {
-  const { data } = await graphql(`
-    query GetAsset($fileName: String!) {
-      assets(where: { fileName: $fileName }) {
-        id
+  const { data } = await graphql(
+    `
+      query GetAsset($fileName: String!) {
+        assets(where: { fileName: $fileName }) {
+          id
+        }
       }
-    }
-  `, { fileName })
+    `,
+    { fileName },
+  );
 
   if (data && data.assets.length >= 1) {
-    return data.assets[0]
+    return data.assets[0];
   }
 
-  return null
+  return null;
 }
 
 function updateRecipe(slug, values) {
-  return graphql(`
-    mutation UpdateRecipe($slug: String!, $values: RecipeUpdateInput!) {
-      updateRecipe(where: { slug: $slug }, data: $values) {
-        id
+  return graphql(
+    `
+      mutation UpdateRecipe($slug: String!, $values: RecipeUpdateInput!) {
+        updateRecipe(where: { slug: $slug }, data: $values) {
+          id
+        }
       }
-    }
-  `, {
-    slug,
-    values
-  })
+    `,
+    {
+      slug,
+      values,
+    },
+  );
 }
 
 async function syncImage(image) {
-  const fileName = image.split('/').pop()
+  const fileName = image.split("/").pop();
 
-  let res = await findAssetByFileName(fileName)
+  let res = await findAssetByFileName(fileName);
 
   if (!res) {
-    res = await upload(image)
+    res = await upload(image);
   }
 
-  const { id } = res
+  const { id } = res;
 
-  return id
+  return id;
 }
 
 async function sync(recipe) {
   if (!recipe.cover) {
-    return
+    return;
   }
 
-  const coverId = await syncImage(recipe.cover.url)
+  const coverId = await syncImage(recipe.cover.url);
 
-  const images = []
+  const images = [];
 
   for (const image of recipe.gallery) {
-    const imageId = await syncImage(image.url)
+    const imageId = await syncImage(image.url);
 
-    images.push(imageId)
+    images.push(imageId);
   }
 
   const updated = await updateRecipe(recipe.slug, {
     cover: {
       connect: {
-        id: coverId
-      }
+        id: coverId,
+      },
     },
     gallery: {
-      connect: images.map(id => ({
-        where: { id }
-      }))
-    }
-  })
+      connect: images.map((id) => ({
+        where: { id },
+      })),
+    },
+  });
 
-  console.log(updated)
+  console.log(updated);
 }
 
-
 async function main() {
-  const recipeSourceFile = getSourceFile('Recipe')
+  const recipeSourceFile = getSourceFile("Recipe");
 
-  const recipes = readExportFile(recipeSourceFile)
+  const recipes = readExportFile(recipeSourceFile);
 
   let i = 0;
   for (const recipe of recipes) {
-    console.log(`Syncing ${++i} / ${recipes.length}`)
-    await sync(recipe)
+    console.log(`Syncing ${++i} / ${recipes.length}`);
+    await sync(recipe);
   }
 }
 
-main()
+main();

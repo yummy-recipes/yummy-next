@@ -14,7 +14,9 @@ describe("markdownToHtml", () => {
  - b
     `);
 
-    expect(result).toMatchInlineSnapshot(`"<ul><li class="flex items-center gap-3 mb-2"><div class="w-1.5 h-1.5 bg-gray-300 rounded-full"></div>a</li><li class="flex items-center gap-3 mb-2"><div class="w-1.5 h-1.5 bg-gray-300 rounded-full"></div>b</li></ul>"`);
+    expect(result).toMatchInlineSnapshot(
+      `"<ul><li class="flex items-center gap-3 mb-2"><div class="w-1.5 h-1.5 bg-gray-300 rounded-full"></div>a</li><li class="flex items-center gap-3 mb-2"><div class="w-1.5 h-1.5 bg-gray-300 rounded-full"></div>b</li></ul>"`,
+    );
   });
 
   it("renders paragraphs", async () => {
@@ -42,11 +44,11 @@ This is paragraph 2.
 
 This is paragraph 3.
 `,
-        { paragraphNumbers: true }
+        { paragraphNumbers: true },
       );
 
       expect(result).toMatchInlineSnapshot(
-        `"<div class="flex my-4"><span class='font-mono text-gray-400 mr-2'>01</span><p>This is paragraph 1.</p></div><div class="flex my-4"><span class='font-mono text-gray-400 mr-2'>02</span><p>This is paragraph 2.</p></div><div class="flex my-4"><span class='font-mono text-gray-400 mr-2'>03</span><p>This is paragraph 3.</p></div>"`
+        `"<div class="flex my-4"><span class='font-mono text-gray-400 mr-2'>01</span><p>This is paragraph 1.</p></div><div class="flex my-4"><span class='font-mono text-gray-400 mr-2'>02</span><p>This is paragraph 2.</p></div><div class="flex my-4"><span class='font-mono text-gray-400 mr-2'>03</span><p>This is paragraph 3.</p></div>"`,
       );
     });
   });

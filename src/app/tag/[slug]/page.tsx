@@ -1,40 +1,40 @@
-import { notFound } from 'next/navigation'
-import { prisma } from '@/data'
-import { RecipeListItem } from '@/components/recipe-list-item/recipe-list-item'
-import { RecipeList } from '@/components/recipe-list/recipe-list'
+import { notFound } from "next/navigation";
+import { prisma } from "@/data";
+import { RecipeListItem } from "@/components/recipe-list-item/recipe-list-item";
+import { RecipeList } from "@/components/recipe-list/recipe-list";
 
 interface Params {
-  slug: string
+  slug: string;
 }
 
 interface Props {
-  params: Promise<Params>
+  params: Promise<Params>;
 }
 
 export default async function Page({ params }: Props) {
-  const { slug } = await params
+  const { slug } = await params;
   const tag = await prisma.tag.findUnique({
     where: {
-      slug: slug
-    }
-  })
+      slug: slug,
+    },
+  });
 
   if (!tag) {
-    return notFound()
+    return notFound();
   }
 
   const recipes = await prisma.recipe.findMany({
     where: {
       tags: {
         some: {
-          id: tag.id
-        }
-      }
+          id: tag.id,
+        },
+      },
     },
     include: {
       category: true,
-    }
-  })
+    },
+  });
 
   return (
     <main className="w-full">
@@ -50,6 +50,6 @@ export default async function Page({ params }: Props) {
           />
         ))}
       </RecipeList>
-    </main >
-  )
+    </main>
+  );
 }
