@@ -14,6 +14,10 @@ class TailwindRenderer extends marked.Renderer {
     this.paragraphIndex = paragraphNumbers ? 0 : -1;
   }
   protected resetParagraphIndex() {
+    if (this.paragraphIndex === -1) {
+      return;
+    }
+
     this.paragraphIndex = 0;
   }
   heading({ tokens, depth }: Tokens.Heading) {
