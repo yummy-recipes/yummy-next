@@ -22,7 +22,7 @@ function useSearch({ query }: { query: string }) {
   return useQuery({
     queryKey: ["search", query],
     enabled: query !== "",
-    keepPreviousData: query !== "",
+    placeholderData: query !== "" ? [] : undefined,
     queryFn: async () => {
       const res = await fetch("/api/search?query=" + encodeURIComponent(query));
       return res.json();
