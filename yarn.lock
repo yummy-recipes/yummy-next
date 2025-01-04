@@ -9131,7 +9131,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^9.1.7":
+"husky@npm:9.1.7":
   version: 9.1.7
   resolution: "husky@npm:9.1.7"
   bin:
@@ -10021,7 +10021,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^15.3.0":
+"lint-staged@npm:15.3.0":
   version: 15.3.0
   resolution: "lint-staged@npm:15.3.0"
   dependencies:
@@ -14499,8 +14499,8 @@ __metadata:
     eslint-config-next: "npm:15.1.3"
     eslint-config-prettier: "npm:9.1.0"
     eslint-plugin-storybook: "npm:0.11.2"
-    husky: "npm:^9.1.7"
-    lint-staged: "npm:^15.3.0"
+    husky: "npm:9.1.7"
+    lint-staged: "npm:15.3.0"
     marked: "npm:15.0.5"
     next: "npm:15.1.3"
     postcss: "npm:8.4.49"
