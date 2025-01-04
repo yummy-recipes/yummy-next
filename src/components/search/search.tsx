@@ -1,6 +1,13 @@
 "use client";
 import { Fragment, useState } from "react";
-import { Combobox, Transition } from "@headlessui/react";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxButton,
+  ComboboxOptions,
+  ComboboxOption,
+  Transition,
+} from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import {
   useQuery,
@@ -42,12 +49,13 @@ function SearchForm({
 }: Props) {
   return (
     <div className="top-16 w-full">
-      <Combobox
-        onChange={(recipe: { value: string }) => onSelected(recipe.value)}
+      <Combobox<null | { value: string }>
+        value={null}
+        onChange={(recipe) => recipe && onSelected(recipe.value)}
       >
         <div className="relative mt-1">
           <div className="relative w-full cursor-default bg-white text-left focus:outline-none focus-visible:ring-3 focus-visible:ring-sky-300 focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
-            <Combobox.Input
+            <ComboboxInput
               className="w-full rounded-full border border-solid border-gray-200 py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
               displayValue={(person: { name: string } | null) =>
                 person ? person.name : ""
@@ -56,12 +64,12 @@ function SearchForm({
               autoComplete="off"
               placeholder="Szukaj"
             />
-            <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+            <ComboboxButton className="absolute inset-y-0 right-0 flex items-center pr-2">
               <MagnifyingGlassIcon
                 className="h-5 w-5 text-gray-400"
                 aria-hidden="true"
               />
-            </Combobox.Button>
+            </ComboboxButton>
           </div>
           <Transition
             as={Fragment}
@@ -70,17 +78,17 @@ function SearchForm({
             leaveTo="opacity-0"
             afterLeave={() => onChange("")}
           >
-            <Combobox.Options className="empty:hidden absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <ComboboxOptions className="empty:hidden absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {results?.length === 0 && query.length > 2 && !loading ? (
                 <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                   Brak wyników
                 </div>
               ) : (
                 (results ?? []).map((recipe) => (
-                  <Combobox.Option
+                  <ComboboxOption
                     key={recipe.id}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                      `relative cursor-default select-none py-2 px-4 ${
                         active ? "bg-teal-600 text-white" : "text-gray-900"
                       }`
                     }
@@ -95,21 +103,12 @@ function SearchForm({
                         >
                           {recipe.label}
                         </span>
-                        {selected ? (
-                          <span
-                            className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                              active ? "text-white" : "text-teal-600"
-                            }`}
-                          >
-                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                          </span>
-                        ) : null}
                       </>
                     )}
-                  </Combobox.Option>
+                  </ComboboxOption>
                 ))
               )}
-            </Combobox.Options>
+            </ComboboxOptions>
           </Transition>
         </div>
       </Combobox>
