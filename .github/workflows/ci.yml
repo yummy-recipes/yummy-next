@@ -63,6 +63,8 @@ jobs:
 
       - name: Build
         run: yarn build
+        env:
+          ALGOLIA_SEARCH_KEY: dummy-key
 
   deploy:
     needs:

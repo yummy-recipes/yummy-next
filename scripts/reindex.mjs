@@ -1,9 +1,10 @@
-import algoliasearch from "algoliasearch";
+import { algoliasearch } from "algoliasearch";
 import "dotenv/config";
 
 const contentEndpoint =
   "https://api-eu-central-1.hygraph.com/v2/ckzhgf7f30mi901xs88ok02gc/master";
 const client = algoliasearch("J8YFF4CZ4C", process.env.ALGOLIA_ADMIN_KEY);
+const indexName = process.env.ALGOLIA_SEARCH_INDEX || "prod_recipes";
 
 const updatedAt = new Date().getTime();
 
@@ -54,17 +55,13 @@ function loadRecipes(after = null, limit = 100) {
         }
       }
     `,
-    { after, limit },
+    { after, limit }
   );
 }
 
 async function main() {
   let after = null;
   const limit = 100;
-
-  const index = client.initIndex(
-    process.env.ALGOLIA_SEARCH_INDEX || "prod_recipes",
-  );
 
   do {
     const { data: recipesData, errors } = await loadRecipes(after, limit);
@@ -83,7 +80,7 @@ async function main() {
       updated_at: updatedAt,
     }));
 
-    await index.saveObjects(dataset, { autoGenerateObjectIDIfNotExist: true });
+    await client.saveObjects({ indexName, objects: dataset });
 
     after =
       recipesData.recipes.length === limit
@@ -91,8 +88,9 @@ async function main() {
         : null;
   } while (after);
 
-  await index.deleteBy({
-    filters: "updated_at < " + updatedAt,
+  await client.deleteBy({
+    indexName,
+    deleteByParams: { filters: "updated_at < " + updatedAt },
   });
 }
 
