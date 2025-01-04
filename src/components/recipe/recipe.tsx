@@ -20,13 +20,15 @@ export async function Recipe({
         <h1 className="text-gradient uppercase inline text-4xl">{title}</h1>
       </div>
 
-      <Image
-        src={coverImage}
-        width={40}
-        height={30}
-        alt={`Photo of ${title}`}
-      />
-
+      <div className="md:w-1/2">
+        <Image
+          className="w-full max-h-32 object-cover"
+          src={coverImage}
+          width={600}
+          height={400}
+          alt={`Zdjęcie ${title}`}
+        />
+      </div>
       <div className="flex flex-col md:flex-row">
         <div className="flex-1 p-2 m-2">
           {ingredients.map(async (ingredient) => (
