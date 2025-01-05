@@ -2,10 +2,23 @@ import { PrismaClient } from "@prisma/client";
 import { algoliasearch } from "algoliasearch";
 
 const prisma = new PrismaClient();
-const client = algoliasearch("J8YFF4CZ4C", process.env.ALGOLIA_SEARCH_KEY);
 const indexName = process.env.ALGOLIA_SEARCH_INDEX || "prod_recipes";
 
+let client: ReturnType<typeof getNewClient> | null = null;
+
+const getNewClient = () =>
+  algoliasearch("J8YFF4CZ4C", process.env.ALGOLIA_SEARCH_KEY);
+
+const getClient = () => {
+  if (!client) {
+    client = getNewClient();
+  }
+  return client;
+};
+
 export async function search(query: string) {
+  const client = getClient();
+
   const { hits } = await client.searchSingleIndex<{ slug: string }>({
     indexName,
     searchParams: { query },
