@@ -209,15 +209,7 @@ function loadRecipes(after = null, limit) {
           }
           cover {
             url
-            blurPlaceholder: url(
-              transformation: {
-                document: { output: { format: jpg } }
-                image: {
-                  resize: { width: 30, height: 30 }
-                  blur: { amount: 20 }
-                }
-              }
-            )
+            placeholderBlurDataUrl
           }
           category {
             id
@@ -236,15 +228,6 @@ function loadRecipes(after = null, limit) {
     `,
     { after, limit },
   );
-}
-
-async function imageToDataUrl(url) {
-  const res = await fetch(url);
-  const blob = await res.blob();
-  const buffer = await blob.arrayBuffer();
-  const base64 = Buffer.from(buffer).toString("base64");
-  const mimeType = blob.type;
-  return `data:${mimeType};base64,${base64}`;
 }
 
 async function main() {
@@ -294,9 +277,7 @@ async function main() {
         coverImage:
           recipe.cover?.url ??
           "https://media.graphassets.com/eiXZ15TaNlZO4H8DQQQB",
-        coverImageBlurDataUrl: recipe.cover?.blurPlaceholder
-          ? await imageToDataUrl(recipe.cover.blurPlaceholder)
-          : null,
+        coverImageBlurDataUrl: recipe.cover?.placeholderBlurDataUrl ?? null,
         headline: recipe.headline,
         preparationTime: recipe.preparationTime,
         category: { id: categoryMap[recipe.category.slug].id },
