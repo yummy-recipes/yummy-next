@@ -42,6 +42,7 @@ export default async function Page({ params }: Props) {
       <Recipe
         title={recipe.title}
         coverImage={recipe.coverImage}
+        coverImageBlurDataUrl={recipe.coverImageBlurDataUrl}
         ingredients={recipe.ingredients}
         instructions={recipe.instructions}
       />
