@@ -17,6 +17,7 @@ CREATE TABLE "Recipe" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "slug" TEXT NOT NULL,
     "coverImage" TEXT NOT NULL,
+    "coverImageBlurDataUrl" TEXT,
     "title" TEXT NOT NULL,
     "headline" TEXT NOT NULL,
     "preparationTime" INTEGER NOT NULL,
