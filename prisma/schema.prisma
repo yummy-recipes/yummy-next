@@ -44,6 +44,7 @@ model Recipe {
   coverImage      String
   coverImageBlurDataUrl      String?
   title           String
+  galleryImages   RecipeGalleryImage[]
   headline        String
   preparationTime Int
   category        Category                 @relation(fields: [categoryId], references: [id])
@@ -52,4 +53,13 @@ model Recipe {
   ingredients     RecipeIngredientBlock[]
   instructions    RecipeInstructionBlock[]
   publishedAt     DateTime
+}
+
+model RecipeGalleryImage {
+  id       Int    @id @default(autoincrement())
+  recipeId Int
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  imageUrl      String
+  blurDataUrl      String?
+  position     Int
 }
