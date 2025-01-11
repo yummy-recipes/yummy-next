@@ -93,6 +93,26 @@ async function createRecipeBlocks({ recipeId, ingredients, instructions }) {
     });
   }
 }
+
+async function createRecipeGalleryImages({ recipeId, gallery }) {
+  let position = 0;
+
+  for (const image of gallery) {
+    await prisma.recipeGalleryImage.create({
+      data: {
+        imageUrl: image.url,
+        blurDataUrl: image.placeholderBlurDataUrl,
+        recipe: {
+          connect: {
+            id: recipeId,
+          },
+        },
+        position: position++,
+      },
+    });
+  }
+}
+
 async function createOrUpdateRecipes({
   title,
   slug,
@@ -100,6 +120,7 @@ async function createOrUpdateRecipes({
   coverImage,
   coverImageBlurDataUrl,
   headline,
+  gallery,
   preparationTime,
   publishedAt,
   ingredients,
@@ -120,6 +141,12 @@ async function createOrUpdateRecipes({
     });
 
     await prisma.recipeInstructionBlock.deleteMany({
+      where: {
+        recipeId: recipe.id,
+      },
+    });
+
+    await prisma.recipeGalleryImage.deleteMany({
       where: {
         recipeId: recipe.id,
       },
@@ -153,6 +180,7 @@ async function createOrUpdateRecipes({
       ingredients,
       instructions,
     });
+    await createRecipeGalleryImages({ recipeId: recipe.id, gallery });
     return;
   }
 
@@ -177,6 +205,7 @@ async function createOrUpdateRecipes({
   });
 
   await createRecipeBlocks({ recipeId: result.id, ingredients, instructions });
+  await createRecipeGalleryImages({ recipeId: result.id, gallery });
 }
 
 function loadCategories() {
@@ -222,6 +251,11 @@ function loadRecipes(after = null, limit) {
           instructions {
             id
             content
+          }
+          gallery {
+            id
+            url
+            placeholderBlurDataUrl
           }
         }
       }
@@ -283,6 +317,7 @@ async function main() {
         category: { id: categoryMap[recipe.category.slug].id },
         ingredients: recipe.ingredients,
         instructions: recipe.instructions,
+        gallery: recipe.gallery,
         publishedAt: recipe.publishedAt,
         tags: dbTags,
       });
