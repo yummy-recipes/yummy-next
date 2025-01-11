@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import {
   Combobox,
   ComboboxInput,
@@ -14,7 +14,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { CheckIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 const queryClient = new QueryClient();
 
@@ -47,15 +47,21 @@ function SearchForm({
   error,
   results = [],
 }: Props) {
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const handleChange = (input: { value: string }) => {
+    if (input) {
+      searchInputRef.current?.blur();
+      onSelected(input.value);
+    }
+  };
   return (
     <div className="top-16 w-full">
-      <Combobox<null | { value: string }>
-        value={null}
-        onChange={(recipe) => recipe && onSelected(recipe.value)}
-      >
+      <Combobox<null | { value: string }> value={null} onChange={handleChange}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default bg-white text-left focus:outline-none focus-visible:ring-3 focus-visible:ring-sky-300 focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <ComboboxInput
+              ref={searchInputRef}
               className="w-full rounded-full border border-solid border-gray-200 py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
               displayValue={(person: { name: string } | null) =>
                 person ? person.name : ""
