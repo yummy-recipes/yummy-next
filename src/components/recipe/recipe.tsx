@@ -1,20 +1,27 @@
 import Image from "next/image";
 import { markdownToHtml } from "@/lib/markdown";
+import Link from "next/link";
 
 interface Props {
+  slug: string;
+  categorySlug: string;
   title: string;
   coverImage: string;
   coverImageBlurDataUrl: string | null;
   ingredients: { id: number; content: string }[];
   instructions: { id: number; content: string }[];
+  galleryImages: { id: number; imageUrl: string; blurDataUrl: string | null }[];
 }
 
 export async function Recipe({
+  slug,
+  categorySlug,
   title,
   coverImage,
   coverImageBlurDataUrl,
   ingredients,
   instructions,
+  galleryImages,
 }: Props) {
   return (
     <div className="flex flex-col w-full">
@@ -58,6 +65,26 @@ export async function Recipe({
           ))}
         </div>
       </div>
+
+      {galleryImages && (
+        <div>
+          {galleryImages.map((galleryImage) => (
+            <Link
+              href={`/${categorySlug}/${slug}/${galleryImage.id}`}
+              key={galleryImage.id}
+              className="mb-4"
+            >
+              <Image
+                className="w-12 object-cover"
+                src={galleryImage.imageUrl}
+                width={300}
+                height={200}
+                alt={`Zdjęcie ${title}`}
+              />
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
