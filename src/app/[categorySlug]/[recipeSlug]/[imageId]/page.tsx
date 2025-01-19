@@ -1,6 +1,8 @@
 import { prisma } from "@/data";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { GalleryDialog } from "./dialog";
+
 interface Params {
   categorySlug: string;
   recipeSlug: string;
@@ -11,7 +13,7 @@ interface Props {
   params: Promise<Params>;
 }
 export default async function Page({ params }: Props) {
-  const { imageId } = await params;
+  const { categorySlug, recipeSlug, imageId } = await params;
 
   const galleryImage = await prisma.recipeGalleryImage.findUnique({
     where: {
@@ -24,17 +26,15 @@ export default async function Page({ params }: Props) {
   }
 
   return (
-    <dialog id="gallery-modal" suppressHydrationWarning>
+    <GalleryDialog categorySlug={categorySlug} recipeSlug={recipeSlug}>
       <Image
-        className="w-12 object-cover"
+        className="w-full object-cover"
         src={galleryImage.imageUrl}
-        width={300}
-        height={200}
+        width={600}
+        height={400}
         alt={`Zdjęcie`}
       />
-
-      <script>document.getElementById("gallery-modal").showModal();</script>
-    </dialog>
+    </GalleryDialog>
   );
 }
 
