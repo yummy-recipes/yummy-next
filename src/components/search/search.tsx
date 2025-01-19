@@ -87,8 +87,10 @@ function SearchForm({
   }, []);
 
   useEffect(() => {
-    searchInputRef.current?.focus();
-    onChange(text);
+    if (text.trim().length > 0) {
+      searchInputRef.current?.focus();
+      onChange(text);
+    }
   }, [text]);
 
   return (
