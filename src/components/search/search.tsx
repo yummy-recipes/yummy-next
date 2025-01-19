@@ -16,7 +16,9 @@ import {
 } from "@tanstack/react-query";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
-import { VoiceRecorder } from "./voide-recorder";
+import { useWhisperWorker } from "./use-whisper-worker";
+import { useAudioInput } from "./use-audio-input";
+import { use } from "chai";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +33,8 @@ function useSearch({ query }: { query: string }) {
     },
   });
 }
+
+const WHISPER_SAMPLING_RATE = 16_000;
 
 interface Props {
   query: string;
@@ -50,10 +54,26 @@ function SearchForm({
   results = [],
 }: Props) {
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const [text, setText] = useState("");
   const [ready, setReady] = useState(false);
-  const [voiceInputEnabled, setVoiceInputEnabled] = useState(false);
   const [isWebGPUAvailable, setIsWebGPUAvailable] = useState(false);
+  const { startRecording, blob } = useAudioInput();
+  const { processAudio, loadModels, status, text } = useWhisperWorker();
+
+  useEffect(() => {
+    if (status === null) {
+      loadModels();
+    }
+  }, [status]);
+
+  useEffect(() => {
+    if (blob && status === "ready") {
+      const audioContext = new AudioContext({
+        sampleRate: WHISPER_SAMPLING_RATE,
+      });
+
+      processAudio(blob, audioContext);
+    }
+  }, [blob, status]);
 
   const handleChange = (input: { value: string }) => {
     if (input) {
@@ -67,36 +87,27 @@ function SearchForm({
   }, []);
 
   useEffect(() => {
-    if (searchInputRef.current) {
-      searchInputRef.current.focus();
-      searchInputRef.current.value = text;
-    }
-  }, [text, searchInputRef]);
+    searchInputRef.current?.focus();
+    onChange(text);
+  }, [text]);
 
   return (
     <div className="top-16 w-full">
       <div className="w-full flex" suppressHydrationWarning>
         {isWebGPUAvailable ? (
           <button
-            onClick={() => setVoiceInputEnabled(true)}
+            onClick={() => startRecording()}
             className={ready ? "text-green-400" : ""}
           >
             Voice
           </button>
         ) : null}
 
-        {isWebGPUAvailable ? (
-          <VoiceRecorder
-            enabled={voiceInputEnabled}
-            onReady={() => setReady(true)}
-            onText={(text: string) => setText(text)}
-          />
-        ) : null}
-
         <div className="flex-grow">
           <Combobox<null | { value: string }>
-            value={null}
+            value={{ value: query }}
             onChange={handleChange}
+            immediate
           >
             <div className="relative mt-1">
               <div className="relative w-full cursor-default bg-white text-left focus:outline-none focus-visible:ring-3 focus-visible:ring-sky-300 focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">

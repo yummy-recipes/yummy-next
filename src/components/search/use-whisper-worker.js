@@ -4,13 +4,9 @@ const WHISPER_SAMPLING_RATE = 16_000;
 const MAX_AUDIO_LENGTH = 30; // seconds
 const MAX_SAMPLES = WHISPER_SAMPLING_RATE * MAX_AUDIO_LENGTH;
 
-export function useWhisper() {
+export function useWhisperWorker() {
   const worker = useRef(null);
   const modelsLoaded = useRef(false);
-
-  const recorderRef = useRef(null);
-
-  const [enabled, setEnabled] = useState(false);
 
   // Model loading and progress
   const [status, setStatus] = useState(null);
@@ -23,10 +19,7 @@ export function useWhisper() {
   const [language, setLanguage] = useState("pl");
 
   // Processing
-  const [recording, setRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [chunks, setChunks] = useState([]);
-  const [stream, setStream] = useState(null);
   const audioContextRef = useRef(null);
 
   // We use the `useEffect` hook to setup the worker as soon as the `App` component is mounted.
@@ -73,7 +66,7 @@ export function useWhisper() {
         case "ready":
           // Pipeline ready: the worker is ready to accept messages.
           setStatus("ready");
-          recorderRef.current?.start();
+          // recorderRef.current?.start();
           break;
 
         case "start":
@@ -82,9 +75,9 @@ export function useWhisper() {
             setIsProcessing(true);
 
             // Request new data from the recorder
-            if (recorderRef.current.state === "recording") {
-              recorderRef.current?.requestData();
-            }
+            // if (recorderRef.current.state === "recording") {
+            //   recorderRef.current?.requestData();
+            // }
           }
           break;
 
@@ -99,7 +92,7 @@ export function useWhisper() {
         case "complete":
           // Generation complete: re-enable the "Generate" button
           setIsProcessing(false);
-          setText(e.data.output);
+          setText(e.data.output[0]);
           break;
       }
     };
@@ -113,87 +106,57 @@ export function useWhisper() {
     };
   }, []);
 
-  useEffect(() => {
-    if (!enabled) return;
-    if (recorderRef.current) return; // Already set
+  const processAudio = async (blob, audioContext) => {
+    const fileReader = new FileReader();
 
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices
-        .getUserMedia({ audio: true })
-        .then((stream) => {
-          setStream(stream);
+    fileReader.onloadend = async () => {
+      const arrayBuffer = fileReader.result;
+      const decoded = await audioContext.decodeAudioData(arrayBuffer);
+      let audio = decoded.getChannelData(0);
+      if (audio.length > MAX_SAMPLES) {
+        // Get last MAX_SAMPLES
+        audio = audio.slice(-MAX_SAMPLES);
+      }
 
-          recorderRef.current = new MediaRecorder(stream);
-          audioContextRef.current = new AudioContext({
-            sampleRate: WHISPER_SAMPLING_RATE,
-          });
-
-          recorderRef.current.onstart = () => {
-            setRecording(true);
-            setChunks([]);
-          };
-          recorderRef.current.ondataavailable = (e) => {
-            if (e.data.size > 0) {
-              setChunks((prev) => [...prev, e.data]);
-            } else {
-              // Empty chunk received, so we request new data after a short timeout
-              setTimeout(() => {
-                recorderRef.current.requestData();
-              }, 25);
-            }
-          };
-
-          recorderRef.current.onstop = () => {
-            setRecording(false);
-            const track = stream.getTracks()[0];
-            track.stop();
-          };
-
-          recorderRef.current.start();
-        })
-        .catch((err) => console.error("The following error occurred: ", err));
-    } else {
-      console.error("getUserMedia not supported on your browser!");
-    }
-
-    return () => {
-      recorderRef.current?.stop();
-      recorderRef.current = null;
+      worker.current.postMessage({
+        type: "generate",
+        data: { audio, language },
+      });
     };
-  }, [enabled]);
+    fileReader.readAsArrayBuffer(blob);
+  };
 
-  useEffect(() => {
-    if (!recorderRef.current) return;
-    if (!recording) return;
-    if (isProcessing) return;
-    if (status !== "ready") return;
+  // useEffect(() => {
+  //   if (!recorderRef.current) return;
+  //   if (!recording) return;
+  //   if (isProcessing) return;
+  //   if (status !== "ready") return;
 
-    if (chunks.length > 0) {
-      // Generate from data
-      const blob = new Blob(chunks, { type: recorderRef.current.mimeType });
+  //   if (chunks.length > 0) {
+  //     // Generate from data
 
-      const fileReader = new FileReader();
+  //     const fileReader = new FileReader();
 
-      fileReader.onloadend = async () => {
-        const arrayBuffer = fileReader.result;
-        const decoded =
-          await audioContextRef.current.decodeAudioData(arrayBuffer);
-        let audio = decoded.getChannelData(0);
-        if (audio.length > MAX_SAMPLES) {
-          // Get last MAX_SAMPLES
-          audio = audio.slice(-MAX_SAMPLES);
-        }
+  //     fileReader.onloadend = async () => {
+  //       const arrayBuffer = fileReader.result;
+  //       const decoded =
+  //         await audioContextRef.current.decodeAudioData(arrayBuffer);
+  //       let audio = decoded.getChannelData(0);
+  //       if (audio.length > MAX_SAMPLES) {
+  //         // Get last MAX_SAMPLES
+  //         audio = audio.slice(-MAX_SAMPLES);
+  //       }
 
-        worker.current.postMessage({
-          type: "generate",
-          data: { audio, language },
-        });
-      };
-      fileReader.readAsArrayBuffer(blob);
-    } else {
-      recorderRef.current?.requestData();
-    }
-  }, [status, recording, isProcessing, chunks, language]);
+  //       worker.current.postMessage({
+  //         type: "generate",
+  //         data: { audio, language },
+  //       });
+  //     };
+  //     fileReader.readAsArrayBuffer(blob);
+  //   } else {
+  //     recorderRef.current?.requestData();
+  //   }
+  // }, [status, recording, isProcessing, chunks, language]);
 
   const loadModels = () => {
     if (modelsLoaded.current) return;
@@ -209,14 +172,8 @@ export function useWhisper() {
     progressItems,
     text,
     tps,
-    language,
-    setLanguage,
     isProcessing,
     loadModels,
-    startRecording: () => {
-      recorderRef.current?.stop();
-      setEnabled(true);
-    },
-    stopRecording: () => recorderRef.current?.stop(),
+    processAudio,
   };
 }
