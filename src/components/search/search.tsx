@@ -14,7 +14,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { MagnifyingGlassIcon, MicrophoneIcon } from "@heroicons/react/20/solid";
 
 import { useWhisperWorker } from "./use-whisper-worker";
 import { useAudioInput } from "./use-audio-input";
@@ -97,9 +97,12 @@ function SearchForm({
         {isWebGPUAvailable ? (
           <button
             onClick={() => startRecording()}
-            className={ready ? "text-green-400" : ""}
+            className={[ready ? "text-green-400" : "", "mr-2"].join(" ")}
           >
-            Voice
+            <MicrophoneIcon
+              className="h-5 w-5 text-inherit"
+              aria-label="Use microphone to dictate search query"
+            />
           </button>
         ) : null}
 
