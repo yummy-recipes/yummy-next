@@ -54,7 +54,6 @@ function SearchForm({
   results = [],
 }: Props) {
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const [ready, setReady] = useState(false);
   const [isWebGPUAvailable, setIsWebGPUAvailable] = useState(false);
   const { startRecording, blob } = useAudioInput();
   const { processAudio, loadModels, status, text } = useWhisperWorker();
@@ -87,9 +86,10 @@ function SearchForm({
   }, []);
 
   useEffect(() => {
-    if (text.trim().length > 0) {
+    const trimmed = text.trim().replace(/\./g, "");
+    if (trimmed.length > 0) {
       searchInputRef.current?.focus();
-      onChange(text);
+      onChange(trimmed);
     }
   }, [text]);
 
@@ -99,7 +99,11 @@ function SearchForm({
         {isWebGPUAvailable ? (
           <button
             onClick={() => startRecording()}
-            className={[ready ? "text-green-400" : "", "mr-2"].join(" ")}
+            className={[
+              "border-transparent",
+              status === "ready" ? "border-b-green-400" : "",
+              "border rounded-full mr-2",
+            ].join(" ")}
           >
             <MicrophoneIcon
               className="h-5 w-5 text-inherit"
