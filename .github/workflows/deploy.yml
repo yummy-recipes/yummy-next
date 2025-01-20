@@ -59,6 +59,14 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Remove devDependencies from package.json
+        uses: jaywcjlove/github-action-package@main
+        with:
+          unset: devDependencies
+
+      - name: Update lock file
+        run: yarn
+
       - uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.DOKKU_DEPLOY_KEY }}
@@ -72,7 +80,6 @@ jobs:
           git add .
           git add --force .next
           git add --force prisma
-          git add --force .yarn/cache
           git commit -m 'Update'
           git push dokku HEAD:master --force
 
