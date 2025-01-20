@@ -16,7 +16,7 @@
     "generate:blur": "node scripts/generateBlurPlaceholder.mjs",
     "seed": "node scripts/seed.mjs",
     "reindex": "node scripts/reindex.mjs",
-    "heroku-postbuild": "echo OK",
+    "heroku-postbuild": "yarn workspaces focus --production",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky"
