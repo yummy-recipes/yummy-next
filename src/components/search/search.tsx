@@ -18,6 +18,7 @@ import { MagnifyingGlassIcon, MicrophoneIcon } from "@heroicons/react/20/solid";
 
 import { useWhisperWorker } from "./use-whisper-worker";
 import { useAudioInput } from "./use-audio-input";
+import styles from "./search.module.css";
 
 const queryClient = new QueryClient();
 
@@ -86,8 +87,11 @@ function SearchForm({
   const [isWebGPUAvailable, setIsWebGPUAvailable] = useState<boolean | null>(
     null,
   );
-  const { startRecording, blob } = useAudioInput();
-  const { processAudio, loadModels, status, text } = useWhisperWorker();
+  const { startRecording, blob, isRecording } = useAudioInput();
+  const [isTranscriptionInProgress, setIsTranscriptionInProgress] =
+    useState(false);
+  const { processAudio, loadModels, isProcessing, status, text } =
+    useWhisperWorker();
 
   useEffect(() => {
     if (status === null) {
@@ -125,28 +129,20 @@ function SearchForm({
   useEffect(() => {
     const trimmed = text.trim().replace(/\./g, "");
     if (trimmed.length > 0) {
+      setIsTranscriptionInProgress(false);
       searchInputRef.current?.focus();
       onChange(trimmed);
     }
   }, [text]);
 
+  const handleTranscribe = () => {
+    setIsTranscriptionInProgress(true);
+    startRecording();
+  };
+
   return (
     <div className="top-16 w-full">
       <div className="w-full flex" suppressHydrationWarning>
-        <button
-          onClick={() => startRecording()}
-          className={[
-            "border-transparent",
-            status === "ready" ? "border-b-green-300" : "",
-            "border rounded-full mr-2",
-          ].join(" ")}
-        >
-          <MicrophoneIcon
-            className="h-5 w-5 text-inherit"
-            aria-label="Use microphone to dictate search query"
-          />
-        </button>
-
         <div className="flex-grow">
           <Combobox<null | { value: string }>
             value={{ value: query }}
@@ -155,9 +151,24 @@ function SearchForm({
           >
             <div className="relative mt-1">
               <div className="relative w-full cursor-default bg-white text-left focus:outline-none focus-visible:ring-3 focus-visible:ring-sky-300 focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+                <button
+                  onClick={() => handleTranscribe()}
+                  className="absolute inset-y-0 left-0 flex items-center ml-2 mr-2 "
+                >
+                  <MicrophoneIcon
+                    className={[
+                      "h-5 w-5 text-inherit border border-transparent rounded-full",
+                      isTranscriptionInProgress || isProcessing
+                        ? styles["border-animation"]
+                        : "",
+                    ].join(" ")}
+                    aria-label="Use microphone to dictate search query"
+                  />
+                </button>
+
                 <ComboboxInput
                   ref={searchInputRef}
-                  className="w-full rounded-full border border-solid border-gray-200 py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+                  className="w-full rounded-full border border-solid border-gray-200 py-2 pl-10 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
                   displayValue={(person: { name: string } | null) =>
                     person ? person.name : ""
                   }

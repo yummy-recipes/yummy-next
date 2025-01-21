@@ -1,0 +1,25 @@
+@property --bg-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+@keyframes spin {
+  to {
+    --bg-angle: 360deg;
+  }
+}
+
+.border-animation {
+  animation: spin 2.5s infinite linear running;
+
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1))
+      padding-box,
+    conic-gradient(
+        from var(--bg-angle) at 50% 50%,
+        #2e90dbff 0%,
+        #cf13c2ff 100%
+      )
+      border-box;
+}
