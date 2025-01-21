@@ -6,6 +6,7 @@ import {
   WhisperForConditionalGeneration,
   TextStreamer,
   full,
+  env,
 } from "@huggingface/transformers";
 
 const MAX_NEW_TOKENS = 64;
@@ -19,7 +20,7 @@ class AutomaticSpeechRecognitionPipeline {
   static processor = null;
   static model = null;
 
-  static async getInstance(progress_callback = null) {
+  static async getInstance(progress_callback = null, { device } = {}) {
     this.model_id = "onnx-community/whisper-base";
 
     this.tokenizer ??= AutoTokenizer.from_pretrained(this.model_id, {
@@ -36,7 +37,7 @@ class AutomaticSpeechRecognitionPipeline {
           encoder_model: "fp32", // 'fp16' works too
           decoder_model_merged: "q4", // or 'fp32' ('fp16' is broken)
         },
-        device: "webgpu",
+        device,
         progress_callback,
       },
     );
@@ -46,7 +47,7 @@ class AutomaticSpeechRecognitionPipeline {
 }
 
 let processing = false;
-async function generate({ audio, language }) {
+async function generate({ audio, language, device }) {
   if (processing) return;
   processing = true;
 
@@ -55,7 +56,7 @@ async function generate({ audio, language }) {
 
   // Retrieve the text-generation pipeline.
   const [tokenizer, processor, model] =
-    await AutomaticSpeechRecognitionPipeline.getInstance();
+    await AutomaticSpeechRecognitionPipeline.getInstance(null, { device });
 
   let startTime;
   let numTokens = 0;

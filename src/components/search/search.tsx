@@ -18,7 +18,6 @@ import { MagnifyingGlassIcon, MicrophoneIcon } from "@heroicons/react/20/solid";
 
 import { useWhisperWorker } from "./use-whisper-worker";
 import { useAudioInput } from "./use-audio-input";
-import { use } from "chai";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +34,36 @@ function useSearch({ query }: { query: string }) {
 }
 
 const WHISPER_SAMPLING_RATE = 16_000;
+
+async function isWebGPUSupported() {
+  if (!("gpu" in navigator)) {
+    return {
+      supported: false,
+      reason: "WebGPU is not supported on this browser.",
+    };
+  }
+
+  try {
+    // Attempt to request an adapter for WebGPU
+    const adapter = await (navigator as any).gpu.requestAdapter();
+    if (!adapter) {
+      return {
+        supported: false,
+        reason:
+          "WebGPU is not available due to platform restrictions or lack of hardware support.",
+      };
+    }
+
+    // If we get an adapter, return success
+    return { supported: true, reason: "WebGPU is supported and enabled." };
+  } catch (error) {
+    // If any error occurs, handle it gracefully
+    return {
+      supported: false,
+      reason: `WebGPU initialization failed: ${(error as Error).message}`,
+    };
+  }
+}
 
 interface Props {
   query: string;
@@ -54,7 +83,9 @@ function SearchForm({
   results = [],
 }: Props) {
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const [isWebGPUAvailable, setIsWebGPUAvailable] = useState(false);
+  const [isWebGPUAvailable, setIsWebGPUAvailable] = useState<boolean | null>(
+    null,
+  );
   const { startRecording, blob } = useAudioInput();
   const { processAudio, loadModels, status, text } = useWhisperWorker();
 
@@ -65,14 +96,18 @@ function SearchForm({
   }, [status]);
 
   useEffect(() => {
-    if (blob && status === "ready") {
+    if (blob && status === "ready" && isWebGPUAvailable !== null) {
       const audioContext = new AudioContext({
         sampleRate: WHISPER_SAMPLING_RATE,
       });
 
-      processAudio(blob, audioContext);
+      processAudio(
+        blob,
+        audioContext,
+        isWebGPUAvailable ? "webgpu" : undefined,
+      );
     }
-  }, [blob, status]);
+  }, [blob, status, isWebGPUAvailable]);
 
   const handleChange = (input: { value: string }) => {
     if (input) {
@@ -82,7 +117,9 @@ function SearchForm({
   };
 
   useEffect(() => {
-    setIsWebGPUAvailable(!!(navigator as any).gpu);
+    isWebGPUSupported().then(({ supported }) => {
+      setIsWebGPUAvailable(supported);
+    });
   }, []);
 
   useEffect(() => {
@@ -96,21 +133,19 @@ function SearchForm({
   return (
     <div className="top-16 w-full">
       <div className="w-full flex" suppressHydrationWarning>
-        {isWebGPUAvailable ? (
-          <button
-            onClick={() => startRecording()}
-            className={[
-              "border-transparent",
-              status === "ready" ? "border-b-green-400" : "",
-              "border rounded-full mr-2",
-            ].join(" ")}
-          >
-            <MicrophoneIcon
-              className="h-5 w-5 text-inherit"
-              aria-label="Use microphone to dictate search query"
-            />
-          </button>
-        ) : null}
+        <button
+          onClick={() => startRecording()}
+          className={[
+            "border-transparent",
+            status === "ready" ? "border-b-green-300" : "",
+            "border rounded-full mr-2",
+          ].join(" ")}
+        >
+          <MicrophoneIcon
+            className="h-5 w-5 text-inherit"
+            aria-label="Use microphone to dictate search query"
+          />
+        </button>
 
         <div className="flex-grow">
           <Combobox<null | { value: string }>

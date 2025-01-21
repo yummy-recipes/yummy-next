@@ -106,7 +106,7 @@ export function useWhisperWorker() {
     };
   }, []);
 
-  const processAudio = async (blob, audioContext) => {
+  const processAudio = async (blob, audioContext, device) => {
     const fileReader = new FileReader();
 
     fileReader.onloadend = async () => {
@@ -120,7 +120,7 @@ export function useWhisperWorker() {
 
       worker.current.postMessage({
         type: "generate",
-        data: { audio, language },
+        data: { audio, language, device },
       });
     };
     fileReader.readAsArrayBuffer(blob);
