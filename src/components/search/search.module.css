@@ -23,3 +23,20 @@
       )
       border-box;
 }
+
+.volume {
+  --audio-level: 0%;
+  position: relative;
+}
+
+.volume:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--audio-level);
+  background: linear-gradient(to right, #2e90db 0%, #cf13c2 100%);
+  opacity: 0.5;
+  transition: height ease-in 25ms;
+}
