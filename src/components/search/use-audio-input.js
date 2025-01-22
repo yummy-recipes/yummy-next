@@ -42,13 +42,18 @@ export function useAudioInput({ onAudioLevel }) {
       let localRecording = true;
       let lastAudio = null;
 
+      const stopRecording = () => {
+        mediaRecorder.stop();
+        setIsRecording(false);
+        onAudioLevel(0);
+        localRecording = false;
+      };
+
       const handle = setTimeout(() => {
         if (!localRecording) return;
 
-        mediaRecorder.stop();
-        setIsRecording(false);
-        localRecording = false;
-      }, 5000);
+        stopRecording();
+      }, 3000);
 
       requestAnimationFrame(function checkAudio() {
         if (!localRecording) return;
@@ -56,18 +61,15 @@ export function useAudioInput({ onAudioLevel }) {
         const dataArray = new Uint8Array(analyser.frequencyBinCount);
         analyser.getByteFrequencyData(dataArray);
 
-        const averageData =
-          dataArray.reduce((a, b) => a + b) / dataArray.length;
+        const maxData = dataArray.reduce((acc, v) => Math.max(acc, v), 0);
 
-        onAudioLevel(Math.min(1, (2 * averageData) / 256));
+        onAudioLevel(maxData / 512);
 
         // Check if the audio is silent
-        const isSilent = averageData < 10;
+        const isSilent = maxData < 10;
         if (isSilent) {
           if (lastAudio && Date.now() - lastAudio > 500) {
-            localRecording = false;
-            mediaRecorder.stop();
-            setIsRecording(false);
+            stopRecording();
             clearTimeout(handle);
             return;
           }

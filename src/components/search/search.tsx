@@ -98,12 +98,11 @@ function SearchForm({
     );
   };
 
-  const { startRecording, blob, isRecording } = useAudioInput({
+  const { startRecording, blob } = useAudioInput({
     onAudioLevel: handleAudioLevel,
   });
 
-  const { processAudio, loadModels, isProcessing, status, text } =
-    useWhisperWorker();
+  const { processAudio, loadModels, status, text } = useWhisperWorker();
 
   useEffect(() => {
     if (status === null) {

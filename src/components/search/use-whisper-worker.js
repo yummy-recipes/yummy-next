@@ -66,19 +66,10 @@ export function useWhisperWorker() {
         case "ready":
           // Pipeline ready: the worker is ready to accept messages.
           setStatus("ready");
-          // recorderRef.current?.start();
           break;
 
         case "start":
-          {
-            // Start generation
-            setIsProcessing(true);
-
-            // Request new data from the recorder
-            // if (recorderRef.current.state === "recording") {
-            //   recorderRef.current?.requestData();
-            // }
-          }
+          setIsProcessing(true);
           break;
 
         case "update":
@@ -126,42 +117,9 @@ export function useWhisperWorker() {
     fileReader.readAsArrayBuffer(blob);
   };
 
-  // useEffect(() => {
-  //   if (!recorderRef.current) return;
-  //   if (!recording) return;
-  //   if (isProcessing) return;
-  //   if (status !== "ready") return;
-
-  //   if (chunks.length > 0) {
-  //     // Generate from data
-
-  //     const fileReader = new FileReader();
-
-  //     fileReader.onloadend = async () => {
-  //       const arrayBuffer = fileReader.result;
-  //       const decoded =
-  //         await audioContextRef.current.decodeAudioData(arrayBuffer);
-  //       let audio = decoded.getChannelData(0);
-  //       if (audio.length > MAX_SAMPLES) {
-  //         // Get last MAX_SAMPLES
-  //         audio = audio.slice(-MAX_SAMPLES);
-  //       }
-
-  //       worker.current.postMessage({
-  //         type: "generate",
-  //         data: { audio, language },
-  //       });
-  //     };
-  //     fileReader.readAsArrayBuffer(blob);
-  //   } else {
-  //     recorderRef.current?.requestData();
-  //   }
-  // }, [status, recording, isProcessing, chunks, language]);
-
   const loadModels = () => {
     if (modelsLoaded.current) return;
 
-    console.log("Load models");
     modelsLoaded.current = true;
     worker.current.postMessage({ type: "load" });
   };
