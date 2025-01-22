@@ -19,6 +19,8 @@ import { MagnifyingGlassIcon, MicrophoneIcon } from "@heroicons/react/20/solid";
 import { useWhisperWorker } from "./use-whisper-worker";
 import { useAudioInput } from "./use-audio-input";
 import styles from "./search.module.css";
+import { useWebGPUAvailability } from "./use-webgpu-availability";
+import { useCssProperty } from "./use-css-property";
 
 const queryClient = new QueryClient();
 
@@ -35,36 +37,6 @@ function useSearch({ query }: { query: string }) {
 }
 
 const WHISPER_SAMPLING_RATE = 16_000;
-
-async function isWebGPUSupported() {
-  if (!("gpu" in navigator)) {
-    return {
-      supported: false,
-      reason: "WebGPU is not supported on this browser.",
-    };
-  }
-
-  try {
-    // Attempt to request an adapter for WebGPU
-    const adapter = await (navigator as any).gpu.requestAdapter();
-    if (!adapter) {
-      return {
-        supported: false,
-        reason:
-          "WebGPU is not available due to platform restrictions or lack of hardware support.",
-      };
-    }
-
-    // If we get an adapter, return success
-    return { supported: true, reason: "WebGPU is supported and enabled." };
-  } catch (error) {
-    // If any error occurs, handle it gracefully
-    return {
-      supported: false,
-      reason: `WebGPU initialization failed: ${(error as Error).message}`,
-    };
-  }
-}
 
 interface Props {
   query: string;
@@ -84,18 +56,14 @@ function SearchForm({
   results = [],
 }: Props) {
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const volumeBarRef = useRef<HTMLSpanElement>(null);
+  const { ref: volumeBarRef, setProperty: setVolumeBarProperty } =
+    useCssProperty();
   const [isTranscriptionInProgress, setIsTranscriptionInProgress] =
     useState(false);
-  const [isWebGPUAvailable, setIsWebGPUAvailable] = useState<boolean | null>(
-    null,
-  );
+  const { isWebGPUAvailable } = useWebGPUAvailability();
 
   const handleAudioLevel = (level: number) => {
-    volumeBarRef.current?.style.setProperty(
-      "--audio-level",
-      `${(level * 100).toFixed(0)}%`,
-    );
+    setVolumeBarProperty("--audio-level", `${(level * 100).toFixed(0)}%`);
   };
 
   const { startRecording, blob } = useAudioInput({
@@ -130,12 +98,6 @@ function SearchForm({
       onSelected(input.value);
     }
   };
-
-  useEffect(() => {
-    isWebGPUSupported().then(({ supported }) => {
-      setIsWebGPUAvailable(supported);
-    });
-  }, []);
 
   useEffect(() => {
     const trimmed = text.trim().replace(/\./g, "");

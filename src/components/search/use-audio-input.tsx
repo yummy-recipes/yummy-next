@@ -1,7 +1,10 @@
 import { useState, useCallback } from "react";
 
-export function useAudioInput({ onAudioLevel }) {
-  const [blob, setBlob] = useState(null);
+interface Params {
+  onAudioLevel: (level: number) => void;
+}
+export function useAudioInput({ onAudioLevel }: Params) {
+  const [blob, setBlob] = useState<Blob | null>(null);
   const [isRecording, setIsRecording] = useState(false);
 
   const startRecording = useCallback(async () => {
@@ -19,7 +22,7 @@ export function useAudioInput({ onAudioLevel }) {
       const source = audioCtx.createMediaStreamSource(stream);
       source.connect(analyser);
 
-      const audioChunks = [];
+      const audioChunks: Blob[] = [];
       const mediaRecorder = new MediaRecorder(stream);
 
       mediaRecorder.ondataavailable = (event) => {
@@ -40,7 +43,7 @@ export function useAudioInput({ onAudioLevel }) {
       setIsRecording(true);
 
       let localRecording = true;
-      let lastAudio = null;
+      let lastAudio: number | null = null;
 
       const stopRecording = () => {
         mediaRecorder.stop();
@@ -83,7 +86,7 @@ export function useAudioInput({ onAudioLevel }) {
       console.error("Error accessing audio device:", err);
       alert("Could not start audio recording.");
     }
-  });
+  }, []);
 
   return {
     blob,
