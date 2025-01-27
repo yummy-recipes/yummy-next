@@ -73,12 +73,6 @@ function SearchForm({
   const { processAudio, loadModels, status, text } = useWhisperWorker();
 
   useEffect(() => {
-    if (status === null) {
-      loadModels();
-    }
-  }, [status]);
-
-  useEffect(() => {
     if (blob && status === "ready" && isWebGPUAvailable !== null) {
       const audioContext = new AudioContext({
         sampleRate: WHISPER_SAMPLING_RATE,
@@ -111,6 +105,10 @@ function SearchForm({
   const handleTranscribe = () => {
     setIsTranscriptionInProgress(true);
     startRecording();
+
+    if (status === null) {
+      loadModels();
+    }
   };
 
   return (
