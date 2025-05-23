@@ -6359,9 +6359,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:11.22.0":
-  version: 11.22.0
-  resolution: "chromatic@npm:11.22.0"
+"chromatic@npm:11.29.0":
+  version: 11.29.0
+  resolution: "chromatic@npm:11.29.0"
   peerDependencies:
     "@chromatic-com/cypress": ^0.*.* || ^1.0.0
     "@chromatic-com/playwright": ^0.*.* || ^1.0.0
@@ -6374,7 +6374,7 @@ __metadata:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: 10/bb84d9d44248d8bbd20d97c1a7240e2e227c216e773d3bb729d8d2a7d7605bb5dfd75510dc193b398180fd0d499b253c8272ff073e89e2b5d50b34839709f7a7
+  checksum: 10/8416acc2f5d61bbbaffb232906244c1a84b6068b2801ae166b76c880a45bc42282bc79ea36c58811a9e6d9e9ea142de5610165940fac2c7bf1d4fc1ba6bc091c
   languageName: node
   linkType: hard
 
@@ -14721,7 +14721,7 @@ __metadata:
     "@types/react-dom": "npm:19.0.2"
     algoliasearch: "npm:5.18.0"
     autoprefixer: "npm:10.4.20"
-    chromatic: "npm:11.22.0"
+    chromatic: "npm:11.29.0"
     dotenv: "npm:16.4.7"
     eslint: "npm:9.17.0"
     eslint-config-next: "npm:15.1.3"
