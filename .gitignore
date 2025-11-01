@@ -17,3 +17,6 @@ strapi-export
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Sentry Config File
+.env.sentry-build-plugin
