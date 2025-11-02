@@ -11,6 +11,14 @@ interface Props {
   params: Promise<Params>;
 }
 
+export async function generateStaticParams() {
+  const tags = await prisma.tag.findMany({});
+
+  return tags.map((tag) => ({
+    slug: tag.slug,
+  }));
+}
+
 export default async function Page({ params }: Props) {
   const { slug } = await params;
   const tag = await prisma.tag.findUnique({
