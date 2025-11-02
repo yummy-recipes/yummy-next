@@ -15851,6 +15851,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vanilla-cookieconsent@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "vanilla-cookieconsent@npm:3.1.0"
+  checksum: 10/053e887cde87cb1e583288d2c3d8b56acf9c97293e5c9ff5c35d0f43b68c8e20441a321469126e92ac78fbb8410fe245cd2f879d4c376b7b2a66ffca00dee41c
+  languageName: node
+  linkType: hard
+
 "vite-node@npm:2.1.8":
   version: 2.1.8
   resolution: "vite-node@npm:2.1.8"
@@ -16400,6 +16407,7 @@ __metadata:
     storybook: "npm:8.4.7"
     tailwindcss: "npm:3.4.17"
     typescript: "npm:5.7.3"
+    vanilla-cookieconsent: "npm:^3.1.0"
     vite-tsconfig-paths: "npm:5.1.4"
     vitest: "npm:2.1.8"
   languageName: unknown
