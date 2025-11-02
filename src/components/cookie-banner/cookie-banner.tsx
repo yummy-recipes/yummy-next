@@ -17,35 +17,35 @@ export const CookieBanner = () => {
         translations: {
           pl: {
             consentModal: {
-              title: "We use cookies",
-              description: "Cookie modal description",
-              acceptAllBtn: "Accept all",
-              acceptNecessaryBtn: "Reject all",
-              showPreferencesBtn: "Manage Individual preferences",
+              title: "Używamy ciasteczek",
+              description: "Opis modalny ciasteczek",
+              acceptAllBtn: "Zaakceptuj wszystkie",
+              acceptNecessaryBtn: "Odrzuć wszystkie",
+              showPreferencesBtn: "Zarządzaj indywidualnymi preferencjami",
             },
             preferencesModal: {
-              title: "Manage cookie preferences",
-              acceptAllBtn: "Accept all",
-              acceptNecessaryBtn: "Reject all",
-              savePreferencesBtn: "Accept current selection",
-              closeIconLabel: "Close modal",
+              title: "Zarządzaj preferencjami ciasteczek",
+              acceptAllBtn: "Zaakceptuj wszystkie",
+              acceptNecessaryBtn: "Odrzuć wszystkie",
+              savePreferencesBtn: "Zaakceptuj bieżący wybór",
+              closeIconLabel: "Zamknij modal",
               sections: [
                 {
-                  title: "Somebody said ... cookies?",
-                  description: "I want one!",
+                  title: "Ktoś powiedział... ciasteczka?",
+                  description: "Chcę jedno!",
                 },
                 {
-                  title: "Strictly Necessary cookies",
+                  title: "Ściśle niezbędne ciasteczka",
                   description:
-                    "These cookies are essential for the proper functioning of the website and cannot be disabled.",
+                    "Te ciasteczka są niezbędne do prawidłowego funkcjonowania witryny i nie można ich wyłączyć.",
 
                   //this field will generate a toggle linked to the 'necessary' category
                   linkedCategory: "necessary",
                 },
                 {
-                  title: "Analytics",
+                  title: "Analityka",
                   description:
-                    "These cookies collect information about how you use our website. All of the data is anonymized and cannot be used to identify you.",
+                    "Te ciasteczka zbierają informacje o tym, jak korzystasz z naszej witryny. Wszystkie dane są anonimizowane i nie mogą być użyte do Twojej identyfikacji.",
                   linkedCategory: "analytics",
                 },
               ],
