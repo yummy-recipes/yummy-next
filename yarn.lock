@@ -2513,7 +2513,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@huggingface/transformers@npm:^3.3.1":
+"@huggingface/transformers@npm:3.3.1":
   version: 3.3.1
   resolution: "@huggingface/transformers@npm:3.3.1"
   dependencies:
@@ -4674,7 +4674,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/nextjs@npm:^10":
+"@sentry/nextjs@npm:10.22.0":
   version: 10.22.0
   resolution: "@sentry/nextjs@npm:10.22.0"
   dependencies:
@@ -16364,9 +16364,9 @@ __metadata:
     "@chromatic-com/storybook": "npm:3.2.3"
     "@headlessui/react": "npm:2.2.0"
     "@heroicons/react": "npm:2.2.0"
-    "@huggingface/transformers": "npm:^3.3.1"
+    "@huggingface/transformers": "npm:3.3.1"
     "@prisma/client": "npm:6.1.0"
-    "@sentry/nextjs": "npm:^10"
+    "@sentry/nextjs": "npm:10.22.0"
     "@storybook/addon-essentials": "npm:8.4.7"
     "@storybook/addon-interactions": "npm:8.4.7"
     "@storybook/addon-links": "npm:8.4.7"
