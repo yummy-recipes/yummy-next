@@ -5,6 +5,14 @@ import * as CookieConsent from "vanilla-cookieconsent";
 export const CookieBanner = () => {
   useEffect(() => {
     CookieConsent.run({
+      guiOptions: {
+        consentModal: {
+          equalWeightButtons: false,
+        },
+        preferencesModal: {
+          equalWeightButtons: false,
+        },
+      },
       categories: {
         necessary: {
           enabled: true,
@@ -18,7 +26,6 @@ export const CookieBanner = () => {
           pl: {
             consentModal: {
               title: "Używamy ciasteczek",
-              description: "Opis modalny ciasteczek",
               acceptAllBtn: "Zaakceptuj wszystkie",
               acceptNecessaryBtn: "Odrzuć wszystkie",
               showPreferencesBtn: "Zarządzaj indywidualnymi preferencjami",
@@ -31,15 +38,10 @@ export const CookieBanner = () => {
               closeIconLabel: "Zamknij modal",
               sections: [
                 {
-                  title: "Ktoś powiedział... ciasteczka?",
-                  description: "Chcę jedno!",
-                },
-                {
                   title: "Ściśle niezbędne ciasteczka",
                   description:
-                    "Te ciasteczka są niezbędne do prawidłowego funkcjonowania witryny i nie można ich wyłączyć.",
+                    "Te ciasteczka są niezbędne do prawidłowego funkcjonowania witryny.",
 
-                  //this field will generate a toggle linked to the 'necessary' category
                   linkedCategory: "necessary",
                 },
                 {
