@@ -6567,7 +6567,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.15.0":
+"acorn@npm:^8.15.0, acorn@npm:^8.8.1":
   version: 8.15.0
   resolution: "acorn@npm:8.15.0"
   bin:
@@ -6582,15 +6582,6 @@ __metadata:
   bin:
     acorn: bin/acorn
   checksum: 10/522310c20fdc3c271caed3caf0f06c51d61cb42267279566edd1d58e83dbc12eebdafaab666a0f0be1b7ad04af9c6bc2a6f478690a9e6391c3c8b165ada917dd
-  languageName: node
-  linkType: hard
-
-"acorn@npm:^8.8.1":
-  version: 8.15.0
-  resolution: "acorn@npm:8.15.0"
-  bin:
-    acorn: bin/acorn
-  checksum: 10/77f2de5051a631cf1729c090e5759148459cdb76b5f5c70f890503d629cf5052357b0ce783c0f976dd8a93c5150f59f6d18df1def3f502396a20f81282482fa4
   languageName: node
   linkType: hard
 
@@ -15860,6 +15851,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vanilla-cookieconsent@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "vanilla-cookieconsent@npm:3.1.0"
+  checksum: 10/053e887cde87cb1e583288d2c3d8b56acf9c97293e5c9ff5c35d0f43b68c8e20441a321469126e92ac78fbb8410fe245cd2f879d4c376b7b2a66ffca00dee41c
+  languageName: node
+  linkType: hard
+
 "vite-node@npm:2.1.8":
   version: 2.1.8
   resolution: "vite-node@npm:2.1.8"
@@ -16409,6 +16407,7 @@ __metadata:
     storybook: "npm:8.4.7"
     tailwindcss: "npm:3.4.17"
     typescript: "npm:5.7.3"
+    vanilla-cookieconsent: "npm:^3.1.0"
     vite-tsconfig-paths: "npm:5.1.4"
     vitest: "npm:2.1.8"
   languageName: unknown
