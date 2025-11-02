@@ -39,6 +39,7 @@
     "prisma": "6.1.0",
     "react": "latest",
     "react-dom": "latest",
+    "react-speech-recognition": "^4.0.1",
     "tailwindcss": "3.4.17",
     "typescript": "5.7.3",
     "vanilla-cookieconsent": "^3.1.0"
@@ -57,6 +58,7 @@
     "@storybook/nextjs": "8.4.7",
     "@storybook/react": "8.4.7",
     "@storybook/test": "8.4.7",
+    "@types/react-speech-recognition": "^3.9.6",
     "chromatic": "11.29.0",
     "dotenv": "16.4.7",
     "eslint-config-next": "15.1.3",

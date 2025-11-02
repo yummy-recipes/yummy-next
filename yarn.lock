@@ -5834,6 +5834,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/dom-speech-recognition@npm:*":
+  version: 0.0.7
+  resolution: "@types/dom-speech-recognition@npm:0.0.7"
+  checksum: 10/5bbda8e1486bb3a7e198b184b2863a63702d5987fd67370174a8f884c486cd418693c490ad84e8d5a8238175d58ffb8f3e589ae768fcb0f4d4cf3c52d4686da5
+  languageName: node
+  linkType: hard
+
 "@types/eslint-scope@npm:^3.7.3":
   version: 3.7.4
   resolution: "@types/eslint-scope@npm:3.7.4"
@@ -6087,6 +6094,15 @@ __metadata:
   peerDependencies:
     "@types/react": ^19.0.0
   checksum: 10/d2ae81ec0b8eee7a4bf31918796fdaa34e8db68f69682163bc212d759de76783e6ffcc02c02722dcf508429067148841e6da81414cc730ca2a28c9c2b350c880
+  languageName: node
+  linkType: hard
+
+"@types/react-speech-recognition@npm:^3.9.6":
+  version: 3.9.6
+  resolution: "@types/react-speech-recognition@npm:3.9.6"
+  dependencies:
+    "@types/dom-speech-recognition": "npm:*"
+  checksum: 10/221c375d2bdb15a1a9b62e8b90828cd706026c3eaa0c600d79dc00fa6b0c1f23899323b12a4beee89c8fd65b54d8356c891d2a306150f53abbf3628c1d74f2fb
   languageName: node
   linkType: hard
 
@@ -13676,6 +13692,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-speech-recognition@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "react-speech-recognition@npm:4.0.1"
+  dependencies:
+    lodash.debounce: "npm:^4.0.8"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10/37ce2a3a2fbc06d90a4b34c47228961a4742810e66469a8fe91a170d06f3ef284d6c7f1b5c7f50ceca9f5e122e31a7adc371e7525af5a7a916ba45102c894491
+  languageName: node
+  linkType: hard
+
 "react-style-singleton@npm:^2.2.1":
   version: 2.2.1
   resolution: "react-style-singleton@npm:2.2.1"
@@ -16547,6 +16574,7 @@ __metadata:
     "@types/node": "npm:22.10.5"
     "@types/react": "npm:19.0.3"
     "@types/react-dom": "npm:19.0.2"
+    "@types/react-speech-recognition": "npm:^3.9.6"
     algoliasearch: "npm:5.18.0"
     autoprefixer: "npm:10.4.21"
     chromatic: "npm:11.29.0"
@@ -16564,6 +16592,7 @@ __metadata:
     prisma: "npm:6.1.0"
     react: "npm:latest"
     react-dom: "npm:latest"
+    react-speech-recognition: "npm:^4.0.1"
     storybook: "npm:8.4.7"
     tailwindcss: "npm:3.4.17"
     typescript: "npm:5.7.3"
