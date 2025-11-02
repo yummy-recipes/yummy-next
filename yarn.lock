@@ -1770,9 +1770,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chromatic-com/storybook@npm:3.2.3":
-  version: 3.2.3
-  resolution: "@chromatic-com/storybook@npm:3.2.3"
+"@chromatic-com/storybook@npm:3.2.7":
+  version: 3.2.7
+  resolution: "@chromatic-com/storybook@npm:3.2.7"
   dependencies:
     chromatic: "npm:^11.15.0"
     filesize: "npm:^10.0.12"
@@ -1781,7 +1781,7 @@ __metadata:
     strip-ansi: "npm:^7.1.0"
   peerDependencies:
     storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
-  checksum: 10/6aa32ff8a227c5ada0667457a36d5db1946f9d89b8fb64153150445c8b67f26647aa48a6afce21f6dc2cad4905418f37c2fd0b12d26c3a42a36edf45b52efb7b
+  checksum: 10/72e3b01221e0273d295dd9b48e3e7b7ca655b70702fbd011d949cdc954291d80399b2b969a4b49dbe88b43c1defb9c7d1fcac97e1370b4e271eb247b92b03b3a
   languageName: node
   linkType: hard
 
@@ -6567,7 +6567,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.15.0":
+"acorn@npm:^8.15.0, acorn@npm:^8.8.1":
   version: 8.15.0
   resolution: "acorn@npm:8.15.0"
   bin:
@@ -6582,15 +6582,6 @@ __metadata:
   bin:
     acorn: bin/acorn
   checksum: 10/522310c20fdc3c271caed3caf0f06c51d61cb42267279566edd1d58e83dbc12eebdafaab666a0f0be1b7ad04af9c6bc2a6f478690a9e6391c3c8b165ada917dd
-  languageName: node
-  linkType: hard
-
-"acorn@npm:^8.8.1":
-  version: 8.15.0
-  resolution: "acorn@npm:8.15.0"
-  bin:
-    acorn: bin/acorn
-  checksum: 10/77f2de5051a631cf1729c090e5759148459cdb76b5f5c70f890503d629cf5052357b0ce783c0f976dd8a93c5150f59f6d18df1def3f502396a20f81282482fa4
   languageName: node
   linkType: hard
 
@@ -16370,7 +16361,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "yummy@workspace:."
   dependencies:
-    "@chromatic-com/storybook": "npm:3.2.3"
+    "@chromatic-com/storybook": "npm:3.2.7"
     "@headlessui/react": "npm:2.2.0"
     "@heroicons/react": "npm:2.2.0"
     "@huggingface/transformers": "npm:^3.3.1"
