@@ -1770,9 +1770,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chromatic-com/storybook@npm:3.2.3":
-  version: 3.2.3
-  resolution: "@chromatic-com/storybook@npm:3.2.3"
+"@chromatic-com/storybook@npm:3.2.7":
+  version: 3.2.7
+  resolution: "@chromatic-com/storybook@npm:3.2.7"
   dependencies:
     chromatic: "npm:^11.15.0"
     filesize: "npm:^10.0.12"
@@ -1781,7 +1781,7 @@ __metadata:
     strip-ansi: "npm:^7.1.0"
   peerDependencies:
     storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
-  checksum: 10/6aa32ff8a227c5ada0667457a36d5db1946f9d89b8fb64153150445c8b67f26647aa48a6afce21f6dc2cad4905418f37c2fd0b12d26c3a42a36edf45b52efb7b
+  checksum: 10/72e3b01221e0273d295dd9b48e3e7b7ca655b70702fbd011d949cdc954291d80399b2b969a4b49dbe88b43c1defb9c7d1fcac97e1370b4e271eb247b92b03b3a
   languageName: node
   linkType: hard
 
@@ -16361,7 +16361,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "yummy@workspace:."
   dependencies:
-    "@chromatic-com/storybook": "npm:3.2.3"
+    "@chromatic-com/storybook": "npm:3.2.7"
     "@headlessui/react": "npm:2.2.0"
     "@heroicons/react": "npm:2.2.0"
     "@huggingface/transformers": "npm:3.3.1"
