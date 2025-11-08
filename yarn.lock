@@ -4813,6 +4813,48 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@statsig/client-core@npm:3.30.0":
+  version: 3.30.0
+  resolution: "@statsig/client-core@npm:3.30.0"
+  checksum: 10/8821c1de2865ab2ada10e6b45c91e0d7178861607bd08affe1f60d935345f45edfae807aeb187b66a4e656b95d38cdeb0acde30b52d01e6b5e09ffc00555abe9
+  languageName: node
+  linkType: hard
+
+"@statsig/js-client@npm:3.30.0":
+  version: 3.30.0
+  resolution: "@statsig/js-client@npm:3.30.0"
+  dependencies:
+    "@statsig/client-core": "npm:3.30.0"
+  checksum: 10/185c1899903bd05f8805f63a4e1fccacddbfb79a1037cb83e419f1db04e23e50a8c445927799e4639f5c4c512c00d036a3972563891920e2232fcddcaace4bc2
+  languageName: node
+  linkType: hard
+
+"@statsig/next@npm:^3.30.0":
+  version: 3.30.0
+  resolution: "@statsig/next@npm:3.30.0"
+  dependencies:
+    "@statsig/client-core": "npm:3.30.0"
+    "@statsig/react-bindings": "npm:3.30.0"
+    statsig-node: "npm:^6.4.5"
+  peerDependencies:
+    next: ^13.0.0 || ^14.0.0 || ^15.0.0
+    react: ^18.0.0 || ^19.0.0
+  checksum: 10/34775dddb4468c27fdeb5b87e2ebc3f592ba4576698ad70b2b0bd8c818eb63786f7ad13df0938ceb9946581f8723d46da74f80310aad1585fe8ee0c0a3266d8e
+  languageName: node
+  linkType: hard
+
+"@statsig/react-bindings@npm:3.30.0, @statsig/react-bindings@npm:^3.30.0":
+  version: 3.30.0
+  resolution: "@statsig/react-bindings@npm:3.30.0"
+  dependencies:
+    "@statsig/client-core": "npm:3.30.0"
+    "@statsig/js-client": "npm:3.30.0"
+  peerDependencies:
+    react: ^16.6.3 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/7e8ae1537b3412c207df257b4e9b473b6e090f3916dfcdf158ef3ec94052b98525c9cbf9bd3b366235c3a01a67339c8f841c70cb87f7fd92cc88765edb17fa3e
+  languageName: node
+  linkType: hard
+
 "@storybook/addon-actions@npm:8.4.7":
   version: 8.4.7
   resolution: "@storybook/addon-actions@npm:8.4.7"
@@ -10730,6 +10772,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ip3country@npm:^5.0.0":
+  version: 5.0.1
+  resolution: "ip3country@npm:5.0.1"
+  checksum: 10/ceb6f00ecda47d4d389adddafda0f1072cf2d32cc3511f537948323efc489408cf74f1271506e3cdb8cd5ad5e7b55cd4e6a8a7f9caf4af98c07f1eed7bea2e45
+  languageName: node
+  linkType: hard
+
 "ip@npm:^2.0.0":
   version: 2.0.0
   resolution: "ip@npm:2.0.0"
@@ -12240,7 +12289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.7":
+"node-fetch@npm:^2.6.7, node-fetch@npm:^2.7.0":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:
@@ -14779,6 +14828,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"statsig-node@npm:^6.4.5":
+  version: 6.5.1
+  resolution: "statsig-node@npm:6.5.1"
+  dependencies:
+    ip3country: "npm:^5.0.0"
+    node-fetch: "npm:^2.7.0"
+    ua-parser-js: "npm:^1.0.2"
+    uuid: "npm:^8.3.2"
+  checksum: 10/033729c27da365a4197b7949db1be4546504f6d841af3fd53d037a567058d6f87716ad9d276d75070fa9412fb8942377f9a13341705ffe219b329e488d5ec639
+  languageName: node
+  linkType: hard
+
 "std-env@npm:^3.8.0":
   version: 3.8.0
   resolution: "std-env@npm:3.8.0"
@@ -15605,6 +15666,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ua-parser-js@npm:^1.0.2":
+  version: 1.0.41
+  resolution: "ua-parser-js@npm:1.0.41"
+  bin:
+    ua-parser-js: script/cli.js
+  checksum: 10/86f2b624ff13f5be86a7cc5172427960493c8c0f703fdc8de340d8701951a1478cdf7a76f1f510932bb25a2fce6a3e0ba750b631f026d85acdc6b2a6b0ba6138
+  languageName: node
+  linkType: hard
+
 "uglify-js@npm:^3.1.4":
   version: 3.17.4
   resolution: "uglify-js@npm:3.17.4"
@@ -15839,6 +15909,15 @@ __metadata:
   version: 0.4.0
   resolution: "utila@npm:0.4.0"
   checksum: 10/b068d8cb140588da0d0c80ee3c14c6b75d3f68760d8a1c6c3908d0270e9e4056454ff16189586481b7382926c44674f6929d08e06eaf9ec8f62736cd900169c5
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 10/9a5f7aa1d6f56dd1e8d5f2478f855f25c645e64e26e347a98e98d95781d5ed20062d6cca2eecb58ba7c84bc3910be95c0451ef4161906abaab44f9cb68ffbdd1
   languageName: node
   linkType: hard
 
@@ -16374,6 +16453,8 @@ __metadata:
     "@huggingface/transformers": "npm:3.3.1"
     "@prisma/client": "npm:6.1.0"
     "@sentry/nextjs": "npm:10.22.0"
+    "@statsig/next": "npm:^3.30.0"
+    "@statsig/react-bindings": "npm:^3.30.0"
     "@storybook/addon-essentials": "npm:8.4.7"
     "@storybook/addon-interactions": "npm:8.4.7"
     "@storybook/addon-links": "npm:8.4.7"
