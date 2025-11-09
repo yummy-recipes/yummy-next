@@ -13,6 +13,8 @@ const bySlugPosition = (tag1: { slug: string }, tag2: { slug: string }) =>
 const upperCaseFirstLetter = (string: string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
+// export const dynamic = "force-static";
+
 export default async function Home() {
   const tags = await prisma.tag.findMany({ where: { slug: { in: tagSlugs } } });
   const recipeCount = await prisma.recipe.count();
