@@ -21,8 +21,6 @@ const getCategories = (cookieValue: string) => {
 };
 
 export default function middleware(request: NextRequest) {
-  console.log("Middleware executed for request:", request.url);
-
   const ccCookie = request.cookies.get("cc_cookie");
 
   if (!ccCookie) {
@@ -30,7 +28,6 @@ export default function middleware(request: NextRequest) {
   }
 
   const categories = getCategories(ccCookie.value);
-  console.log("Categories extracted from cookie:", categories);
 
   if (!categories.includes("analytics")) {
     return NextResponse.next();

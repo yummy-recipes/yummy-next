@@ -4,6 +4,7 @@ import { RecipeList } from "@/components/recipe-list/recipe-list";
 
 interface Props {}
 
+// export const dynamic = "force-static";
 export default async function Page({}: Props) {
   const recipes = await prisma.recipe.findMany({
     include: {

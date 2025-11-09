@@ -17,7 +17,7 @@ export default async function Page({ params }: Props) {
 
   const galleryImage = await prisma.recipeGalleryImage.findUnique({
     where: {
-      id: parseInt(imageId),
+      id: parseInt(imageId) ?? -1,
     },
   });
 
