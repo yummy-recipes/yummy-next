@@ -4829,21 +4829,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@statsig/next@npm:^3.30.0":
-  version: 3.30.0
-  resolution: "@statsig/next@npm:3.30.0"
-  dependencies:
-    "@statsig/client-core": "npm:3.30.0"
-    "@statsig/react-bindings": "npm:3.30.0"
-    statsig-node: "npm:^6.4.5"
-  peerDependencies:
-    next: ^13.0.0 || ^14.0.0 || ^15.0.0
-    react: ^18.0.0 || ^19.0.0
-  checksum: 10/34775dddb4468c27fdeb5b87e2ebc3f592ba4576698ad70b2b0bd8c818eb63786f7ad13df0938ceb9946581f8723d46da74f80310aad1585fe8ee0c0a3266d8e
-  languageName: node
-  linkType: hard
-
-"@statsig/react-bindings@npm:3.30.0, @statsig/react-bindings@npm:^3.30.0":
+"@statsig/react-bindings@npm:^3.30.0":
   version: 3.30.0
   resolution: "@statsig/react-bindings@npm:3.30.0"
   dependencies:
@@ -14893,7 +14879,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"statsig-node@npm:^6.4.5":
+"statsig-node@npm:^6.5.1":
   version: 6.5.1
   resolution: "statsig-node@npm:6.5.1"
   dependencies:
@@ -16532,7 +16518,6 @@ __metadata:
     "@huggingface/transformers": "npm:3.3.1"
     "@prisma/client": "npm:6.1.0"
     "@sentry/nextjs": "npm:10.22.0"
-    "@statsig/next": "npm:^3.30.0"
     "@statsig/react-bindings": "npm:^3.30.0"
     "@storybook/addon-essentials": "npm:8.4.7"
     "@storybook/addon-interactions": "npm:8.4.7"
@@ -16564,11 +16549,20 @@ __metadata:
     prisma: "npm:6.1.0"
     react: "npm:latest"
     react-dom: "npm:latest"
+    statsig-node: "npm:^6.5.1"
     storybook: "npm:8.4.7"
     tailwindcss: "npm:3.4.17"
     typescript: "npm:5.7.3"
     vanilla-cookieconsent: "npm:^3.1.0"
     vite-tsconfig-paths: "npm:5.1.4"
     vitest: "npm:2.1.8"
+    zlib: "npm:^1.0.5"
   languageName: unknown
   linkType: soft
+
+"zlib@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "zlib@npm:1.0.5"
+  checksum: 10/3841e7719783001ef72654c0e3ab3aec259f8859e75692166410a7582aadb5c6a183328ff22cb6e0a3e26d9eb287dec6250e350acde3670c06cb69b400f5c356
+  languageName: node
+  linkType: hard
