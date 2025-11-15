@@ -9,6 +9,9 @@ import {
   Transition,
 } from "@headlessui/react";
 import { useRouter } from "next/navigation";
+import SpeechRecognition, {
+  useSpeechRecognition as useSpeechRecognitionLib,
+} from "react-speech-recognition";
 import {
   useQuery,
   QueryClient,
@@ -21,6 +24,7 @@ import { useAudioInput } from "./use-audio-input";
 import styles from "./search.module.css";
 import { useWebGPUAvailability } from "./use-webgpu-availability";
 import { useCssProperty } from "./use-css-property";
+import { useFeatureGate } from "@statsig/react-bindings";
 
 const queryClient = new QueryClient();
 
@@ -47,25 +51,12 @@ interface Props {
   results?: { id: string; label: string; url: string }[];
 }
 
-function SearchForm({
-  query,
-  onChange,
-  onSelected,
-  loading,
-  error,
-  results = [],
-}: Props) {
-  const searchInputRef = useRef<HTMLInputElement>(null);
-  const { ref: volumeBarRef, setProperty: setVolumeBarProperty } =
-    useCssProperty();
-  const [isTranscriptionInProgress, setIsTranscriptionInProgress] =
-    useState(false);
+const useSpeechRecognitionOld = ({
+  handleAudioLevel,
+}: {
+  handleAudioLevel: (level: number) => void;
+}) => {
   const { isWebGPUAvailable } = useWebGPUAvailability();
-
-  const handleAudioLevel = (level: number) => {
-    setVolumeBarProperty("--audio-level", `${(level * 100).toFixed(0)}%`);
-  };
-
   const { startRecording, blob } = useAudioInput({
     onAudioLevel: handleAudioLevel,
   });
@@ -85,6 +76,79 @@ function SearchForm({
       );
     }
   }, [blob, status, isWebGPUAvailable]);
+
+  return { startRecording, loadModels, status, text };
+};
+
+const useSpeechRecognition = ({
+  handleAudioLevel,
+}: {
+  handleAudioLevel: (level: number) => void;
+}) => {
+  const { startRecording, loadModels, status, text } = useSpeechRecognitionOld({
+    handleAudioLevel,
+  });
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognitionLib();
+
+  const lightweight = useFeatureGate("use-lightweight-speech-recognition");
+
+  if (lightweight) {
+    return {
+      startRecording: () => {
+        resetTranscript();
+        SpeechRecognition.startListening({
+          continuous: true,
+          language: "pl-PL",
+        });
+      },
+      loadModels: () => {},
+      status: listening ? "listening" : "idle",
+      text: transcript,
+      browserSupportsSpeechRecognition,
+    };
+  }
+
+  return {
+    startRecording,
+    loadModels,
+    status,
+    text,
+    browserSupportsSpeechRecognition: true,
+  };
+};
+
+function SearchForm({
+  query,
+  onChange,
+  onSelected,
+  loading,
+  error,
+  results = [],
+}: Props) {
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const { ref: volumeBarRef, setProperty: setVolumeBarProperty } =
+    useCssProperty();
+  const [isTranscriptionInProgress, setIsTranscriptionInProgress] =
+    useState(false);
+
+  const handleAudioLevel = (level: number) => {
+    setVolumeBarProperty("--audio-level", `${(level * 100).toFixed(0)}%`);
+  };
+
+  const {
+    startRecording,
+    loadModels,
+    status,
+    text,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition({
+    handleAudioLevel,
+  });
 
   const handleChange = (input: { value: string }) => {
     if (input) {
