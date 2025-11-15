@@ -53,15 +53,7 @@ export const StatsigProvider = ({
       });
       const values = await res.json();
 
-      console.log("Fetched Statsig initial values:", values);
       setInitialValues(values);
-      // const inst = new StatsigClient(
-      //   process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!,
-      //   user,
-      //   { initializeValues },
-      // );
-      // await inst.initializeAsync();
-      // setClient(inst);
     })();
   }, []);
 
