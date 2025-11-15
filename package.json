@@ -24,7 +24,6 @@
   "dependencies": {
     "@prisma/client": "6.1.0",
     "@sentry/nextjs": "10.22.0",
-    "@statsig/next": "^3.30.0",
     "@statsig/react-bindings": "^3.30.0",
     "@tanstack/react-query": "5.90.9",
     "@types/node": "22.10.5",
@@ -40,6 +39,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-speech-recognition": "^4.0.1",
+    "statsig-node": "^6.5.1",
     "tailwindcss": "3.4.17",
     "typescript": "5.7.3",
     "vanilla-cookieconsent": "^3.1.0"

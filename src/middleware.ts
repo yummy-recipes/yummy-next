@@ -40,7 +40,6 @@ export default function middleware(request: NextRequest) {
   response.cookies.set({
     name: STABLE_ID_COOKIE_NAME,
     value: stableID,
-    httpOnly: true,
   });
 
   return response;
