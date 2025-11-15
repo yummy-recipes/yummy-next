@@ -10,6 +10,7 @@ storybook-static
 
 .DS_Store
 strapi-export
+storybook-static
 
 .pnp.*
 .yarn/*
