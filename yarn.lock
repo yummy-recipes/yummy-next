@@ -16585,13 +16585,5 @@ __metadata:
     vanilla-cookieconsent: "npm:^3.1.0"
     vite-tsconfig-paths: "npm:5.1.4"
     vitest: "npm:2.1.8"
-    zlib: "npm:^1.0.5"
   languageName: unknown
   linkType: soft
-
-"zlib@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "zlib@npm:1.0.5"
-  checksum: 10/3841e7719783001ef72654c0e3ab3aec259f8859e75692166410a7582aadb5c6a183328ff22cb6e0a3e26d9eb287dec6250e350acde3670c06cb69b400f5c356
-  languageName: node
-  linkType: hard
