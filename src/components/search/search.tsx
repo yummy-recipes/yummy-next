@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState, Activity } from "react";
 import {
   Combobox,
   ComboboxInput,
@@ -186,26 +186,30 @@ function SearchForm({
           >
             <div className="relative mt-1">
               <div className="relative w-full cursor-default bg-white text-left focus:outline-none focus-visible:ring-3 focus-visible:ring-sky-300 focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
-                <button
-                  onClick={() => handleTranscribe()}
-                  className="absolute inset-y-0 left-0 flex items-center pl-2 pr-2"
+                <Activity
+                  mode={browserSupportsSpeechRecognition ? "visible" : "hidden"}
                 >
-                  <span
-                    ref={volumeBarRef}
-                    className={[
-                      "rounded-full overflow-hidden border border-transparent",
-                      isTranscriptionInProgress
-                        ? styles["border-animation"]
-                        : null,
-                      styles.volume,
-                    ].join(" ")}
+                  <button
+                    onClick={() => handleTranscribe()}
+                    className="absolute inset-y-0 left-0 flex items-center pl-2 pr-2"
                   >
-                    <MicrophoneIcon
-                      className="h-5 w-5 text-inherit border border-transparent rounded-full relative z-10"
-                      aria-label="Use microphone to dictate search query"
-                    />
-                  </span>
-                </button>
+                    <span
+                      ref={volumeBarRef}
+                      className={[
+                        "rounded-full overflow-hidden border border-transparent",
+                        isTranscriptionInProgress
+                          ? styles["border-animation"]
+                          : null,
+                        styles.volume,
+                      ].join(" ")}
+                    >
+                      <MicrophoneIcon
+                        className="h-5 w-5 text-inherit border border-transparent rounded-full relative z-10"
+                        aria-label="Use microphone to dictate search query"
+                      />
+                    </span>
+                  </button>
+                </Activity>
 
                 <ComboboxInput
                   ref={searchInputRef}

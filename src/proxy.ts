@@ -20,7 +20,7 @@ const getCategories = (cookieValue: string) => {
   }
 };
 
-export default function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const ccCookie = request.cookies.get("cc_cookie");
 
   if (!ccCookie) {
