@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 
 const WHISPER_SAMPLING_RATE = 16_000;
 const MAX_AUDIO_LENGTH = 30; // seconds
@@ -26,9 +26,12 @@ export function useWhisperWorker() {
   useEffect(() => {
     if (!worker.current) {
       // Create the worker if it does not yet exist.
-      worker.current = new Worker(new URL("./worker.js", import.meta.url), {
-        type: "module",
-      });
+      worker.current = new window.Worker(
+        new URL("./worker.js", import.meta.url),
+        {
+          type: "module",
+        },
+      );
     }
 
     // Create a callback function for messages from the worker thread.
@@ -97,25 +100,28 @@ export function useWhisperWorker() {
     };
   }, []);
 
-  const processAudio = async (blob, audioContext, device) => {
-    const fileReader = new FileReader();
+  const processAudio = useCallback(
+    async (blob, audioContext, device) => {
+      const fileReader = new FileReader();
 
-    fileReader.onloadend = async () => {
-      const arrayBuffer = fileReader.result;
-      const decoded = await audioContext.decodeAudioData(arrayBuffer);
-      let audio = decoded.getChannelData(0);
-      if (audio.length > MAX_SAMPLES) {
-        // Get last MAX_SAMPLES
-        audio = audio.slice(-MAX_SAMPLES);
-      }
+      fileReader.onloadend = async () => {
+        const arrayBuffer = fileReader.result;
+        const decoded = await audioContext.decodeAudioData(arrayBuffer);
+        let audio = decoded.getChannelData(0);
+        if (audio.length > MAX_SAMPLES) {
+          // Get last MAX_SAMPLES
+          audio = audio.slice(-MAX_SAMPLES);
+        }
 
-      worker.current.postMessage({
-        type: "generate",
-        data: { audio, language, device },
-      });
-    };
-    fileReader.readAsArrayBuffer(blob);
-  };
+        worker.current.postMessage({
+          type: "generate",
+          data: { audio, language, device },
+        });
+      };
+      fileReader.readAsArrayBuffer(blob);
+    },
+    [language],
+  );
 
   const loadModels = () => {
     if (modelsLoaded.current) return;

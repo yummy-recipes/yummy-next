@@ -86,7 +86,7 @@ export function useAudioInput({ onAudioLevel }: Params) {
       console.error("Error accessing audio device:", err);
       alert("Could not start audio recording.");
     }
-  }, []);
+  }, [onAudioLevel]);
 
   return {
     blob,
