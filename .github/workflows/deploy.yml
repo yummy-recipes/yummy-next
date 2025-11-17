@@ -63,7 +63,15 @@ jobs:
         uses: jaywcjlove/github-action-package@main
         with:
           unset: devDependencies
-
+      - name: Skip optional deps
+        uses: jaywcjlove/github-action-package@main
+        with:
+          data: |
+            {
+              "installConfig": {
+                "optional": false
+              }
+            }
       - name: Update lock file
         run: yarn install --mode update-lockfile
 
