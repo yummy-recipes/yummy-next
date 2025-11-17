@@ -63,15 +63,9 @@ jobs:
         uses: jaywcjlove/github-action-package@main
         with:
           unset: devDependencies
-      - name: Skip optional deps
-        uses: jaywcjlove/github-action-package@main
-        with:
-          data: |
-            {
-              "installConfig": {
-                "optional": false
-              }
-            }
+      - name: Remove sharp
+        run: yarn remove sharp
+
       - name: Update lock file
         run: yarn install --mode update-lockfile
 
