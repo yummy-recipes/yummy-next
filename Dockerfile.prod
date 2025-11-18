@@ -28,6 +28,8 @@ COPY . .
 
 RUN yarn prisma migrate deploy
 
+RUN yarn prisma generate
+
 RUN yarn pull
 
 # Next.js collects completely anonymous telemetry data about general usage.
