@@ -102,7 +102,7 @@ const useSpeechRecognition = ({
     browserSupportsSpeechRecognition,
   } = useSpeechRecognitionLib();
 
-  const lightweight = useFeatureGate("use-lightweight-speech-recognition");
+  const lightweight = false; // useFeatureGate("use-lightweight-speech-recognition");
 
   if (lightweight) {
     return {
