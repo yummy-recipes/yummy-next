@@ -59,6 +59,13 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
+            ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+      - name: Push to dokku
+        uses: dokku/github-action@master
+        with:
+          git_remote_url: "ssh://dokku@dokku@167.71.190.115:yummy-next-test"
+          ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
+          deploy_docker_image: ${{ github.repository }}:master
 
   build_and_deploy:
     runs-on: ubuntu-latest
