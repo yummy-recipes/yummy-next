@@ -65,6 +65,11 @@ jobs:
         run: yarn build
 
   deploy:
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
     needs:
       - build
       - test
