@@ -1,7 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 ARG NODE_VERSION="22"
 ARG HYGRAPH_AUTH_TOKEN
-ARG ALGOLIA_ADMIN_KEY
 
 FROM node:${NODE_VERSION}-alpine AS base
 
