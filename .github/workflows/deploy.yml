@@ -86,12 +86,40 @@ jobs:
       #     force_push_tag: true
       #     message: "Latest production release"
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      # - name: "Reindex"
-      #   env:
-      #     HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
-      #     ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
-      #   run: |
-      #     yarn reindex
+
+  reindex:
+    runs-on: ubuntu-latest
+    needs: build_image
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.ref || 'latest/production' }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Prisma generate
+        run: yarn prisma generate
+
+      - name: Migrate db
+        run: yarn prisma migrate deploy
+
+      - name: Pull data
+        run: yarn pull
+        env:
+          HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
+
+      - name: Reindex
+        env:
+          HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
+          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+        run: |
+          yarn reindex
 
   build_and_deploy:
     runs-on: ubuntu-latest
