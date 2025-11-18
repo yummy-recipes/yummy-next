@@ -62,6 +62,8 @@ jobs:
           file: ./Dockerfile.prod
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           build-args: |
             HYGRAPH_AUTH_TOKEN=${{ secrets.HYGRAPH_AUTH_TOKEN }}
             NODE_VERSION=${{ steps.nvmrc.outputs.node_version }}
