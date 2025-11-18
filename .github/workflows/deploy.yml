@@ -43,6 +43,9 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Read .nvmrc
+        id: nvmrc
+        run: echo "node_version=$(cat .nvmrc)" >> $GITHUB_OUTPUT
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
@@ -60,11 +63,13 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
+            HYGRAPH_AUTH_TOKEN=${{ secrets.HYGRAPH_AUTH_TOKEN }}
+            NODE_VERSION=${{ steps.nvmrc.outputs.node_version }}
+
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: "ssh://dokku@dokku@167.71.190.115:yummy-next-test"
+          git_remote_url: "ssh://dokku@dokku@167.71.190.115/yummy-next-test"
           ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
           deploy_docker_image: ${{ github.repository }}:${{ steps.push.outputs.digest }}
 
