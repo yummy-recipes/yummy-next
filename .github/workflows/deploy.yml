@@ -86,12 +86,12 @@ jobs:
       #     force_push_tag: true
       #     message: "Latest production release"
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: "Reindex"
-        env:
-          HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
-          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
-        run: |
-          yarn reindex
+      # - name: "Reindex"
+      #   env:
+      #     HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
+      #     ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+      #   run: |
+      #     yarn reindex
 
   build_and_deploy:
     runs-on: ubuntu-latest

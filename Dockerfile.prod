@@ -1,6 +1,5 @@
 # syntax=docker.io/docker/dockerfile:1
 ARG NODE_VERSION="22"
-ARG HYGRAPH_AUTH_TOKEN
 
 FROM node:${NODE_VERSION}-alpine AS base
 
@@ -22,6 +21,7 @@ RUN \
 
 # Rebuild the source code only when needed
 FROM base AS builder
+ARG HYGRAPH_AUTH_TOKEN
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
