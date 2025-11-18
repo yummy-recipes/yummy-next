@@ -48,6 +48,8 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
@@ -65,7 +67,7 @@ jobs:
         with:
           git_remote_url: "ssh://dokku@dokku@167.71.190.115:yummy-next-test"
           ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
-          deploy_docker_image: ${{ github.repository }}:master
+          deploy_docker_image: ${{ github.repository }}:${{ steps.push.outputs.digest }}
 
   build_and_deploy:
     runs-on: ubuntu-latest
