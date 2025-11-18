@@ -73,7 +73,8 @@ jobs:
         with:
           git_remote_url: "ssh://dokku@dokku@167.71.190.115/yummy-next-test"
           ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
-          deploy_docker_image: ${{ github.repository }}:${{ steps.push.outputs.digest }}
+          deploy_docker_image: ${{ github.repository }}@${{ steps.push.outputs.digest }}
+
       # - uses: rickstaa/action-create-tag@v1
       #   if: inputs.ref && inputs.ref != 'latest/production'
       #   with:
