@@ -1,6 +1,8 @@
 # syntax=docker.io/docker/dockerfile:1
+ARG NODE_VERSION="22"
+ARG HYGRAPH_AUTH_TOKEN
 
-FROM node:22-alpine AS base
+FROM node:${NODE_VERSION}-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -18,12 +20,15 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+RUN yarn prisma migrate deploy
+
+RUN yarn pull
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
