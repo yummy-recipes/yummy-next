@@ -74,7 +74,7 @@ jobs:
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: "ssh://dokku@dokku@167.71.190.115/yummy-next-test"
+          git_remote_url: "ssh://dokku@dokku@167.71.190.115/yummy-next"
           ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
           deploy_docker_image: ${{ env.REGISTRY }}/${{ github.repository }}@${{ steps.push.outputs.digest }}
 
