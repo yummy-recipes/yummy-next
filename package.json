@@ -48,7 +48,7 @@
     "@chromatic-com/storybook": "4.1.2",
     "@headlessui/react": "2.2.0",
     "@heroicons/react": "2.2.0",
-    "@huggingface/transformers": "3.3.1",
+    "@huggingface/transformers": "3.7.6",
     "@storybook/addon-docs": "10.0.7",
     "@storybook/addon-links": "10.0.7",
     "@storybook/addon-onboarding": "10.0.7",
