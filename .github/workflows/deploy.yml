@@ -77,6 +77,9 @@ jobs:
       - name: Install dependencies
         run: yarn install  --frozen-lockfile
 
+      - name: Prisma generate
+        run: yarn prisma generate
+
       - name: Migrate db
         run: yarn prisma migrate deploy
 
