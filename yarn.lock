@@ -4421,7 +4421,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@statsig/react-bindings@npm:^3.30.0":
+"@statsig/react-bindings@npm:3.30.0":
   version: 3.30.0
   resolution: "@statsig/react-bindings@npm:3.30.0"
   dependencies:
@@ -4993,7 +4993,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-speech-recognition@npm:^3.9.6":
+"@types/react-speech-recognition@npm:3.9.6":
   version: 3.9.6
   resolution: "@types/react-speech-recognition@npm:3.9.6"
   dependencies:
@@ -12665,7 +12665,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-speech-recognition@npm:^4.0.1":
+"react-speech-recognition@npm:4.0.1":
   version: 4.0.1
   resolution: "react-speech-recognition@npm:4.0.1"
   dependencies:
@@ -13966,7 +13966,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"statsig-node@npm:^6.5.1":
+"statsig-node@npm:6.5.1":
   version: 6.5.1
   resolution: "statsig-node@npm:6.5.1"
   dependencies:
@@ -15091,7 +15091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vanilla-cookieconsent@npm:^3.1.0":
+"vanilla-cookieconsent@npm:3.1.0":
   version: 3.1.0
   resolution: "vanilla-cookieconsent@npm:3.1.0"
   checksum: 10/053e887cde87cb1e583288d2c3d8b56acf9c97293e5c9ff5c35d0f43b68c8e20441a321469126e92ac78fbb8410fe245cd2f879d4c376b7b2a66ffca00dee41c
@@ -15615,7 +15615,7 @@ __metadata:
     "@huggingface/transformers": "npm:3.3.1"
     "@prisma/client": "npm:6.19.0"
     "@sentry/nextjs": "npm:10.25.0"
-    "@statsig/react-bindings": "npm:^3.30.0"
+    "@statsig/react-bindings": "npm:3.30.0"
     "@storybook/addon-docs": "npm:10.0.7"
     "@storybook/addon-links": "npm:10.0.7"
     "@storybook/addon-onboarding": "npm:10.0.7"
@@ -15624,7 +15624,7 @@ __metadata:
     "@types/node": "npm:22.19.1"
     "@types/react": "npm:19.2.5"
     "@types/react-dom": "npm:19.2.3"
-    "@types/react-speech-recognition": "npm:^3.9.6"
+    "@types/react-speech-recognition": "npm:3.9.6"
     algoliasearch: "npm:5.44.0"
     autoprefixer: "npm:10.4.21"
     chromatic: "npm:11.29.0"
@@ -15642,12 +15642,12 @@ __metadata:
     prisma: "npm:6.19.0"
     react: "npm:19.2.0"
     react-dom: "npm:19.2.0"
-    react-speech-recognition: "npm:^4.0.1"
-    statsig-node: "npm:^6.5.1"
+    react-speech-recognition: "npm:4.0.1"
+    statsig-node: "npm:6.5.1"
     storybook: "npm:10.0.7"
     tailwindcss: "npm:3.4.17"
     typescript: "npm:5.7.3"
-    vanilla-cookieconsent: "npm:^3.1.0"
+    vanilla-cookieconsent: "npm:3.1.0"
     vite-tsconfig-paths: "npm:5.1.4"
     vitest: "npm:2.1.9"
   languageName: unknown
