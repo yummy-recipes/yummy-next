@@ -28,7 +28,7 @@ jobs:
   build_image:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
       attestations: write
       id-token: write
@@ -78,14 +78,14 @@ jobs:
           ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
           deploy_docker_image: ${{ env.REGISTRY }}/${{ github.repository }}@${{ steps.push.outputs.digest }}
 
-      # - uses: rickstaa/action-create-tag@v1
-      #   if: inputs.ref && inputs.ref != 'latest/production'
-      #   with:
-      #     commit_sha: ${{ inputs.ref }}
-      #     tag: "latest/production"
-      #     force_push_tag: true
-      #     message: "Latest production release"
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: rickstaa/action-create-tag@v1
+        if: inputs.ref && inputs.ref != 'latest/production'
+        with:
+          commit_sha: ${{ inputs.ref }}
+          tag: "latest/production"
+          force_push_tag: true
+          message: "Latest production release"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   reindex:
     runs-on: ubuntu-latest
@@ -120,85 +120,3 @@ jobs:
           ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
         run: |
           yarn reindex
-
-  # build_and_deploy:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0
-  #         ref: ${{ inputs.ref || 'latest/production' }}
-
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version-file: .nvmrc
-  #         cache: "yarn"
-
-  #     - name: Install dependencies
-  #       run: yarn install  --frozen-lockfile
-
-  #     - name: Prisma generate
-  #       run: yarn prisma generate
-
-  #     - name: Migrate db
-  #       run: yarn prisma migrate deploy
-
-  #     - name: Pull data
-  #       run: yarn pull
-  #       env:
-  #         HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
-
-  #     - uses: actions/cache@v4
-  #       with:
-  #         path: |
-  #           ${{ github.workspace }}/.next/cache
-  #         # Generate a new cache whenever packages or source files change.
-  #         key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.[jt]s', '**/*.[jt]sx') }}
-  #         # If source files changed but packages didn't, rebuild from a prior cache.
-  #         restore-keys: |
-  #           ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-
-  #     - name: Build
-  #       run: yarn build
-
-  #     - name: Remove devDependencies from package.json
-  #       uses: jaywcjlove/github-action-package@main
-  #       with:
-  #         unset: devDependencies
-  #     - name: Remove sharp
-  #       run: yarn remove sharp
-
-  #     - name: Update lock file
-  #       run: yarn install --mode update-lockfile
-
-  #     - uses: webfactory/ssh-agent@v0.9.1
-  #       with:
-  #         ssh-private-key: ${{ secrets.DOKKU_DEPLOY_KEY }}
-
-  #     - run: echo '167.71.190.115 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEYg+BGxM8IdEoQ8fx7aDoclC0eNXSpI6l/QkLRMF/cvjJcSCk4kz/4LEkSU8eXFawp8IX/yNOyV11sJZtCVBCs=' >> ~/.ssh/known_hosts
-
-  #     - run: |
-  #         git config --global user.email "deploy-bot@ertrzyiks.me"
-  #         git config --global user.name "Deploy Bot"
-  #         git remote add dokku dokku@167.71.190.115:yummy-next
-  #         git add .
-  #         git add --force .next
-  #         git add --force prisma
-  #         git commit -m 'Update'
-  #         git push dokku HEAD:master --force
-
-  #     - uses: rickstaa/action-create-tag@v1
-  #       if: inputs.ref && inputs.ref != 'latest/production'
-  #       with:
-  #         commit_sha: ${{ inputs.ref }}
-  #         tag: "latest/production"
-  #         force_push_tag: true
-  #         message: "Latest production release"
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #     - name: "Reindex"
-  #       env:
-  #         HYGRAPH_AUTH_TOKEN: ${{ secrets.HYGRAPH_AUTH_TOKEN }}
-  #         ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
-  #       run: |
-  #         yarn reindex
