@@ -25,6 +25,9 @@ const preview: Preview = {
     //   defaultTheme: "light",
     // }),
   ],
+
+  // Enable experimental features for CSF next format
+  experimental_indexingApi: true,
 };
 
 export default preview;

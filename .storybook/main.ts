@@ -20,5 +20,10 @@ const config: StorybookConfig = {
   typescript: {
     reactDocgen: "react-docgen-typescript",
   },
+
+  features: {
+    // Enable experimental features for CSF next format
+    experimentalRSC: true,
+  },
 };
 export default config;
