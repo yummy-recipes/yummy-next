@@ -6,15 +6,14 @@ import { RecipeListItem } from "../recipe-list-item/recipe-list-item";
 const imageUrl =
   "https://res.cloudinary.com/dddjfvneq/image/fetch/f_auto,c_limit,w_800,q_auto/https://media.graphassets.com/bVmSWqhQOuOiBenDcvQO";
 
-const meta: Meta<typeof RecipeList> = {
+const meta = {
   title: "UI/RecipeList",
   component: RecipeList,
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof RecipeList>;
 
 export default meta;
-
-type Story = StoryObj<typeof RecipeList>;
+type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {

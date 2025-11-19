@@ -1,10 +1,10 @@
-import type { Preview } from "@storybook/nextjs";
+import { definePreview } from "@storybook/nextjs";
 
 // import { withThemeByClassName } from "@storybook/addon-styling";
 
 import "../src/app/globals.css";
 
-const preview: Preview = {
+export default definePreview({
   parameters: {
     controls: {
       matchers: {
@@ -25,9 +25,4 @@ const preview: Preview = {
     //   defaultTheme: "light",
     // }),
   ],
-
-  // Enable experimental features for CSF next format
-  experimental_indexingApi: true,
-};
-
-export default preview;
+});
