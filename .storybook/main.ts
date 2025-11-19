@@ -12,7 +12,16 @@ export default defineMain({
 
   framework: {
     name: "@storybook/nextjs",
-    options: {},
+    options: {
+      builder: {
+        useSWC: true,
+      },
+      nextConfigPath: "../next.config.js",
+    },
+  },
+
+  features: {
+    experimentalRSC: true,
   },
 
   docs: {},
