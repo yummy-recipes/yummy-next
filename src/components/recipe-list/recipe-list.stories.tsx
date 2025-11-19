@@ -1,4 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/nextjs";
+import { type ReactNode } from "react";
+import preview from "../../../.storybook/preview";
+
+const meta = preview.meta({
+  title: "UI/RecipeList",
+  component: RecipeList,
+  tags: ["autodocs"],
+});
 
 import { RecipeList } from "./recipe-list";
 import { RecipeListItem } from "../recipe-list-item/recipe-list-item";
@@ -6,16 +13,9 @@ import { RecipeListItem } from "../recipe-list-item/recipe-list-item";
 const imageUrl =
   "https://res.cloudinary.com/dddjfvneq/image/fetch/f_auto,c_limit,w_800,q_auto/https://media.graphassets.com/bVmSWqhQOuOiBenDcvQO";
 
-const meta = {
-  title: "UI/RecipeList",
-  component: RecipeList,
-  tags: ["autodocs"],
-} satisfies Meta<typeof RecipeList>;
-
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Primary = meta.story({
   args: {
     children: [
       <RecipeListItem
@@ -44,4 +44,4 @@ export const Primary: Story = {
       />,
     ],
   },
-};
+});

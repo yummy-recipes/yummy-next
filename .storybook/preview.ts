@@ -1,3 +1,5 @@
+import addonDocs from "@storybook/addon-docs";
+import addonLinks from "@storybook/addon-links";
 import { definePreview } from "@storybook/nextjs";
 
 // import { withThemeByClassName } from "@storybook/addon-styling";
@@ -13,6 +15,8 @@ export default definePreview({
       },
     },
   },
+
+  addons: [addonLinks(), addonDocs()],
 
   decorators: [
     // Adds theme switching support.
