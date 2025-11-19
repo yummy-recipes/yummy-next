@@ -22,3 +22,6 @@ storybook-static
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# TypeScript build info
+tsconfig.tsbuildinfo
