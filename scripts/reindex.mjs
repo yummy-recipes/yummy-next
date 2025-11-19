@@ -55,7 +55,7 @@ function loadRecipes(after = null, limit = 100) {
         }
       }
     `,
-    { after, limit }
+    { after, limit },
   );
 }
 

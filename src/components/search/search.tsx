@@ -169,14 +169,14 @@ function SearchForm({
 
   const trimmed = text.trim().replace(/\./g, "");
 
-  if (trimmed.length === 0 && isTranscriptionInProgress) {
-    setIsTranscriptionInProgress(false);
-  }
-
+  // Reset transcription progress when we successfully get text
   useEffect(() => {
     if (trimmed.length > 0) {
       searchInputRef.current?.focus();
       onChange(trimmed);
+      // Successfully got transcribed text, reset the progress indicator
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsTranscriptionInProgress(false);
     }
   }, [trimmed, onChange]);
 
@@ -294,10 +294,15 @@ function SearchWidget({ onSelected }: { onSelected: (value: string) => void }) {
 
   const { status, data, error, isFetching } = useSearch({ query });
 
+  // Memoize onChange callback to prevent infinite loop in useEffect dependencies
+  const handleChange = useCallback((value: string) => {
+    setQuery(value);
+  }, []);
+
   return (
     <SearchForm
       query={query}
-      onChange={(value) => setQuery(value)}
+      onChange={handleChange}
       onSelected={onSelected}
       loading={isFetching}
       results={data?.data ?? []}
