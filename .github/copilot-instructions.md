@@ -69,6 +69,7 @@ This is a Next.js-based recipe website called "Kuchnia Yummy" (Yummy Kitchen). T
 ### Database Models
 
 Key models in the Prisma schema:
+
 - `Recipe`: Main recipe entity with title, slug, images, preparation time, etc.
 - `Category`: Recipe categories (e.g., desserts, main dishes)
 - `Tag`: Recipe tags for filtering
@@ -136,6 +137,7 @@ yarn build-storybook # Build Storybook for production
 ## Environment Variables
 
 The application uses environment variables for:
+
 - Statsig configuration (`NEXT_PUBLIC_STATSIG_CLIENT_KEY`, `STATSIG_SERVER_KEY`)
 - Sentry error tracking
 - Algolia search configuration
@@ -146,7 +148,7 @@ Check for `.env.local` or environment-specific configuration files.
 ## Image Handling
 
 - Custom image loader configured in `image-loader.js`
-- Images are hosted on GraphCMS (**.graphassets.com)
+- Images are hosted on GraphCMS (\*\*.graphassets.com)
 - Blur placeholders are generated for better UX
 - Use Next.js `Image` component for optimized images
 

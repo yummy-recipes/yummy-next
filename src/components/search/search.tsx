@@ -102,9 +102,9 @@ const useSpeechRecognition = ({
     browserSupportsSpeechRecognition,
   } = useSpeechRecognitionLib();
 
-  const lightweight = false; // useFeatureGate("use-lightweight-speech-recognition");
+  const lightweight = useFeatureGate("use-lightweight-speech-recognition");
 
-  if (lightweight) {
+  if (lightweight.value) {
     return {
       startRecording: () => {
         resetTranscript();
