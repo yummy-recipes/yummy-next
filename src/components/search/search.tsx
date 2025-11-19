@@ -158,7 +158,7 @@ function SearchForm({
     handleAudioLevel,
   });
 
-  const handleChange = (input: { value: string }) => {
+  const handleChange = (input: { value: string } | null) => {
     if (input) {
       searchInputRef.current?.blur();
       onSelected(input.value);
