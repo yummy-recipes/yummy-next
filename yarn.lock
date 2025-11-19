@@ -2300,15 +2300,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@huggingface/transformers@npm:3.7.6":
-  version: 3.7.6
-  resolution: "@huggingface/transformers@npm:3.7.6"
+"@huggingface/transformers@npm:3.8.0":
+  version: 3.8.0
+  resolution: "@huggingface/transformers@npm:3.8.0"
   dependencies:
     "@huggingface/jinja": "npm:^0.5.1"
     onnxruntime-node: "npm:1.21.0"
     onnxruntime-web: "npm:1.22.0-dev.20250409-89f8206ba4"
     sharp: "npm:^0.34.1"
-  checksum: 10/d25c1b2586577d68b02df15c91d781d3eaaed63b93b34ab478a7432f5d13f41a4d797e464ab645864098eb1929a55fa884e7eb5dad8ed7c37a0f29d3dc12ffcb
+  checksum: 10/63dd44c7594d39d0d77cd680b4808daf2dce952ac3a539e64c42d003fc68468f477e1c599bb13539f91e017ec24dbe8d6f460dcf0844e7d6b4982ca775299cc2
   languageName: node
   linkType: hard
 
@@ -15408,7 +15408,7 @@ __metadata:
     "@chromatic-com/storybook": "npm:4.1.3"
     "@headlessui/react": "npm:2.2.0"
     "@heroicons/react": "npm:2.2.0"
-    "@huggingface/transformers": "npm:3.7.6"
+    "@huggingface/transformers": "npm:3.8.0"
     "@prisma/client": "npm:6.19.0"
     "@sentry/nextjs": "npm:10.26.0"
     "@statsig/react-bindings": "npm:3.30.0"
