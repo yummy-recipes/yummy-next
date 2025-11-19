@@ -104,19 +104,23 @@ const useSpeechRecognition = ({
 
   const lightweight = useFeatureGate("use-lightweight-speech-recognition");
 
+  const startRecordingFn = useCallback(() => {
+    resetTranscript();
+    SpeechRecognition.startListening({
+      continuous: false,
+      language: "pl-PL",
+    });
+  }, [resetTranscript]);
+
+  const loadModelsFn = useCallback(() => {}, []);
+
   if (lightweight.value) {
     return {
-      startRecording: () => {
-        resetTranscript();
-        SpeechRecognition.startListening({
-          continuous: true,
-          language: "pl-PL",
-        });
-      },
-      loadModels: () => {},
+      startRecording: startRecordingFn,
+      loadModels: loadModelsFn,
       status: listening ? "listening" : "idle",
       text: transcript,
-      browserSupportsSpeechRecognition,
+      browserSupportsSpeechRecognition: true,
     };
   }
 
@@ -150,13 +154,7 @@ function SearchForm({
     [setVolumeBarProperty],
   );
 
-  const {
-    startRecording,
-    loadModels,
-    status,
-    text,
-    browserSupportsSpeechRecognition,
-  } = useSpeechRecognition({
+  const { startRecording, loadModels, status, text } = useSpeechRecognition({
     handleAudioLevel,
   });
 
@@ -200,9 +198,7 @@ function SearchForm({
           >
             <div className="relative mt-1">
               <div className="relative w-full cursor-default bg-white text-left focus:outline-none focus-visible:ring-3 focus-visible:ring-sky-300 focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
-                <Activity
-                  mode={browserSupportsSpeechRecognition ? "visible" : "hidden"}
-                >
+                <Activity mode="visible">
                   <button
                     onClick={() => handleTranscribe()}
                     className="absolute inset-y-0 left-0 flex items-center pl-2 pr-2"
