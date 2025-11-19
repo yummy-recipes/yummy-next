@@ -1,10 +1,12 @@
-import type { Preview } from "@storybook/nextjs";
+import addonDocs from "@storybook/addon-docs";
+import addonLinks from "@storybook/addon-links";
+import { definePreview } from "@storybook/nextjs";
 
 // import { withThemeByClassName } from "@storybook/addon-styling";
 
 import "../src/app/globals.css";
 
-const preview: Preview = {
+export default definePreview({
   parameters: {
     controls: {
       matchers: {
@@ -13,6 +15,8 @@ const preview: Preview = {
       },
     },
   },
+
+  addons: [addonLinks(), addonDocs()],
 
   decorators: [
     // Adds theme switching support.
@@ -25,6 +29,4 @@ const preview: Preview = {
     //   defaultTheme: "light",
     // }),
   ],
-};
-
-export default preview;
+});
