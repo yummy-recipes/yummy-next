@@ -172,6 +172,7 @@ Check for `.env.local` or environment-specific configuration files.
 5. Consider database schema changes carefully - migrations should be additive when possible
 6. Test responsive design at different breakpoints
 7. Verify that Server Components remain server-side unless client interactivity is needed
+8. Use existing components in tests and stories without creating their test-specific copies
 
 ## Best Practices
 
