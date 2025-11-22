@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/data";
+import { markdownToHtml } from "@/lib/markdown";
 import { Recipe } from "@/components/recipe/recipe";
 
 interface Params {
@@ -40,6 +41,26 @@ export default async function Layout({ params, children }: Props) {
     return notFound();
   }
 
+  const ingredients = await Promise.all(
+    recipe.ingredients.map(async (ingredient) => {
+      return {
+        ...ingredient,
+        content: await markdownToHtml(ingredient.content),
+      };
+    }),
+  );
+
+  const instructions = await Promise.all(
+    recipe.instructions.map(async (instruction) => {
+      return {
+        ...instruction,
+        content: await markdownToHtml(instruction.content, {
+          paragraphNumbers: true,
+        }),
+      };
+    }),
+  );
+
   return (
     <div className="max-w-screen-xl mx-auto">
       <Recipe
@@ -49,8 +70,8 @@ export default async function Layout({ params, children }: Props) {
         galleryImages={recipe.galleryImages}
         slug={recipe.slug}
         categorySlug={recipe.category.slug}
-        ingredients={recipe.ingredients}
-        instructions={recipe.instructions}
+        ingredients={ingredients}
+        instructions={instructions}
       />
       {children}
     </div>

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { markdownToHtml } from "@/lib/markdown";
 import Link from "next/link";
 
 interface Props {
@@ -13,7 +12,7 @@ interface Props {
   galleryImages: { id: number; imageUrl: string; blurDataUrl: string | null }[];
 }
 
-export async function Recipe({
+export function Recipe({
   slug,
   categorySlug,
   title,
@@ -42,24 +41,22 @@ export async function Recipe({
       </div>
       <div className="flex flex-col md:flex-row">
         <div className="flex-1 p-2 m-2">
-          {ingredients.map(async (ingredient) => (
+          {ingredients.map((ingredient) => (
             <div
               key={ingredient.id}
               dangerouslySetInnerHTML={{
-                __html: await markdownToHtml(ingredient.content),
+                __html: ingredient.content,
               }}
             ></div>
           ))}
         </div>
 
         <div className="flex-1 p-2 m-2">
-          {instructions.map(async (instruction, index) => (
+          {instructions.map((instruction, index) => (
             <div
               key={instruction.id}
               dangerouslySetInnerHTML={{
-                __html: await markdownToHtml(instruction.content, {
-                  paragraphNumbers: true,
-                }),
+                __html: instruction.content,
               }}
             ></div>
           ))}
