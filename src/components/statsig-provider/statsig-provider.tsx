@@ -27,6 +27,9 @@ const StatsigProviderInternal = ({
     process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!,
     user,
     initialValues,
+    {
+      environment: { tier: process.env.NODE_ENV ?? "development" },
+    },
   );
 
   return (
