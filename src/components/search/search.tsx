@@ -26,12 +26,8 @@ import {
 } from "@tanstack/react-query";
 import { MagnifyingGlassIcon, MicrophoneIcon } from "@heroicons/react/20/solid";
 
-import { useWhisperWorker } from "./use-whisper-worker";
-import { useAudioInput } from "./use-audio-input";
 import styles from "./search.module.css";
-import { useWebGPUAvailability } from "./use-webgpu-availability";
 import { useCssProperty } from "./use-css-property";
-import { useFeatureGate } from "@statsig/react-bindings";
 
 const queryClient = new QueryClient();
 
@@ -58,51 +54,17 @@ interface Props {
   results?: { id: string; label: string; url: string }[];
 }
 
-const useSpeechRecognitionOld = ({
-  handleAudioLevel,
-}: {
-  handleAudioLevel: (level: number) => void;
-}) => {
-  const { isWebGPUAvailable } = useWebGPUAvailability();
-  const { startRecording, blob } = useAudioInput({
-    onAudioLevel: handleAudioLevel,
-  });
-
-  const { processAudio, loadModels, status, text } = useWhisperWorker();
-
-  useEffect(() => {
-    if (blob && status === "ready" && isWebGPUAvailable !== null) {
-      const audioContext = new AudioContext({
-        sampleRate: WHISPER_SAMPLING_RATE,
-      });
-
-      processAudio(
-        blob,
-        audioContext,
-        isWebGPUAvailable ? "webgpu" : undefined,
-      );
-    }
-  }, [blob, status, isWebGPUAvailable, processAudio]);
-
-  return { startRecording, loadModels, status, text };
-};
-
 const useSpeechRecognition = ({
   handleAudioLevel,
 }: {
   handleAudioLevel: (level: number) => void;
 }) => {
-  const { startRecording, loadModels, status, text } = useSpeechRecognitionOld({
-    handleAudioLevel,
-  });
   const {
     transcript,
     listening,
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognitionLib();
-
-  const lightweight = useFeatureGate("use-lightweight-speech-recognition");
 
   const startRecordingFn = useCallback(() => {
     resetTranscript();
@@ -114,21 +76,11 @@ const useSpeechRecognition = ({
 
   const loadModelsFn = useCallback(() => {}, []);
 
-  if (lightweight.value) {
-    return {
-      startRecording: startRecordingFn,
-      loadModels: loadModelsFn,
-      status: listening ? "listening" : "idle",
-      text: transcript,
-      browserSupportsSpeechRecognition: true,
-    };
-  }
-
   return {
-    startRecording,
-    loadModels,
-    status,
-    text,
+    startRecording: startRecordingFn,
+    loadModels: loadModelsFn,
+    status: listening ? "listening" : "idle",
+    text: transcript,
     browserSupportsSpeechRecognition: true,
   };
 };
