@@ -290,10 +290,14 @@ function SearchWidget({ onSelected }: { onSelected: (value: string) => void }) {
 
   const { status, data, error, isFetching } = useSearch({ query });
 
+  const handleChange = useCallback((value: string) => {
+    setQuery(value);
+  }, []);
+
   return (
     <SearchForm
       query={query}
-      onChange={(value) => setQuery(value)}
+      onChange={handleChange}
       onSelected={onSelected}
       loading={isFetching}
       results={data?.data ?? []}
