@@ -114,6 +114,8 @@ const useSpeechRecognition = ({
 
   const loadModelsFn = useCallback(() => {}, []);
 
+  console.log("lightweight:", lightweight.value);
+
   if (lightweight.value) {
     return {
       startRecording: startRecordingFn,
