@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client";
 import { algoliasearch } from "algoliasearch";
+import { getPrismaClient } from "../../prisma/client.ts";
 
-const prisma = new PrismaClient();
+const prisma = getPrismaClient();
 const indexName = process.env.ALGOLIA_SEARCH_INDEX || "prod_recipes";
 
 let client: ReturnType<typeof getNewClient> | null = null;

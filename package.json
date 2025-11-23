@@ -5,6 +5,7 @@
   "engines": {
     "node": "24.x"
   },
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -22,6 +23,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.0.0",
     "@prisma/client": "7.0.0",
     "@sentry/nextjs": "10.26.0",
     "@statsig/react-bindings": "3.30.0",
@@ -67,6 +69,7 @@
   },
   "resolutions": {
     "@types/react": "19.2.6",
-    "@types/react-dom": "19.2.3"
+    "@types/react-dom": "19.2.3",
+    "better-sqlite3": "12.4.6"
   }
 }

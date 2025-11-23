@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { getPrismaClient } from "../prisma/client.ts";
 
-const prisma = new PrismaClient();
+const prisma = getPrismaClient();
 
 async function getOrCreateCategory({ title, slug }) {
   const category = await prisma.category.findUnique({
@@ -204,6 +204,7 @@ function loadRecipes(after = null, limit) {
 }
 
 async function main() {
+  console.log("Seeding database...");
   const { data, errors } = await loadCategories();
   const categoryMap = {};
 
@@ -265,6 +266,8 @@ async function main() {
         ? recipesData.recipes[recipesData.recipes.length - 1].id
         : null;
   } while (after);
+
+  console.log("Done");
 }
 
 main();

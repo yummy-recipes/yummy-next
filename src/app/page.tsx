@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { PrismaClient } from "@prisma/client";
 import { MenuSection } from "@/components/menu-section/menu-section";
 import { MenuSectionItem } from "@/components/menu-section-item/menu-section-item";
+import { getPrismaClient } from "../../prisma/client.ts";
 
-const prisma = new PrismaClient();
+const prisma = getPrismaClient();
 
 const tagSlugs = ["makaron", "wegetarianskie", "drozdzowe", "ciasta"];
 
