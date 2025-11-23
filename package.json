@@ -23,7 +23,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@prisma/adapter-better-sqlite3": "^7.0.0",
+    "@prisma/adapter-better-sqlite3": "7.0.0",
     "@prisma/client": "7.0.0",
     "@sentry/nextjs": "10.26.0",
     "@statsig/react-bindings": "3.30.0",
