@@ -1,6 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import { getPrismaClient } from "../prisma/client.ts";
+import "dotenv/config";
 
-const prisma = new PrismaClient();
+const prisma = getPrismaClient();
 
 const contentEndpoint =
   "https://api-eu-central-1.hygraph.com/v2/ckzhgf7f30mi901xs88ok02gc/master";
