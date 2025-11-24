@@ -62,7 +62,7 @@ class TailwindRenderer extends marked.Renderer {
   }
 
   listitem(item: Tokens.ListItem): string {
-    const text = this.parser.parseInline(item.tokens);
+    const text = this.parser.parse(item.tokens);
     if (this.insideList && !this.insideList.ordered) {
       return `<li class="flex items-center gap-3 mb-2"><div class="w-1.5 h-1.5 bg-gray-300 rounded-full"></div>${text}</li>`;
     }
