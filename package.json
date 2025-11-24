@@ -31,7 +31,7 @@
     "@types/node": "24.10.1",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
-    "algoliasearch": "5.44.0",
+    "algoliasearch": "5.45.0",
     "autoprefixer": "10.4.22",
     "eslint": "9.39.1",
     "marked": "15.0.12",
