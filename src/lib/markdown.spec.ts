@@ -19,6 +19,18 @@ describe("markdownToHtml", () => {
     );
   });
 
+  it("renders paragraph inside list without numbers", async () => {
+    const result = await markdownToHtml(`
+ - This is item 1.
+
+ - This is item 2.
+    `);
+
+    expect(result).toMatchInlineSnapshot(
+      `"<ul><li class="flex items-center gap-3 mb-2"><div class="w-1.5 h-1.5 bg-gray-300 rounded-full"></div>This is item 1.</li><li class="flex items-center gap-3 mb-2"><div class="w-1.5 h-1.5 bg-gray-300 rounded-full"></div>This is item 2.</li></ul>"`,
+    );
+  });
+
   it("renders paragraphs", async () => {
     const result = await markdownToHtml(`
 This is paragraph 1.
