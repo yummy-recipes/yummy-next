@@ -4614,7 +4614,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tailwindcss/postcss@npm:^4.1.17":
+"@tailwindcss/postcss@npm:4.1.17":
   version: 4.1.17
   resolution: "@tailwindcss/postcss@npm:4.1.17"
   dependencies:
@@ -15454,7 +15454,7 @@ __metadata:
     "@storybook/addon-links": "npm:10.0.8"
     "@storybook/addon-onboarding": "npm:10.0.8"
     "@storybook/nextjs": "npm:10.0.8"
-    "@tailwindcss/postcss": "npm:^4.1.17"
+    "@tailwindcss/postcss": "npm:4.1.17"
     "@tanstack/react-query": "npm:5.90.11"
     "@types/node": "npm:24.10.1"
     "@types/react": "npm:19.2.7"
