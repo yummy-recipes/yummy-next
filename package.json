@@ -27,6 +27,7 @@
     "@prisma/client": "7.0.1",
     "@sentry/nextjs": "10.27.0",
     "@statsig/react-bindings": "3.30.0",
+    "@tailwindcss/postcss": "^4.1.17",
     "@tanstack/react-query": "5.90.11",
     "@types/node": "24.10.1",
     "@types/react": "19.2.7",
@@ -42,7 +43,7 @@
     "react-dom": "19.2.0",
     "react-speech-recognition": "4.0.1",
     "statsig-node": "6.5.1",
-    "tailwindcss": "3.4.18",
+    "tailwindcss": "4.1.17",
     "typescript": "5.9.3",
     "vanilla-cookieconsent": "3.1.0"
   },
