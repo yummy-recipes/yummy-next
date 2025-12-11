@@ -14197,6 +14197,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tailwindcss@npm:4.1.18":
+  version: 4.1.18
+  resolution: "tailwindcss@npm:4.1.18"
+  checksum: 10/16a51bf972dce3871fec66aba7bffa02cd6fccc5a330180be3dcf297e48aae2d64d965df48fda851f65924ef61d7d2c6c8e6d7a05a09f454244475b7dab93464
+  languageName: node
+  linkType: hard
+
 "tapable@npm:^2.0.0, tapable@npm:^2.1.1, tapable@npm:^2.2.0, tapable@npm:^2.2.1":
   version: 2.2.1
   resolution: "tapable@npm:2.2.1"
@@ -15440,7 +15447,7 @@ __metadata:
     react-speech-recognition: "npm:4.0.1"
     statsig-node: "npm:6.5.1"
     storybook: "npm:10.0.8"
-    tailwindcss: "npm:4.1.17"
+    tailwindcss: "npm:4.1.18"
     typescript: "npm:5.9.3"
     vanilla-cookieconsent: "npm:3.1.0"
     vite-tsconfig-paths: "npm:5.1.4"
