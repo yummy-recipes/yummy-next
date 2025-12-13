@@ -34,7 +34,7 @@
     "@types/react-dom": "19.2.3",
     "algoliasearch": "5.46.0",
     "autoprefixer": "10.4.22",
-    "eslint": "9.39.1",
+    "eslint": "9.39.2",
     "marked": "17.0.1",
     "next": "16.0.10",
     "postcss": "8.5.6",
