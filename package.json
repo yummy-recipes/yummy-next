@@ -23,8 +23,8 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@prisma/adapter-better-sqlite3": "7.1.0",
-    "@prisma/client": "7.1.0",
+    "@prisma/adapter-better-sqlite3": "7.2.0",
+    "@prisma/client": "7.2.0",
     "@sentry/nextjs": "10.31.0",
     "@statsig/react-bindings": "3.31.0",
     "@tailwindcss/postcss": "4.1.18",
@@ -38,7 +38,7 @@
     "marked": "17.0.1",
     "next": "16.0.10",
     "postcss": "8.5.6",
-    "prisma": "7.1.0",
+    "prisma": "7.2.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-speech-recognition": "4.0.1",
