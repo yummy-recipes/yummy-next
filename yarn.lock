@@ -6614,7 +6614,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:13.3.4, chromatic@npm:^13.3.3":
+"chromatic@npm:13.3.5":
+  version: 13.3.5
+  resolution: "chromatic@npm:13.3.5"
+  peerDependencies:
+    "@chromatic-com/cypress": ^0.*.* || ^1.0.0
+    "@chromatic-com/playwright": ^0.*.* || ^1.0.0
+  peerDependenciesMeta:
+    "@chromatic-com/cypress":
+      optional: true
+    "@chromatic-com/playwright":
+      optional: true
+  bin:
+    chroma: dist/bin.js
+    chromatic: dist/bin.js
+    chromatic-cli: dist/bin.js
+  checksum: 10/d660e926e2763158eb216c12fd443ac909235b62e0855d6485c5ec270cbde8ce6d5467fc9792a988f2cd4c32722efb9899982b26d4bd8265381846c7d7006c21
+  languageName: node
+  linkType: hard
+
+"chromatic@npm:^13.3.3":
   version: 13.3.4
   resolution: "chromatic@npm:13.3.4"
   peerDependencies:
@@ -15424,7 +15443,7 @@ __metadata:
     "@types/react-speech-recognition": "npm:3.9.6"
     algoliasearch: "npm:5.46.2"
     autoprefixer: "npm:10.4.23"
-    chromatic: "npm:13.3.4"
+    chromatic: "npm:13.3.5"
     dotenv: "npm:17.2.3"
     eslint: "npm:9.39.2"
     eslint-config-next: "npm:16.1.1"
