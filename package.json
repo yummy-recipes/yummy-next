@@ -56,7 +56,7 @@
     "@storybook/addon-onboarding": "10.0.8",
     "@storybook/nextjs": "10.0.8",
     "@types/react-speech-recognition": "3.9.6",
-    "chromatic": "13.3.4",
+    "chromatic": "13.3.5",
     "dotenv": "17.2.3",
     "eslint-config-next": "16.1.1",
     "eslint-config-prettier": "10.1.8",
