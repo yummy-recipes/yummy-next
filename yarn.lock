@@ -4862,12 +4862,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:24.10.4":
-  version: 24.10.4
-  resolution: "@types/node@npm:24.10.4"
+"@types/node@npm:24.10.5":
+  version: 24.10.5
+  resolution: "@types/node@npm:24.10.5"
   dependencies:
     undici-types: "npm:~7.16.0"
-  checksum: 10/a0b318b99a97103d151589a10e20d7d3ce93188a0e6466040eb2ce5fae33ca6785306737b4006560fe3152073cbb2b14747b854fa303296275c22afc8a37da2a
+  checksum: 10/24c6eb5237e392067dbe511729d1df62b9cb67d51e873dc4b7950123625b70363c45ac6b36156b38f80a27e174e2f854b920f14d0f6846b294f4127916565a54
   languageName: node
   linkType: hard
 
@@ -15437,7 +15437,7 @@ __metadata:
     "@storybook/nextjs": "npm:10.0.8"
     "@tailwindcss/postcss": "npm:4.1.18"
     "@tanstack/react-query": "npm:5.90.16"
-    "@types/node": "npm:24.10.4"
+    "@types/node": "npm:24.10.5"
     "@types/react": "npm:19.2.7"
     "@types/react-dom": "npm:19.2.3"
     "@types/react-speech-recognition": "npm:3.9.6"
