@@ -21,6 +21,15 @@ export async function GET(request: Request) {
     id: recipe.id,
     label: recipe.title,
     value: `/${recipe.category.slug}/${recipe.slug}`,
+    recipe: {
+      id: recipe.id,
+      slug: recipe.slug,
+      title: recipe.title,
+      headline: recipe.headline,
+      preparationTime: recipe.preparationTime,
+      categorySlug: recipe.category.slug,
+      coverImage: recipe.coverImage,
+    },
   }));
 
   return new Response(JSON.stringify({ data }));

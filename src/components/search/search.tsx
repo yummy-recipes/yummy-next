@@ -28,6 +28,7 @@ import { MagnifyingGlassIcon, MicrophoneIcon } from "@heroicons/react/20/solid";
 
 import styles from "./search.module.css";
 import { useCssProperty } from "./use-css-property";
+import { useRecentlyViewed, RecentlyViewedRecipe } from "@/lib/use-recently-viewed";
 
 const queryClient = new QueryClient();
 
@@ -48,10 +49,10 @@ const WHISPER_SAMPLING_RATE = 16_000;
 interface Props {
   query: string;
   onChange: (value: string) => void;
-  onSelected: (value: string) => void;
+  onSelected: (value: string, recipe: RecentlyViewedRecipe) => void;
   loading?: boolean;
   error?: string;
-  results?: { id: string; label: string; url: string }[];
+  results?: { id: string; label: string; url: string; recipe: RecentlyViewedRecipe }[];
 }
 
 const useSpeechRecognition = ({
@@ -110,10 +111,10 @@ function SearchForm({
     handleAudioLevel,
   });
 
-  const handleChange = (input: { value: string } | null) => {
+  const handleChange = (input: { value: string; recipe: RecentlyViewedRecipe } | null) => {
     if (input) {
       searchInputRef.current?.blur();
-      onSelected(input.value);
+      onSelected(input.value, input.recipe);
     }
   };
 
@@ -143,8 +144,8 @@ function SearchForm({
     <div className="top-16 w-full">
       <div className="w-full flex" suppressHydrationWarning>
         <div className="flex-grow">
-          <Combobox<null | { value: string }>
-            value={{ value: query }}
+          <Combobox<null | { value: string; recipe: RecentlyViewedRecipe }>
+            value={{ value: query, recipe: {} as RecentlyViewedRecipe }}
             onChange={handleChange}
             immediate
           >
@@ -237,7 +238,7 @@ function SearchForm({
   );
 }
 
-function SearchWidget({ onSelected }: { onSelected: (value: string) => void }) {
+function SearchWidget({ onSelected }: { onSelected: (value: string, recipe: RecentlyViewedRecipe) => void }) {
   const [query, setQuery] = useState("");
 
   const { status, data, error, isFetching } = useSearch({ query });
@@ -259,10 +260,14 @@ function SearchWidget({ onSelected }: { onSelected: (value: string) => void }) {
 
 export function Search() {
   const router = useRouter();
+  const { addRecipe } = useRecentlyViewed();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SearchWidget onSelected={(url) => router.push(url)} />
+      <SearchWidget onSelected={(url, recipe) => {
+        addRecipe(recipe);
+        router.push(url);
+      }} />
     </QueryClientProvider>
   );
 }
