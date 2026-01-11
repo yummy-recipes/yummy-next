@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export interface RecentlyViewedRecipe {
   id: number;
@@ -33,11 +33,19 @@ function getStoredRecipes(): RecentlyViewedRecipe[] {
 
 export function useRecentlyViewed() {
   const [recipes, setRecipes] = useState<RecentlyViewedRecipe[]>([]);
+  const isInitialized = useRef(false);
 
   useEffect(() => {
-    // Load from localStorage after component mounts to avoid hydration mismatch
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setRecipes(getStoredRecipes());
+    // Only load once on mount to avoid hydration mismatch
+    // This setState is intentional - we're syncing external state (localStorage) with React state
+    if (!isInitialized.current) {
+      isInitialized.current = true;
+      const stored = getStoredRecipes();
+      if (stored.length > 0) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setRecipes(stored);
+      }
+    }
   }, []);
 
   const addRecipe = (recipe: RecentlyViewedRecipe) => {

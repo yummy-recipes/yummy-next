@@ -18,13 +18,21 @@ export function TrackedMenuSectionItem({ title, href, prepTime, description, rec
     addRecipe(recipe);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick();
+    }
+  };
+
   return (
-    <div onClick={handleClick} onKeyDown={(e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        handleClick();
-      }
-    }}>
+    <div 
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+      aria-label={`Track view of ${title}`}
+    >
       <MenuSectionItem 
         title={title}
         href={href}
