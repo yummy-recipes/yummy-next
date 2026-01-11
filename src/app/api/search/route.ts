@@ -6,6 +6,9 @@ const getSearchResults = cache(
   ["search-cache-key"],
 );
 
+const getId = (obj: { slug: string }) =>
+  Buffer.from(`V1-recipe-${obj.slug}`).toString("base64");
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
@@ -17,11 +20,23 @@ export async function GET(request: Request) {
 
   const recipes = await getSearchResults(query);
 
-  const data = recipes.map((recipe) => ({
-    id: recipe.id,
-    label: recipe.title,
-    value: `/${recipe.category.slug}/${recipe.slug}`,
-  }));
+  const data = recipes.map((recipe) => {
+    const id = getId(recipe);
+    return {
+      id,
+      label: recipe.title,
+      value: `/${recipe.category.slug}/${recipe.slug}`,
+      recipe: {
+        id,
+        slug: recipe.slug,
+        title: recipe.title,
+        headline: recipe.headline,
+        preparationTime: recipe.preparationTime,
+        categorySlug: recipe.category.slug,
+        coverImage: recipe.coverImage,
+      },
+    };
+  });
 
   return new Response(JSON.stringify({ data }));
 }

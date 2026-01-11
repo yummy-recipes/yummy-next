@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MenuSection } from "@/components/menu-section/menu-section";
 import { MenuSectionItem } from "@/components/menu-section-item/menu-section-item";
+import { RecentlyViewedRecipes } from "@/components/recently-viewed-recipes/recently-viewed-recipes";
 import { getPrismaClient } from "../../prisma/client.ts";
 
 const prisma = getPrismaClient();
@@ -56,6 +57,8 @@ export default async function Home() {
           Kolekcja {recipeCount} domowych przepisów na pyszne dania
         </h2>
       </div>
+
+      <RecentlyViewedRecipes />
 
       {groups.map(({ tag, recipes }) => (
         <div className="w-full flex flex-col gap-4" key={tag.id}>
