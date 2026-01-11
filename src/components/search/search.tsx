@@ -145,7 +145,7 @@ function SearchForm({
       <div className="w-full flex" suppressHydrationWarning>
         <div className="flex-grow">
           <Combobox<null | { value: string; recipe: RecentlyViewedRecipe }>
-            value={{ value: query, recipe: {} as RecentlyViewedRecipe }}
+            value={null}
             onChange={handleChange}
             immediate
           >

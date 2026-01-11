@@ -19,7 +19,12 @@ export function TrackedMenuSectionItem({ title, href, prepTime, description, rec
   };
 
   return (
-    <div onClick={handleClick}>
+    <div onClick={handleClick} onKeyDown={(e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleClick();
+      }
+    }}>
       <MenuSectionItem 
         title={title}
         href={href}

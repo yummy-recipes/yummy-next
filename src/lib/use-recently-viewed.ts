@@ -32,7 +32,13 @@ function getStoredRecipes(): RecentlyViewedRecipe[] {
 }
 
 export function useRecentlyViewed() {
-  const [recipes, setRecipes] = useState<RecentlyViewedRecipe[]>(getStoredRecipes);
+  const [recipes, setRecipes] = useState<RecentlyViewedRecipe[]>([]);
+
+  useEffect(() => {
+    // Load from localStorage after component mounts to avoid hydration mismatch
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setRecipes(getStoredRecipes());
+  }, []);
 
   const addRecipe = (recipe: RecentlyViewedRecipe) => {
     try {
