@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { scope } from "arktype";
 
 export interface RecentlyViewedRecipe {
   id: number;
@@ -15,6 +16,22 @@ export interface RecentlyViewedRecipe {
 const STORAGE_KEY = "recentlyViewedRecipes";
 const MAX_ITEMS = 5;
 
+// Arktype schema for validating recently viewed recipes array
+const types = scope({
+  recipe: {
+    id: "number",
+    slug: "string",
+    title: "string",
+    headline: "string",
+    preparationTime: "number",
+    categorySlug: "string",
+    coverImage: "string",
+  },
+  recipes: "recipe[]",
+}).export();
+
+const recentlyViewedRecipesArraySchema = types.recipes;
+
 function getStoredRecipes(): RecentlyViewedRecipe[] {
   if (typeof window === "undefined") {
     return [];
@@ -23,7 +40,17 @@ function getStoredRecipes(): RecentlyViewedRecipe[] {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
-      return JSON.parse(stored);
+      const parsed = JSON.parse(stored);
+      const result = recentlyViewedRecipesArraySchema(parsed);
+      
+      // If validation failed, arktype returns an ArkErrors object
+      if (result.constructor.name === "ArkErrors") {
+        console.error("Invalid recently viewed recipes data:", result.summary);
+        return [];
+      }
+      
+      // Validation succeeded, result is the validated data
+      return result as RecentlyViewedRecipe[];
     }
   } catch (error) {
     console.error("Error loading recently viewed recipes:", error);

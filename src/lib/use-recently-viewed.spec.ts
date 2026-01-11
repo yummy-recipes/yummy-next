@@ -1,0 +1,165 @@
+import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
+import { scope } from "arktype";
+
+// Mock localStorage
+const localStorageMock = (() => {
+  let store: Record<string, string> = {};
+
+  return {
+    getItem: (key: string) => store[key] || null,
+    setItem: (key: string, value: string) => {
+      store[key] = value.toString();
+    },
+    removeItem: (key: string) => {
+      delete store[key];
+    },
+    clear: () => {
+      store = {};
+    },
+  };
+})();
+
+Object.defineProperty(global, "localStorage", {
+  value: localStorageMock,
+});
+
+describe("arktype validation for recently viewed recipes", () => {
+  beforeEach(() => {
+    localStorageMock.clear();
+    vi.clearAllMocks();
+  });
+
+  const types = scope({
+    recipe: {
+      id: "number",
+      slug: "string",
+      title: "string",
+      headline: "string",
+      preparationTime: "number",
+      categorySlug: "string",
+      coverImage: "string",
+    },
+    recipes: "recipe[]",
+  }).export();
+
+  const recentlyViewedRecipesArraySchema = types.recipes;
+
+  it("should validate correct recipe data structure", () => {
+    const validRecipes = [
+      {
+        id: 1,
+        slug: "test-recipe",
+        title: "Test Recipe",
+        headline: "A test recipe",
+        preparationTime: 30,
+        categorySlug: "desserts",
+        coverImage: "https://example.com/image.jpg",
+      },
+    ];
+
+    const result = recentlyViewedRecipesArraySchema(validRecipes);
+    expect(result.constructor.name).not.toBe("ArkErrors");
+    expect(result).toEqual(validRecipes);
+  });
+
+  it("should reject recipe data with missing required fields", () => {
+    const invalidRecipes = [
+      {
+        id: 1,
+        slug: "test-recipe",
+        // Missing: title, headline, preparationTime, categorySlug, coverImage
+      },
+    ];
+
+    const result = recentlyViewedRecipesArraySchema(invalidRecipes);
+    expect(result.constructor.name).toBe("ArkErrors");
+  });
+
+  it("should reject recipe data with wrong types", () => {
+    const invalidRecipes = [
+      {
+        id: "not-a-number", // Should be number
+        slug: "test-recipe",
+        title: "Test Recipe",
+        headline: "A test recipe",
+        preparationTime: "30", // Should be number
+        categorySlug: "desserts",
+        coverImage: "https://example.com/image.jpg",
+      },
+    ];
+
+    const result = recentlyViewedRecipesArraySchema(invalidRecipes);
+    expect(result.constructor.name).toBe("ArkErrors");
+  });
+
+  it("should reject non-array data", () => {
+    const invalidData = {
+      id: 1,
+      slug: "test-recipe",
+      title: "Test Recipe",
+    };
+
+    const result = recentlyViewedRecipesArraySchema(invalidData);
+    expect(result.constructor.name).toBe("ArkErrors");
+  });
+
+  it("should validate empty array", () => {
+    const emptyArray: any[] = [];
+    const result = recentlyViewedRecipesArraySchema(emptyArray);
+    expect(result.constructor.name).not.toBe("ArkErrors");
+    expect(result).toEqual([]);
+  });
+
+  it("should validate multiple recipes", () => {
+    const validRecipes = [
+      {
+        id: 1,
+        slug: "test-recipe-1",
+        title: "Test Recipe 1",
+        headline: "A test recipe 1",
+        preparationTime: 30,
+        categorySlug: "desserts",
+        coverImage: "https://example.com/image1.jpg",
+      },
+      {
+        id: 2,
+        slug: "test-recipe-2",
+        title: "Test Recipe 2",
+        headline: "A test recipe 2",
+        preparationTime: 45,
+        categorySlug: "main-dishes",
+        coverImage: "https://example.com/image2.jpg",
+      },
+    ];
+
+    const result = recentlyViewedRecipesArraySchema(validRecipes);
+    expect(result.constructor.name).not.toBe("ArkErrors");
+    expect(result).toEqual(validRecipes);
+  });
+
+  it("should reject array with one valid and one invalid recipe", () => {
+    const mixedRecipes = [
+      {
+        id: 1,
+        slug: "test-recipe-1",
+        title: "Test Recipe 1",
+        headline: "A test recipe 1",
+        preparationTime: 30,
+        categorySlug: "desserts",
+        coverImage: "https://example.com/image1.jpg",
+      },
+      {
+        id: "not-a-number", // Invalid
+        slug: "test-recipe-2",
+        title: "Test Recipe 2",
+        headline: "A test recipe 2",
+        preparationTime: 45,
+        categorySlug: "main-dishes",
+        coverImage: "https://example.com/image2.jpg",
+      },
+    ];
+
+    const result = recentlyViewedRecipesArraySchema(mixedRecipes);
+    expect(result.constructor.name).toBe("ArkErrors");
+  });
+});
