@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { MenuSection } from "@/components/menu-section/menu-section";
 import { MenuSectionItem } from "@/components/menu-section-item/menu-section-item";
-import { TrackedMenuSectionItem } from "@/components/tracked-menu-section-item/tracked-menu-section-item";
 import { RecentlyViewedRecipes } from "@/components/recently-viewed-recipes/recently-viewed-recipes";
 import { getPrismaClient } from "../../prisma/client.ts";
 
@@ -65,21 +64,12 @@ export default async function Home() {
         <div className="w-full flex flex-col gap-4" key={tag.id}>
           <MenuSection title={upperCaseFirstLetter(tag.title)}>
             {recipes.map((recipe) => (
-              <TrackedMenuSectionItem
+              <MenuSectionItem
                 key={recipe.id}
                 href={`/${recipe.category.slug}/${recipe.slug}`}
                 title={recipe.title}
                 description={recipe.headline}
                 prepTime={recipe.preparationTime}
-                recipe={{
-                  id: recipe.id,
-                  slug: recipe.slug,
-                  title: recipe.title,
-                  headline: recipe.headline,
-                  preparationTime: recipe.preparationTime,
-                  categorySlug: recipe.category.slug,
-                  coverImage: recipe.coverImage,
-                }}
               />
             ))}
           </MenuSection>
