@@ -5944,7 +5944,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"arktype@npm:^2.1.29":
+"arktype@npm:2.1.29":
   version: 2.1.29
   resolution: "arktype@npm:2.1.29"
   dependencies:
@@ -15780,7 +15780,7 @@ __metadata:
     "@types/react-dom": "npm:19.2.3"
     "@types/react-speech-recognition": "npm:3.9.6"
     algoliasearch: "npm:5.46.3"
-    arktype: "npm:^2.1.29"
+    arktype: "npm:2.1.29"
     autoprefixer: "npm:10.4.23"
     chromatic: "npm:13.3.5"
     dotenv: "npm:17.2.3"
