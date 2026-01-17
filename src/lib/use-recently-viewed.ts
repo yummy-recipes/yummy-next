@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { scope } from "arktype";
+import { scope, type } from "arktype";
 
 export interface RecentlyViewedRecipe {
   id: number;
@@ -44,13 +44,13 @@ function getStoredRecipes(): RecentlyViewedRecipe[] {
       const result = recentlyViewedRecipesArraySchema(parsed);
       
       // If validation failed, arktype returns an ArkErrors object
-      if (result.constructor.name === "ArkErrors") {
+      if (result instanceof type.errors) {
         console.error("Invalid recently viewed recipes data:", result.summary);
         return [];
       }
       
       // Validation succeeded, result is the validated data
-      return result as RecentlyViewedRecipe[];
+      return result;
     }
   } catch (error) {
     console.error("Error loading recently viewed recipes:", error);

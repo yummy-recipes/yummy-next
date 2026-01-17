@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
-import { scope } from "arktype";
+import { scope, type } from "arktype";
 
 // Mock localStorage
 const localStorageMock = (() => {
@@ -58,7 +58,7 @@ describe("arktype validation for recently viewed recipes", () => {
     ];
 
     const result = recentlyViewedRecipesArraySchema(validRecipes);
-    expect(result.constructor.name).not.toBe("ArkErrors");
+    expect(result instanceof type.errors).toBe(false);
     expect(result).toEqual(validRecipes);
   });
 
@@ -72,7 +72,7 @@ describe("arktype validation for recently viewed recipes", () => {
     ];
 
     const result = recentlyViewedRecipesArraySchema(invalidRecipes);
-    expect(result.constructor.name).toBe("ArkErrors");
+    expect(result instanceof type.errors).toBe(true);
   });
 
   it("should reject recipe data with wrong types", () => {
@@ -89,7 +89,7 @@ describe("arktype validation for recently viewed recipes", () => {
     ];
 
     const result = recentlyViewedRecipesArraySchema(invalidRecipes);
-    expect(result.constructor.name).toBe("ArkErrors");
+    expect(result instanceof type.errors).toBe(true);
   });
 
   it("should reject non-array data", () => {
@@ -100,13 +100,13 @@ describe("arktype validation for recently viewed recipes", () => {
     };
 
     const result = recentlyViewedRecipesArraySchema(invalidData);
-    expect(result.constructor.name).toBe("ArkErrors");
+    expect(result instanceof type.errors).toBe(true);
   });
 
   it("should validate empty array", () => {
     const emptyArray: any[] = [];
     const result = recentlyViewedRecipesArraySchema(emptyArray);
-    expect(result.constructor.name).not.toBe("ArkErrors");
+    expect(result instanceof type.errors).toBe(false);
     expect(result).toEqual([]);
   });
 
@@ -133,7 +133,7 @@ describe("arktype validation for recently viewed recipes", () => {
     ];
 
     const result = recentlyViewedRecipesArraySchema(validRecipes);
-    expect(result.constructor.name).not.toBe("ArkErrors");
+    expect(result instanceof type.errors).toBe(false);
     expect(result).toEqual(validRecipes);
   });
 
@@ -160,6 +160,6 @@ describe("arktype validation for recently viewed recipes", () => {
     ];
 
     const result = recentlyViewedRecipesArraySchema(mixedRecipes);
-    expect(result.constructor.name).toBe("ArkErrors");
+    expect(result instanceof type.errors).toBe(true);
   });
 });
