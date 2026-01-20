@@ -32,7 +32,7 @@
     "@types/node": "24.10.9",
     "@types/react": "19.2.8",
     "@types/react-dom": "19.2.3",
-    "algoliasearch": "5.46.3",
+    "algoliasearch": "5.46.4",
     "arktype": "2.1.29",
     "autoprefixer": "10.4.23",
     "eslint": "9.39.2",
