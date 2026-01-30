@@ -38,7 +38,7 @@ jobs:
           fetch-depth: 0
           ref: ${{ inputs.ref || 'latest/production' }}
       - name: Log in to the Container registry
-        uses: docker/login-action@8e2a0b642a6296f5b70071b54b587ef363155acd
+        uses: docker/login-action@3227f5311cb93ffd14d13e65d8cc400d30f4dd8a
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
