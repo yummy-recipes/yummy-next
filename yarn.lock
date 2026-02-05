@@ -4969,12 +4969,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:19.2.11":
-  version: 19.2.11
-  resolution: "@types/react@npm:19.2.11"
+"@types/react@npm:19.2.12":
+  version: 19.2.12
+  resolution: "@types/react@npm:19.2.12"
   dependencies:
     csstype: "npm:^3.2.2"
-  checksum: 10/c31f7770d547bdbd5936bb621727340e41baed4e617e5b2203209024edfc52af4f1ef286851cc5e89d4c62c6a28da3ad0e7d4d62796087c71f63779552ec27fa
+  checksum: 10/0594ed0b6714f21a33644e6d3c83556278e8925341d0367f4e6e0656cb134aad2db9510dfb217b83c743b76e11e136db85398c1d684c65fba822d02978f9de7c
   languageName: node
   linkType: hard
 
@@ -15506,7 +15506,7 @@ __metadata:
     "@tailwindcss/postcss": "npm:4.1.18"
     "@tanstack/react-query": "npm:5.90.20"
     "@types/node": "npm:24.10.10"
-    "@types/react": "npm:19.2.11"
+    "@types/react": "npm:19.2.12"
     "@types/react-dom": "npm:19.2.3"
     "@types/react-speech-recognition": "npm:3.9.6"
     algoliasearch: "npm:5.47.0"
