@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { scope, type } from "arktype";
 
 export interface RecentlyViewedRecipe {
-  id: number;
+  id: string;
   slug: string;
   title: string;
   headline: string;
@@ -19,7 +19,7 @@ const MAX_ITEMS = 5;
 // Arktype schema for validating recently viewed recipes array
 const types = scope({
   recipe: {
-    id: "number",
+    id: "string",
     slug: "string",
     title: "string",
     headline: "string",
@@ -36,19 +36,19 @@ function getStoredRecipes(): RecentlyViewedRecipe[] {
   if (typeof window === "undefined") {
     return [];
   }
-  
+
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       const parsed = JSON.parse(stored);
       const result = recentlyViewedRecipesArraySchema(parsed);
-      
+
       // If validation failed, arktype returns an ArkErrors object
       if (result instanceof type.errors) {
         console.error("Invalid recently viewed recipes data:", result.summary);
         return [];
       }
-      
+
       // Validation succeeded, result is the validated data
       return result;
     }
