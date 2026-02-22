@@ -30,7 +30,7 @@ const types = scope({
   recipes: "recipe[]",
 }).export();
 
-const recentlyViewedRecipesArraySchema = types.recipes;
+export const recentlyViewedRecipesArraySchema = types.recipes;
 
 function getStoredRecipes(): RecentlyViewedRecipe[] {
   if (typeof window === "undefined") {

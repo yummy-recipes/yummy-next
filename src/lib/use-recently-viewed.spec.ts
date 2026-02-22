@@ -1,5 +1,6 @@
-import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
-import { scope, type } from "arktype";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { type } from "arktype";
+import { recentlyViewedRecipesArraySchema } from "./use-recently-viewed";
 
 // Mock localStorage
 const localStorageMock = (() => {
@@ -29,25 +30,10 @@ describe("arktype validation for recently viewed recipes", () => {
     vi.clearAllMocks();
   });
 
-  const types = scope({
-    recipe: {
-      id: "number",
-      slug: "string",
-      title: "string",
-      headline: "string",
-      preparationTime: "number",
-      categorySlug: "string",
-      coverImage: "string",
-    },
-    recipes: "recipe[]",
-  }).export();
-
-  const recentlyViewedRecipesArraySchema = types.recipes;
-
   it("should validate correct recipe data structure", () => {
     const validRecipes = [
       {
-        id: 1,
+        id: "1",
         slug: "test-recipe",
         title: "Test Recipe",
         headline: "A test recipe",
@@ -65,7 +51,7 @@ describe("arktype validation for recently viewed recipes", () => {
   it("should reject recipe data with missing required fields", () => {
     const invalidRecipes = [
       {
-        id: 1,
+        id: "1",
         slug: "test-recipe",
         // Missing: title, headline, preparationTime, categorySlug, coverImage
       },
@@ -78,7 +64,7 @@ describe("arktype validation for recently viewed recipes", () => {
   it("should reject recipe data with wrong types", () => {
     const invalidRecipes = [
       {
-        id: "not-a-number", // Should be number
+        id: 1, // Should be string
         slug: "test-recipe",
         title: "Test Recipe",
         headline: "A test recipe",
@@ -94,7 +80,7 @@ describe("arktype validation for recently viewed recipes", () => {
 
   it("should reject non-array data", () => {
     const invalidData = {
-      id: 1,
+      id: "1",
       slug: "test-recipe",
       title: "Test Recipe",
     };
@@ -113,7 +99,7 @@ describe("arktype validation for recently viewed recipes", () => {
   it("should validate multiple recipes", () => {
     const validRecipes = [
       {
-        id: 1,
+        id: "1",
         slug: "test-recipe-1",
         title: "Test Recipe 1",
         headline: "A test recipe 1",
@@ -122,7 +108,7 @@ describe("arktype validation for recently viewed recipes", () => {
         coverImage: "https://example.com/image1.jpg",
       },
       {
-        id: 2,
+        id: "2",
         slug: "test-recipe-2",
         title: "Test Recipe 2",
         headline: "A test recipe 2",
@@ -140,7 +126,7 @@ describe("arktype validation for recently viewed recipes", () => {
   it("should reject array with one valid and one invalid recipe", () => {
     const mixedRecipes = [
       {
-        id: 1,
+        id: "1",
         slug: "test-recipe-1",
         title: "Test Recipe 1",
         headline: "A test recipe 1",
@@ -149,7 +135,7 @@ describe("arktype validation for recently viewed recipes", () => {
         coverImage: "https://example.com/image1.jpg",
       },
       {
-        id: "not-a-number", // Invalid
+        id: 2, // Invalid
         slug: "test-recipe-2",
         title: "Test Recipe 2",
         headline: "A test recipe 2",
