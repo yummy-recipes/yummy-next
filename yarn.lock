@@ -4279,31 +4279,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@statsig/client-core@npm:3.31.2":
-  version: 3.31.2
-  resolution: "@statsig/client-core@npm:3.31.2"
-  checksum: 10/2540ee004a8fff4c1304b93ca7e77340f190fe4efd8ba8d4b49a565747f862cd8a2afe72ba5e70dc898f102868abc31879927370c7ccb01ca671957bc34288f6
+"@statsig/client-core@npm:3.32.0":
+  version: 3.32.0
+  resolution: "@statsig/client-core@npm:3.32.0"
+  checksum: 10/1c8d4e46a324515be03f4dd84b1e5f87b8faffde5eb04075d1b91931ca0bc2b5afc0a0ad1b4fd2196b553e4b60f71664081ce653a0d5c810b3c5d29f6d1b2088
   languageName: node
   linkType: hard
 
-"@statsig/js-client@npm:3.31.2":
-  version: 3.31.2
-  resolution: "@statsig/js-client@npm:3.31.2"
+"@statsig/js-client@npm:3.32.0":
+  version: 3.32.0
+  resolution: "@statsig/js-client@npm:3.32.0"
   dependencies:
-    "@statsig/client-core": "npm:3.31.2"
-  checksum: 10/361a1ca7e627ec122568c3e0f802bf535d68994421ecaa8f1e6fbd02a2ff625aa0548fbe9f2a66981f552e2fbe672f01190b324f03736638387ffdb2592f8d6a
+    "@statsig/client-core": "npm:3.32.0"
+  checksum: 10/b2d3222e70a3cb4bdec8cd0a9cea92a82dc3c4143397ab49df84c675c8c3d20a09eba6895ff21909a24ab193d7539d4c340ca0500f3ff2d2a1ce841bc4881eb4
   languageName: node
   linkType: hard
 
-"@statsig/react-bindings@npm:3.31.2":
-  version: 3.31.2
-  resolution: "@statsig/react-bindings@npm:3.31.2"
+"@statsig/react-bindings@npm:3.32.0":
+  version: 3.32.0
+  resolution: "@statsig/react-bindings@npm:3.32.0"
   dependencies:
-    "@statsig/client-core": "npm:3.31.2"
-    "@statsig/js-client": "npm:3.31.2"
+    "@statsig/client-core": "npm:3.32.0"
+    "@statsig/js-client": "npm:3.32.0"
   peerDependencies:
     react: ^16.6.3 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10/928e00c46be6d50095fd7568c4d5311bd50b0250f70d2ff7b228404a0203441aecaaf9c2fa2d03fecb7b2c596a4c67f1b7af45cd2807e875b5d59fbd3902e5c5
+  checksum: 10/842a8995c35747689a69a8a4aaa773182ba5925acb240d18d8bc8333e11b502227088873afbf1332af5de603a4fc38571025b1d0391ffa1fddfdbfe3590ded37
   languageName: node
   linkType: hard
 
@@ -15492,7 +15492,7 @@ __metadata:
     "@prisma/adapter-better-sqlite3": "npm:7.2.0"
     "@prisma/client": "npm:7.2.0"
     "@sentry/nextjs": "npm:10.40.0"
-    "@statsig/react-bindings": "npm:3.31.2"
+    "@statsig/react-bindings": "npm:3.32.0"
     "@storybook/addon-docs": "npm:10.0.8"
     "@storybook/addon-links": "npm:10.0.8"
     "@storybook/addon-onboarding": "npm:10.0.8"
