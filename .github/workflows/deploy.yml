@@ -51,7 +51,7 @@ jobs:
         run: echo "node_version=$(cat .nvmrc)" >> $GITHUB_OUTPUT
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@a60f0f62b5c12316066c8db464bfb2faafd7907b
+        uses: docker/metadata-action@76c27c49eb4f47e7222a12572cd210b8fb8be392
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
