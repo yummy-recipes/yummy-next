@@ -5858,14 +5858,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"arktype@npm:2.1.29":
-  version: 2.1.29
-  resolution: "arktype@npm:2.1.29"
+"arktype@npm:2.2.0":
+  version: 2.2.0
+  resolution: "arktype@npm:2.2.0"
   dependencies:
     "@ark/schema": "npm:0.56.0"
     "@ark/util": "npm:0.56.0"
     arkregex: "npm:0.0.5"
-  checksum: 10/091df54e5df0282a26f5de74cc001569483fc61b3297277a51cb8244f277334a549cf8ae3342ca3bbde95bd10172aaa2f86e6c5738e2853b2b66c088a7c9f398
+  checksum: 10/f391a570bd9dd0f39369669ca47c1504fa1969a6f29b60ef1219525c8866ce4b6f8553179b92bf40fc323faa29412ad0b25c03a4a2f16b96f836a1b589aac0b5
   languageName: node
   linkType: hard
 
@@ -15498,7 +15498,7 @@ __metadata:
     "@types/react-dom": "npm:19.2.3"
     "@types/react-speech-recognition": "npm:3.9.6"
     algoliasearch: "npm:5.49.1"
-    arktype: "npm:2.1.29"
+    arktype: "npm:2.2.0"
     autoprefixer: "npm:10.4.27"
     chromatic: "npm:13.3.5"
     dotenv: "npm:17.3.1"
