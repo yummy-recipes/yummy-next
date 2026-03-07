@@ -35,7 +35,7 @@
     "algoliasearch": "5.49.1",
     "arktype": "2.2.0",
     "autoprefixer": "10.4.27",
-    "eslint": "9.39.3",
+    "eslint": "9.39.4",
     "marked": "17.0.4",
     "next": "16.1.6",
     "postcss": "8.5.8",
