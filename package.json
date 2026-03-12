@@ -67,7 +67,7 @@
     "prettier": "3.8.1",
     "storybook": "10.0.8",
     "vite-tsconfig-paths": "6.1.1",
-    "vitest": "4.0.18"
+    "vitest": "4.1.0"
   },
   "resolutions": {
     "@types/react": "19.2.14",
