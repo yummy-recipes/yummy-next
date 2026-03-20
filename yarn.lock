@@ -4708,14 +4708,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:5.91.2":
-  version: 5.91.2
-  resolution: "@tanstack/react-query@npm:5.91.2"
+"@tanstack/react-query@npm:5.91.3":
+  version: 5.91.3
+  resolution: "@tanstack/react-query@npm:5.91.3"
   dependencies:
     "@tanstack/query-core": "npm:5.91.2"
   peerDependencies:
     react: ^18 || ^19
-  checksum: 10/b630bca48fbe288e4d56640b5232dcbfd33facec16e9eb1e53d0f5100f6137e938c4c7d20b80532864f0db4ab3cf501ad1ce29bc93660510e8d7809f9ba472d4
+  checksum: 10/94a99c7957c870d38f7480971037523ab46cdf90ca816d8a8d5cc34592e428f6e1399004df36210e12a331f54198369205fcfb6a5c7a2a8afa1e2ba7e9fb5f0a
   languageName: node
   linkType: hard
 
@@ -15486,7 +15486,7 @@ __metadata:
     "@storybook/addon-onboarding": "npm:10.0.8"
     "@storybook/nextjs": "npm:10.0.8"
     "@tailwindcss/postcss": "npm:4.2.2"
-    "@tanstack/react-query": "npm:5.91.2"
+    "@tanstack/react-query": "npm:5.91.3"
     "@types/node": "npm:24.10.15"
     "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
