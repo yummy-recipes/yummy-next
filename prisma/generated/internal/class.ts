@@ -15,11 +15,11 @@ import type * as Prisma from "./prismaNamespace.ts";
 
 const config: runtime.GetPrismaClientConfig = {
   previewFeatures: [],
-  clientVersion: "7.0.0",
-  engineVersion: "0c19ccc313cf9911a90d99d2ac2eb0280c76c513",
+  clientVersion: "7.2.0",
+  engineVersion: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   activeProvider: "sqlite",
   inlineSchema:
-    '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider            = "prisma-client"\n  output              = "../prisma/generated"\n  importFileExtension = "ts"\n}\n\ndatasource db {\n  provider = "sqlite"\n}\n\nmodel Tag {\n  id      Int      @id @default(autoincrement())\n  slug    String   @unique\n  title   String\n  recipes Recipe[]\n}\n\nmodel Category {\n  id      Int      @id @default(autoincrement())\n  slug    String   @unique\n  title   String\n  recipes Recipe[]\n}\n\nmodel RecipeIngredientBlock {\n  id       Int    @id @default(autoincrement())\n  recipeId Int\n  content  String\n  recipe   Recipe @relation(fields: [recipeId], references: [id])\n}\n\nmodel RecipeInstructionBlock {\n  id       Int    @id @default(autoincrement())\n  recipeId Int\n  content  String\n  recipe   Recipe @relation(fields: [recipeId], references: [id])\n}\n\nmodel Recipe {\n  id                    Int                      @id @default(autoincrement())\n  slug                  String                   @unique\n  coverImage            String\n  coverImageBlurDataUrl String?\n  title                 String\n  galleryImages         RecipeGalleryImage[]\n  headline              String\n  preparationTime       Int\n  category              Category                 @relation(fields: [categoryId], references: [id])\n  categoryId            Int\n  tags                  Tag[]\n  ingredients           RecipeIngredientBlock[]\n  instructions          RecipeInstructionBlock[]\n  publishedAt           DateTime\n}\n\nmodel RecipeGalleryImage {\n  id          Int     @id @default(autoincrement())\n  recipeId    Int\n  recipe      Recipe  @relation(fields: [recipeId], references: [id])\n  imageUrl    String\n  blurDataUrl String?\n  position    Int\n}\n',
+    '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider            = "prisma-client"\n  output              = "../prisma/generated"\n  importFileExtension = "ts"\n}\n\ndatasource db {\n  provider = "sqlite"\n}\n\nmodel Tag {\n  id      Int      @id @default(autoincrement())\n  slug    String   @unique\n  title   String\n  recipes Recipe[]\n}\n\nmodel Category {\n  id      Int      @id @default(autoincrement())\n  slug    String   @unique\n  title   String\n  recipes Recipe[]\n}\n\nmodel RecipeIngredientBlock {\n  id       Int     @id @default(autoincrement())\n  recipeId Int\n  title    String?\n  content  String\n  recipe   Recipe  @relation(fields: [recipeId], references: [id])\n}\n\nmodel RecipeInstructionBlock {\n  id       Int     @id @default(autoincrement())\n  recipeId Int\n  title    String?\n  content  String\n  recipe   Recipe  @relation(fields: [recipeId], references: [id])\n}\n\nmodel Recipe {\n  id                    Int                      @id @default(autoincrement())\n  slug                  String                   @unique\n  coverImage            String\n  coverImageBlurDataUrl String?\n  title                 String\n  galleryImages         RecipeGalleryImage[]\n  headline              String\n  preparationTime       Int\n  category              Category                 @relation(fields: [categoryId], references: [id])\n  categoryId            Int\n  tags                  Tag[]\n  ingredients           RecipeIngredientBlock[]\n  instructions          RecipeInstructionBlock[]\n  publishedAt           DateTime\n}\n\nmodel RecipeGalleryImage {\n  id          Int     @id @default(autoincrement())\n  recipeId    Int\n  recipe      Recipe  @relation(fields: [recipeId], references: [id])\n  imageUrl    String\n  blurDataUrl String?\n  position    Int\n}\n',
   runtimeDataModel: {
     models: {},
     enums: {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
 };
 
 config.runtimeDataModel = JSON.parse(
-  '{"models":{"Tag":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"slug","kind":"scalar","type":"String"},{"name":"title","kind":"scalar","type":"String"},{"name":"recipes","kind":"object","type":"Recipe","relationName":"RecipeToTag"}],"dbName":null},"Category":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"slug","kind":"scalar","type":"String"},{"name":"title","kind":"scalar","type":"String"},{"name":"recipes","kind":"object","type":"Recipe","relationName":"CategoryToRecipe"}],"dbName":null},"RecipeIngredientBlock":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"recipeId","kind":"scalar","type":"Int"},{"name":"content","kind":"scalar","type":"String"},{"name":"recipe","kind":"object","type":"Recipe","relationName":"RecipeToRecipeIngredientBlock"}],"dbName":null},"RecipeInstructionBlock":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"recipeId","kind":"scalar","type":"Int"},{"name":"content","kind":"scalar","type":"String"},{"name":"recipe","kind":"object","type":"Recipe","relationName":"RecipeToRecipeInstructionBlock"}],"dbName":null},"Recipe":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"slug","kind":"scalar","type":"String"},{"name":"coverImage","kind":"scalar","type":"String"},{"name":"coverImageBlurDataUrl","kind":"scalar","type":"String"},{"name":"title","kind":"scalar","type":"String"},{"name":"galleryImages","kind":"object","type":"RecipeGalleryImage","relationName":"RecipeToRecipeGalleryImage"},{"name":"headline","kind":"scalar","type":"String"},{"name":"preparationTime","kind":"scalar","type":"Int"},{"name":"category","kind":"object","type":"Category","relationName":"CategoryToRecipe"},{"name":"categoryId","kind":"scalar","type":"Int"},{"name":"tags","kind":"object","type":"Tag","relationName":"RecipeToTag"},{"name":"ingredients","kind":"object","type":"RecipeIngredientBlock","relationName":"RecipeToRecipeIngredientBlock"},{"name":"instructions","kind":"object","type":"RecipeInstructionBlock","relationName":"RecipeToRecipeInstructionBlock"},{"name":"publishedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"RecipeGalleryImage":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"recipeId","kind":"scalar","type":"Int"},{"name":"recipe","kind":"object","type":"Recipe","relationName":"RecipeToRecipeGalleryImage"},{"name":"imageUrl","kind":"scalar","type":"String"},{"name":"blurDataUrl","kind":"scalar","type":"String"},{"name":"position","kind":"scalar","type":"Int"}],"dbName":null}},"enums":{},"types":{}}',
+  '{"models":{"Tag":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"slug","kind":"scalar","type":"String"},{"name":"title","kind":"scalar","type":"String"},{"name":"recipes","kind":"object","type":"Recipe","relationName":"RecipeToTag"}],"dbName":null},"Category":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"slug","kind":"scalar","type":"String"},{"name":"title","kind":"scalar","type":"String"},{"name":"recipes","kind":"object","type":"Recipe","relationName":"CategoryToRecipe"}],"dbName":null},"RecipeIngredientBlock":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"recipeId","kind":"scalar","type":"Int"},{"name":"title","kind":"scalar","type":"String"},{"name":"content","kind":"scalar","type":"String"},{"name":"recipe","kind":"object","type":"Recipe","relationName":"RecipeToRecipeIngredientBlock"}],"dbName":null},"RecipeInstructionBlock":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"recipeId","kind":"scalar","type":"Int"},{"name":"title","kind":"scalar","type":"String"},{"name":"content","kind":"scalar","type":"String"},{"name":"recipe","kind":"object","type":"Recipe","relationName":"RecipeToRecipeInstructionBlock"}],"dbName":null},"Recipe":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"slug","kind":"scalar","type":"String"},{"name":"coverImage","kind":"scalar","type":"String"},{"name":"coverImageBlurDataUrl","kind":"scalar","type":"String"},{"name":"title","kind":"scalar","type":"String"},{"name":"galleryImages","kind":"object","type":"RecipeGalleryImage","relationName":"RecipeToRecipeGalleryImage"},{"name":"headline","kind":"scalar","type":"String"},{"name":"preparationTime","kind":"scalar","type":"Int"},{"name":"category","kind":"object","type":"Category","relationName":"CategoryToRecipe"},{"name":"categoryId","kind":"scalar","type":"Int"},{"name":"tags","kind":"object","type":"Tag","relationName":"RecipeToTag"},{"name":"ingredients","kind":"object","type":"RecipeIngredientBlock","relationName":"RecipeToRecipeIngredientBlock"},{"name":"instructions","kind":"object","type":"RecipeInstructionBlock","relationName":"RecipeToRecipeInstructionBlock"},{"name":"publishedAt","kind":"scalar","type":"DateTime"}],"dbName":null},"RecipeGalleryImage":{"fields":[{"name":"id","kind":"scalar","type":"Int"},{"name":"recipeId","kind":"scalar","type":"Int"},{"name":"recipe","kind":"object","type":"Recipe","relationName":"RecipeToRecipeGalleryImage"},{"name":"imageUrl","kind":"scalar","type":"String"},{"name":"blurDataUrl","kind":"scalar","type":"String"},{"name":"position","kind":"scalar","type":"Int"}],"dbName":null}},"enums":{},"types":{}}',
 );
 
 async function decodeBase64AsWasm(
@@ -44,9 +44,8 @@ config.compilerWasm = {
     await import("@prisma/client/runtime/query_compiler_bg.sqlite.mjs"),
 
   getQueryCompilerWasmModule: async () => {
-    const { wasm } = await import(
-      "@prisma/client/runtime/query_compiler_bg.sqlite.wasm-base64.mjs"
-    );
+    const { wasm } =
+      await import("@prisma/client/runtime/query_compiler_bg.sqlite.wasm-base64.mjs");
     return await decodeBase64AsWasm(wasm);
   },
 };
@@ -70,7 +69,7 @@ export interface PrismaClientConstructor {
    * const tags = await prisma.tag.findMany()
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+   * Read more in our [docs](https://pris.ly/d/client).
    */
 
   new <
@@ -81,8 +80,8 @@ export interface PrismaClientConstructor {
     }
       ? U
       : Prisma.PrismaClientOptions["omit"],
-    ExtArgs extends
-      runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+    ExtArgs extends runtime.Types.Extensions.InternalArgs =
+      runtime.Types.Extensions.DefaultArgs,
   >(
     options: Prisma.Subset<Options, Prisma.PrismaClientOptions>,
   ): PrismaClient<LogOpts, OmitOpts, ExtArgs>;
@@ -99,14 +98,14 @@ export interface PrismaClientConstructor {
  * const tags = await prisma.tag.findMany()
  * ```
  *
- * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+ * Read more in our [docs](https://pris.ly/d/client).
  */
 
 export interface PrismaClient<
   in LogOpts extends Prisma.LogLevel = never,
   in out OmitOpts extends Prisma.PrismaClientOptions["omit"] = undefined,
-  in out ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  in out ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["other"] };
 
@@ -134,7 +133,7 @@ export interface PrismaClient<
    * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $executeRaw<T = unknown>(
     query: TemplateStringsArray | Prisma.Sql,
@@ -149,7 +148,7 @@ export interface PrismaClient<
    * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $executeRawUnsafe<T = unknown>(
     query: string,
@@ -163,7 +162,7 @@ export interface PrismaClient<
    * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $queryRaw<T = unknown>(
     query: TemplateStringsArray | Prisma.Sql,
@@ -178,7 +177,7 @@ export interface PrismaClient<
    * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
    * ```
    *
-   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
    */
   $queryRawUnsafe<T = unknown>(
     query: string,

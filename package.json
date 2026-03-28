@@ -13,7 +13,7 @@
     "start": "next start",
     "lint": "eslint .",
     "pretty": "prettier . --write",
-    "pull": "node scripts/import.mjs",
+    "pull": "node --experimental-strip-types scripts/import.mjs",
     "generate:blur": "node scripts/generateBlurPlaceholder.mjs",
     "seed": "node scripts/seed.mjs",
     "reindex": "node scripts/reindex.mjs",

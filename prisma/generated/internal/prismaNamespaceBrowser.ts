@@ -96,6 +96,7 @@ export type CategoryScalarFieldEnum =
 export const RecipeIngredientBlockScalarFieldEnum = {
   id: "id",
   recipeId: "recipeId",
+  title: "title",
   content: "content",
 } as const;
 
@@ -105,6 +106,7 @@ export type RecipeIngredientBlockScalarFieldEnum =
 export const RecipeInstructionBlockScalarFieldEnum = {
   id: "id",
   recipeId: "recipeId",
+  title: "title",
   content: "content",
 } as const;
 

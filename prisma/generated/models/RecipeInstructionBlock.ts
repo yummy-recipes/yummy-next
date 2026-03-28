@@ -39,18 +39,21 @@ export type RecipeInstructionBlockSumAggregateOutputType = {
 export type RecipeInstructionBlockMinAggregateOutputType = {
   id: number | null;
   recipeId: number | null;
+  title: string | null;
   content: string | null;
 };
 
 export type RecipeInstructionBlockMaxAggregateOutputType = {
   id: number | null;
   recipeId: number | null;
+  title: string | null;
   content: string | null;
 };
 
 export type RecipeInstructionBlockCountAggregateOutputType = {
   id: number;
   recipeId: number;
+  title: number;
   content: number;
   _all: number;
 };
@@ -68,25 +71,28 @@ export type RecipeInstructionBlockSumAggregateInputType = {
 export type RecipeInstructionBlockMinAggregateInputType = {
   id?: true;
   recipeId?: true;
+  title?: true;
   content?: true;
 };
 
 export type RecipeInstructionBlockMaxAggregateInputType = {
   id?: true;
   recipeId?: true;
+  title?: true;
   content?: true;
 };
 
 export type RecipeInstructionBlockCountAggregateInputType = {
   id?: true;
   recipeId?: true;
+  title?: true;
   content?: true;
   _all?: true;
 };
 
 export type RecipeInstructionBlockAggregateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which RecipeInstructionBlock to aggregate.
@@ -163,8 +169,8 @@ export type GetRecipeInstructionBlockAggregateType<
 };
 
 export type RecipeInstructionBlockGroupByArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.RecipeInstructionBlockWhereInput;
   orderBy?:
@@ -186,6 +192,7 @@ export type RecipeInstructionBlockGroupByArgs<
 export type RecipeInstructionBlockGroupByOutputType = {
   id: number;
   recipeId: number;
+  title: string | null;
   content: string;
   _count: RecipeInstructionBlockCountAggregateOutputType | null;
   _avg: RecipeInstructionBlockAvgAggregateOutputType | null;
@@ -225,6 +232,7 @@ export type RecipeInstructionBlockWhereInput = {
     | Prisma.RecipeInstructionBlockWhereInput[];
   id?: Prisma.IntFilter<"RecipeInstructionBlock"> | number;
   recipeId?: Prisma.IntFilter<"RecipeInstructionBlock"> | number;
+  title?: Prisma.StringNullableFilter<"RecipeInstructionBlock"> | string | null;
   content?: Prisma.StringFilter<"RecipeInstructionBlock"> | string;
   recipe?: Prisma.XOR<
     Prisma.RecipeScalarRelationFilter,
@@ -235,6 +243,7 @@ export type RecipeInstructionBlockWhereInput = {
 export type RecipeInstructionBlockOrderByWithRelationInput = {
   id?: Prisma.SortOrder;
   recipeId?: Prisma.SortOrder;
+  title?: Prisma.SortOrderInput | Prisma.SortOrder;
   content?: Prisma.SortOrder;
   recipe?: Prisma.RecipeOrderByWithRelationInput;
 };
@@ -250,6 +259,10 @@ export type RecipeInstructionBlockWhereUniqueInput = Prisma.AtLeast<
       | Prisma.RecipeInstructionBlockWhereInput
       | Prisma.RecipeInstructionBlockWhereInput[];
     recipeId?: Prisma.IntFilter<"RecipeInstructionBlock"> | number;
+    title?:
+      | Prisma.StringNullableFilter<"RecipeInstructionBlock">
+      | string
+      | null;
     content?: Prisma.StringFilter<"RecipeInstructionBlock"> | string;
     recipe?: Prisma.XOR<
       Prisma.RecipeScalarRelationFilter,
@@ -262,6 +275,7 @@ export type RecipeInstructionBlockWhereUniqueInput = Prisma.AtLeast<
 export type RecipeInstructionBlockOrderByWithAggregationInput = {
   id?: Prisma.SortOrder;
   recipeId?: Prisma.SortOrder;
+  title?: Prisma.SortOrderInput | Prisma.SortOrder;
   content?: Prisma.SortOrder;
   _count?: Prisma.RecipeInstructionBlockCountOrderByAggregateInput;
   _avg?: Prisma.RecipeInstructionBlockAvgOrderByAggregateInput;
@@ -280,12 +294,17 @@ export type RecipeInstructionBlockScalarWhereWithAggregatesInput = {
     | Prisma.RecipeInstructionBlockScalarWhereWithAggregatesInput[];
   id?: Prisma.IntWithAggregatesFilter<"RecipeInstructionBlock"> | number;
   recipeId?: Prisma.IntWithAggregatesFilter<"RecipeInstructionBlock"> | number;
+  title?:
+    | Prisma.StringNullableWithAggregatesFilter<"RecipeInstructionBlock">
+    | string
+    | null;
   content?:
     | Prisma.StringWithAggregatesFilter<"RecipeInstructionBlock">
     | string;
 };
 
 export type RecipeInstructionBlockCreateInput = {
+  title?: string | null;
   content: string;
   recipe: Prisma.RecipeCreateNestedOneWithoutInstructionsInput;
 };
@@ -293,10 +312,12 @@ export type RecipeInstructionBlockCreateInput = {
 export type RecipeInstructionBlockUncheckedCreateInput = {
   id?: number;
   recipeId: number;
+  title?: string | null;
   content: string;
 };
 
 export type RecipeInstructionBlockUpdateInput = {
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   content?: Prisma.StringFieldUpdateOperationsInput | string;
   recipe?: Prisma.RecipeUpdateOneRequiredWithoutInstructionsNestedInput;
 };
@@ -304,28 +325,33 @@ export type RecipeInstructionBlockUpdateInput = {
 export type RecipeInstructionBlockUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   recipeId?: Prisma.IntFieldUpdateOperationsInput | number;
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   content?: Prisma.StringFieldUpdateOperationsInput | string;
 };
 
 export type RecipeInstructionBlockCreateManyInput = {
   id?: number;
   recipeId: number;
+  title?: string | null;
   content: string;
 };
 
 export type RecipeInstructionBlockUpdateManyMutationInput = {
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   content?: Prisma.StringFieldUpdateOperationsInput | string;
 };
 
 export type RecipeInstructionBlockUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
   recipeId?: Prisma.IntFieldUpdateOperationsInput | number;
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   content?: Prisma.StringFieldUpdateOperationsInput | string;
 };
 
 export type RecipeInstructionBlockCountOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   recipeId?: Prisma.SortOrder;
+  title?: Prisma.SortOrder;
   content?: Prisma.SortOrder;
 };
 
@@ -337,12 +363,14 @@ export type RecipeInstructionBlockAvgOrderByAggregateInput = {
 export type RecipeInstructionBlockMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   recipeId?: Prisma.SortOrder;
+  title?: Prisma.SortOrder;
   content?: Prisma.SortOrder;
 };
 
 export type RecipeInstructionBlockMinOrderByAggregateInput = {
   id?: Prisma.SortOrder;
   recipeId?: Prisma.SortOrder;
+  title?: Prisma.SortOrder;
   content?: Prisma.SortOrder;
 };
 
@@ -474,11 +502,13 @@ export type RecipeInstructionBlockUncheckedUpdateManyWithoutRecipeNestedInput =
   };
 
 export type RecipeInstructionBlockCreateWithoutRecipeInput = {
+  title?: string | null;
   content: string;
 };
 
 export type RecipeInstructionBlockUncheckedCreateWithoutRecipeInput = {
   id?: number;
+  title?: string | null;
   content: string;
 };
 
@@ -534,35 +564,41 @@ export type RecipeInstructionBlockScalarWhereInput = {
     | Prisma.RecipeInstructionBlockScalarWhereInput[];
   id?: Prisma.IntFilter<"RecipeInstructionBlock"> | number;
   recipeId?: Prisma.IntFilter<"RecipeInstructionBlock"> | number;
+  title?: Prisma.StringNullableFilter<"RecipeInstructionBlock"> | string | null;
   content?: Prisma.StringFilter<"RecipeInstructionBlock"> | string;
 };
 
 export type RecipeInstructionBlockCreateManyRecipeInput = {
   id?: number;
+  title?: string | null;
   content: string;
 };
 
 export type RecipeInstructionBlockUpdateWithoutRecipeInput = {
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   content?: Prisma.StringFieldUpdateOperationsInput | string;
 };
 
 export type RecipeInstructionBlockUncheckedUpdateWithoutRecipeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   content?: Prisma.StringFieldUpdateOperationsInput | string;
 };
 
 export type RecipeInstructionBlockUncheckedUpdateManyWithoutRecipeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number;
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   content?: Prisma.StringFieldUpdateOperationsInput | string;
 };
 
 export type RecipeInstructionBlockSelect<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
     recipeId?: boolean;
+    title?: boolean;
     content?: boolean;
     recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>;
   },
@@ -570,12 +606,13 @@ export type RecipeInstructionBlockSelect<
 >;
 
 export type RecipeInstructionBlockSelectCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
     recipeId?: boolean;
+    title?: boolean;
     content?: boolean;
     recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>;
   },
@@ -583,12 +620,13 @@ export type RecipeInstructionBlockSelectCreateManyAndReturn<
 >;
 
 export type RecipeInstructionBlockSelectUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
     recipeId?: boolean;
+    title?: boolean;
     content?: boolean;
     recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>;
   },
@@ -598,38 +636,39 @@ export type RecipeInstructionBlockSelectUpdateManyAndReturn<
 export type RecipeInstructionBlockSelectScalar = {
   id?: boolean;
   recipeId?: boolean;
+  title?: boolean;
   content?: boolean;
 };
 
 export type RecipeInstructionBlockOmit<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
-  "id" | "recipeId" | "content",
+  "id" | "recipeId" | "title" | "content",
   ExtArgs["result"]["recipeInstructionBlock"]
 >;
 export type RecipeInstructionBlockInclude<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>;
 };
 export type RecipeInstructionBlockIncludeCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>;
 };
 export type RecipeInstructionBlockIncludeUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>;
 };
 
 export type $RecipeInstructionBlockPayload<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   name: "RecipeInstructionBlock";
   objects: {
@@ -639,6 +678,7 @@ export type $RecipeInstructionBlockPayload<
     {
       id: number;
       recipeId: number;
+      title: string | null;
       content: string;
     },
     ExtArgs["result"]["recipeInstructionBlock"]
@@ -651,8 +691,8 @@ export type RecipeInstructionBlockGetPayload<
 > = runtime.Types.Result.GetResult<Prisma.$RecipeInstructionBlockPayload, S>;
 
 export type RecipeInstructionBlockCountArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = Omit<
   RecipeInstructionBlockFindManyArgs,
   "select" | "include" | "distinct" | "omit"
@@ -661,8 +701,8 @@ export type RecipeInstructionBlockCountArgs<
 };
 
 export interface RecipeInstructionBlockDelegate<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
   [K: symbol]: {
@@ -1213,8 +1253,8 @@ export interface RecipeInstructionBlockDelegate<
 export interface Prisma__RecipeInstructionBlockClient<
   T,
   Null = never,
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise";
@@ -1276,6 +1316,7 @@ export interface Prisma__RecipeInstructionBlockClient<
 export interface RecipeInstructionBlockFieldRefs {
   readonly id: Prisma.FieldRef<"RecipeInstructionBlock", "Int">;
   readonly recipeId: Prisma.FieldRef<"RecipeInstructionBlock", "Int">;
+  readonly title: Prisma.FieldRef<"RecipeInstructionBlock", "String">;
   readonly content: Prisma.FieldRef<"RecipeInstructionBlock", "String">;
 }
 
@@ -1284,8 +1325,8 @@ export interface RecipeInstructionBlockFieldRefs {
  * RecipeInstructionBlock findUnique
  */
 export type RecipeInstructionBlockFindUniqueArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -1309,8 +1350,8 @@ export type RecipeInstructionBlockFindUniqueArgs<
  * RecipeInstructionBlock findUniqueOrThrow
  */
 export type RecipeInstructionBlockFindUniqueOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -1334,8 +1375,8 @@ export type RecipeInstructionBlockFindUniqueOrThrowArgs<
  * RecipeInstructionBlock findFirst
  */
 export type RecipeInstructionBlockFindFirstArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -1393,8 +1434,8 @@ export type RecipeInstructionBlockFindFirstArgs<
  * RecipeInstructionBlock findFirstOrThrow
  */
 export type RecipeInstructionBlockFindFirstOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -1452,8 +1493,8 @@ export type RecipeInstructionBlockFindFirstOrThrowArgs<
  * RecipeInstructionBlock findMany
  */
 export type RecipeInstructionBlockFindManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -1506,8 +1547,8 @@ export type RecipeInstructionBlockFindManyArgs<
  * RecipeInstructionBlock create
  */
 export type RecipeInstructionBlockCreateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -1534,8 +1575,8 @@ export type RecipeInstructionBlockCreateArgs<
  * RecipeInstructionBlock createMany
  */
 export type RecipeInstructionBlockCreateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to create many RecipeInstructionBlocks.
@@ -1549,8 +1590,8 @@ export type RecipeInstructionBlockCreateManyArgs<
  * RecipeInstructionBlock createManyAndReturn
  */
 export type RecipeInstructionBlockCreateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -1576,8 +1617,8 @@ export type RecipeInstructionBlockCreateManyAndReturnArgs<
  * RecipeInstructionBlock update
  */
 export type RecipeInstructionBlockUpdateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -1608,8 +1649,8 @@ export type RecipeInstructionBlockUpdateArgs<
  * RecipeInstructionBlock updateMany
  */
 export type RecipeInstructionBlockUpdateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to update RecipeInstructionBlocks.
@@ -1632,8 +1673,8 @@ export type RecipeInstructionBlockUpdateManyArgs<
  * RecipeInstructionBlock updateManyAndReturn
  */
 export type RecipeInstructionBlockUpdateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -1668,8 +1709,8 @@ export type RecipeInstructionBlockUpdateManyAndReturnArgs<
  * RecipeInstructionBlock upsert
  */
 export type RecipeInstructionBlockUpsertArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -1707,8 +1748,8 @@ export type RecipeInstructionBlockUpsertArgs<
  * RecipeInstructionBlock delete
  */
 export type RecipeInstructionBlockDeleteArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -1732,8 +1773,8 @@ export type RecipeInstructionBlockDeleteArgs<
  * RecipeInstructionBlock deleteMany
  */
 export type RecipeInstructionBlockDeleteManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which RecipeInstructionBlocks to delete
@@ -1749,8 +1790,8 @@ export type RecipeInstructionBlockDeleteManyArgs<
  * RecipeInstructionBlock without action
  */
 export type RecipeInstructionBlockDefaultArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock

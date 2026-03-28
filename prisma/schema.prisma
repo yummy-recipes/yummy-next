@@ -28,6 +28,7 @@ model Category {
 model RecipeIngredientBlock {
   id       Int    @id @default(autoincrement())
   recipeId Int
+  title    String?
   content  String
   recipe   Recipe @relation(fields: [recipeId], references: [id])
 }
@@ -35,6 +36,7 @@ model RecipeIngredientBlock {
 model RecipeInstructionBlock {
   id       Int    @id @default(autoincrement())
   recipeId Int
+  title    String?
   content  String
   recipe   Recipe @relation(fields: [recipeId], references: [id])
 }

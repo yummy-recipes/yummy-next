@@ -71,6 +71,7 @@ async function createRecipeBlocks({ recipeId, ingredients, instructions }) {
   for (const ingredient of ingredients) {
     await prisma.recipeIngredientBlock.create({
       data: {
+        title: ingredient.title ?? null,
         content: ingredient.content,
         recipe: {
           connect: {
@@ -84,6 +85,7 @@ async function createRecipeBlocks({ recipeId, ingredients, instructions }) {
   for (const instruction of instructions) {
     await prisma.recipeInstructionBlock.create({
       data: {
+        title: instruction.title ?? null,
         content: instruction.content,
         recipe: {
           connect: {
@@ -247,10 +249,12 @@ function loadRecipes(after = null, limit) {
           }
           ingredients {
             id
+            title
             content
           }
           instructions {
             id
+            title
             content
           }
           gallery {

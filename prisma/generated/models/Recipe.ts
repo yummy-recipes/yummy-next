@@ -125,8 +125,8 @@ export type RecipeCountAggregateInputType = {
 };
 
 export type RecipeAggregateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which Recipe to aggregate.
@@ -199,8 +199,8 @@ export type GetRecipeAggregateType<T extends RecipeAggregateArgs> = {
 };
 
 export type RecipeGroupByArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.RecipeWhereInput;
   orderBy?:
@@ -744,10 +744,6 @@ export type RecipeUpdateOneRequiredWithoutInstructionsNestedInput = {
     >,
     Prisma.RecipeUncheckedUpdateWithoutInstructionsInput
   >;
-};
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null;
 };
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -1329,8 +1325,8 @@ export type RecipeCountOutputType = {
 };
 
 export type RecipeCountOutputTypeSelect<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   galleryImages?: boolean | RecipeCountOutputTypeCountGalleryImagesArgs;
   tags?: boolean | RecipeCountOutputTypeCountTagsArgs;
@@ -1342,8 +1338,8 @@ export type RecipeCountOutputTypeSelect<
  * RecipeCountOutputType without action
  */
 export type RecipeCountOutputTypeDefaultArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeCountOutputType
@@ -1355,8 +1351,8 @@ export type RecipeCountOutputTypeDefaultArgs<
  * RecipeCountOutputType without action
  */
 export type RecipeCountOutputTypeCountGalleryImagesArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.RecipeGalleryImageWhereInput;
 };
@@ -1365,8 +1361,8 @@ export type RecipeCountOutputTypeCountGalleryImagesArgs<
  * RecipeCountOutputType without action
  */
 export type RecipeCountOutputTypeCountTagsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.TagWhereInput;
 };
@@ -1375,8 +1371,8 @@ export type RecipeCountOutputTypeCountTagsArgs<
  * RecipeCountOutputType without action
  */
 export type RecipeCountOutputTypeCountIngredientsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.RecipeIngredientBlockWhereInput;
 };
@@ -1385,15 +1381,15 @@ export type RecipeCountOutputTypeCountIngredientsArgs<
  * RecipeCountOutputType without action
  */
 export type RecipeCountOutputTypeCountInstructionsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   where?: Prisma.RecipeInstructionBlockWhereInput;
 };
 
 export type RecipeSelect<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -1416,8 +1412,8 @@ export type RecipeSelect<
 >;
 
 export type RecipeSelectCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -1435,8 +1431,8 @@ export type RecipeSelectCreateManyAndReturn<
 >;
 
 export type RecipeSelectUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
   {
     id?: boolean;
@@ -1466,8 +1462,8 @@ export type RecipeSelectScalar = {
 };
 
 export type RecipeOmit<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetOmit<
   | "id"
   | "slug"
@@ -1481,8 +1477,8 @@ export type RecipeOmit<
   ExtArgs["result"]["recipe"]
 >;
 export type RecipeInclude<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   galleryImages?: boolean | Prisma.Recipe$galleryImagesArgs<ExtArgs>;
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>;
@@ -1492,21 +1488,21 @@ export type RecipeInclude<
   _count?: boolean | Prisma.RecipeCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type RecipeIncludeCreateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>;
 };
 export type RecipeIncludeUpdateManyAndReturn<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>;
 };
 
 export type $RecipePayload<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   name: "Recipe";
   objects: {
@@ -1538,15 +1534,15 @@ export type RecipeGetPayload<
 > = runtime.Types.Result.GetResult<Prisma.$RecipePayload, S>;
 
 export type RecipeCountArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = Omit<RecipeFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
   select?: RecipeCountAggregateInputType | true;
 };
 
 export interface RecipeDelegate<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > {
   [K: symbol]: {
@@ -2072,8 +2068,8 @@ export interface RecipeDelegate<
 export interface Prisma__RecipeClient<
   T,
   Null = never,
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise";
@@ -2193,8 +2189,8 @@ export interface RecipeFieldRefs {
  * Recipe findUnique
  */
 export type RecipeFindUniqueArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
@@ -2218,8 +2214,8 @@ export type RecipeFindUniqueArgs<
  * Recipe findUniqueOrThrow
  */
 export type RecipeFindUniqueOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
@@ -2243,8 +2239,8 @@ export type RecipeFindUniqueOrThrowArgs<
  * Recipe findFirst
  */
 export type RecipeFindFirstArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
@@ -2300,8 +2296,8 @@ export type RecipeFindFirstArgs<
  * Recipe findFirstOrThrow
  */
 export type RecipeFindFirstOrThrowArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
@@ -2357,8 +2353,8 @@ export type RecipeFindFirstOrThrowArgs<
  * Recipe findMany
  */
 export type RecipeFindManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
@@ -2409,8 +2405,8 @@ export type RecipeFindManyArgs<
  * Recipe create
  */
 export type RecipeCreateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
@@ -2434,8 +2430,8 @@ export type RecipeCreateArgs<
  * Recipe createMany
  */
 export type RecipeCreateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to create many Recipes.
@@ -2447,8 +2443,8 @@ export type RecipeCreateManyArgs<
  * Recipe createManyAndReturn
  */
 export type RecipeCreateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
@@ -2472,8 +2468,8 @@ export type RecipeCreateManyAndReturnArgs<
  * Recipe update
  */
 export type RecipeUpdateArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
@@ -2501,8 +2497,8 @@ export type RecipeUpdateArgs<
  * Recipe updateMany
  */
 export type RecipeUpdateManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * The data used to update Recipes.
@@ -2525,8 +2521,8 @@ export type RecipeUpdateManyArgs<
  * Recipe updateManyAndReturn
  */
 export type RecipeUpdateManyAndReturnArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
@@ -2561,8 +2557,8 @@ export type RecipeUpdateManyAndReturnArgs<
  * Recipe upsert
  */
 export type RecipeUpsertArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
@@ -2600,8 +2596,8 @@ export type RecipeUpsertArgs<
  * Recipe delete
  */
 export type RecipeDeleteArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
@@ -2625,8 +2621,8 @@ export type RecipeDeleteArgs<
  * Recipe deleteMany
  */
 export type RecipeDeleteManyArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Filter which Recipes to delete
@@ -2642,8 +2638,8 @@ export type RecipeDeleteManyArgs<
  * Recipe.galleryImages
  */
 export type Recipe$galleryImagesArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeGalleryImage
@@ -2673,8 +2669,8 @@ export type Recipe$galleryImagesArgs<
  * Recipe.tags
  */
 export type Recipe$tagsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Tag
@@ -2702,8 +2698,8 @@ export type Recipe$tagsArgs<
  * Recipe.ingredients
  */
 export type Recipe$ingredientsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeIngredientBlock
@@ -2733,8 +2729,8 @@ export type Recipe$ingredientsArgs<
  * Recipe.instructions
  */
 export type Recipe$instructionsArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the RecipeInstructionBlock
@@ -2764,8 +2760,8 @@ export type Recipe$instructionsArgs<
  * Recipe without action
  */
 export type RecipeDefaultArgs<
-  ExtArgs extends
-    runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
 > = {
   /**
    * Select specific fields to fetch from the Recipe
