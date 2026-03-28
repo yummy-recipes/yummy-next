@@ -7,8 +7,8 @@ interface Props {
   title: string;
   coverImage: string;
   coverImageBlurDataUrl: string | null;
-  ingredients: { id: number; content: string }[];
-  instructions: { id: number; content: string }[];
+  ingredients: string;
+  instructions: string;
   galleryImages: { id: number; imageUrl: string; blurDataUrl: string | null }[];
 }
 
@@ -41,25 +41,19 @@ export function Recipe({
       </div>
       <div className="flex flex-col md:flex-row">
         <div className="flex-1 p-2 m-2">
-          {ingredients.map((ingredient) => (
-            <div
-              key={ingredient.id}
-              dangerouslySetInnerHTML={{
-                __html: ingredient.content,
-              }}
-            ></div>
-          ))}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: ingredients,
+            }}
+          ></div>
         </div>
 
         <div className="flex-1 p-2 m-2">
-          {instructions.map((instruction, index) => (
-            <div
-              key={instruction.id}
-              dangerouslySetInnerHTML={{
-                __html: instruction.content,
-              }}
-            ></div>
-          ))}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: instructions,
+            }}
+          ></div>
         </div>
       </div>
 

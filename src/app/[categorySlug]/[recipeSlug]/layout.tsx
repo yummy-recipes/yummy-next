@@ -13,6 +13,25 @@ interface Props {
   children: React.ReactNode;
 }
 
+interface RecipeBlock {
+  title: string | null;
+  content: string;
+}
+
+const markdownHasHeading = (content: string) =>
+  /(^|\n)\s{0,3}#{1,3}\s+|<h[1-3][\s>]/im.test(content);
+
+const mergeMarkdownBlocks = (blocks: RecipeBlock[]) =>
+  blocks
+    .map((block) => {
+      if (block.title && !markdownHasHeading(block.content)) {
+        return `## ${block.title}\n\n${block.content}`;
+      }
+
+      return block.content;
+    })
+    .join("\n\n");
+
 export default async function Layout({ params, children }: Props) {
   const { categorySlug, recipeSlug } = await params;
   const category = await prisma.category.findUnique({
@@ -41,28 +60,21 @@ export default async function Layout({ params, children }: Props) {
     return notFound();
   }
 
-  const ingredients = await Promise.all(
-    recipe.ingredients.map(async (ingredient) => {
-      return {
-        ...ingredient,
-        content: await markdownToHtml(ingredient.content),
-      };
-    }),
+  const ingredients = await markdownToHtml(
+    mergeMarkdownBlocks(recipe.ingredients),
   );
 
-  const instructions = await Promise.all(
-    recipe.instructions.map(async (instruction) => {
-      return {
-        ...instruction,
-        content: await markdownToHtml(instruction.content, {
-          paragraphNumbers: true,
-        }),
-      };
-    }),
+  const instructions = await markdownToHtml(
+    mergeMarkdownBlocks(recipe.instructions),
+    {
+      paragraphNumbers: true,
+    },
   );
+
+  console.log("instructions", mergeMarkdownBlocks(recipe.instructions));
 
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <Recipe
         title={recipe.title}
         coverImage={recipe.coverImage}
