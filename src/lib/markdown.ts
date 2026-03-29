@@ -21,8 +21,6 @@ class TailwindRenderer extends marked.Renderer {
     this.paragraphIndex = 0;
   }
   heading({ tokens, depth }: Tokens.Heading) {
-    this.resetParagraphIndex();
-
     const text = this.parser.parseInline(tokens);
     return `<h${depth} class='text-2xl my-4'>${text}</h${depth}>`;
   }
