@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { scope, type } from "arktype";
 
 export interface RecentlyViewedRecipe {
@@ -58,6 +58,17 @@ function getStoredRecipes(): RecentlyViewedRecipe[] {
   return [];
 }
 
+export function computeUpdatedRecipes(
+  currentRecipes: RecentlyViewedRecipe[],
+  recipe: RecentlyViewedRecipe,
+  maxItems = MAX_ITEMS,
+): RecentlyViewedRecipe[] {
+  // Remove the recipe if it already exists (to pull it to the top)
+  const filtered = currentRecipes.filter((r) => r.id !== recipe.id);
+  // Add the recipe at the beginning
+  return [recipe, ...filtered].slice(0, maxItems);
+}
+
 export function useRecentlyViewed() {
   const [recipes, setRecipes] = useState<RecentlyViewedRecipe[]>([]);
   const isInitialized = useRef(false);
@@ -75,23 +86,20 @@ export function useRecentlyViewed() {
     }
   }, []);
 
-  const addRecipe = (recipe: RecentlyViewedRecipe) => {
+  const addRecipe = useCallback((recipe: RecentlyViewedRecipe) => {
     try {
-      setRecipes((prevRecipes) => {
-        // Remove the recipe if it already exists
-        const filtered = prevRecipes.filter((r) => r.id !== recipe.id);
-        // Add the new recipe at the beginning
-        const updated = [recipe, ...filtered].slice(0, MAX_ITEMS);
-        // Save to localStorage
-        if (typeof window !== "undefined") {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-        }
-        return updated;
-      });
+      // Always read from localStorage to get the most current data, avoiding
+      // stale React state issues (e.g. before the initialization effect runs)
+      const currentRecipes = getStoredRecipes();
+      const updated = computeUpdatedRecipes(currentRecipes, recipe);
+      if (typeof window !== "undefined") {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      }
+      setRecipes(updated);
     } catch (error) {
       console.error("Error saving recently viewed recipe:", error);
     }
-  };
+  }, []);
 
   return { recipes, addRecipe };
 }

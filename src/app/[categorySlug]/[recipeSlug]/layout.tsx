@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/data";
 import { markdownToHtml } from "@/lib/markdown";
 import { Recipe } from "@/components/recipe/recipe";
+import { RecentlyViewedTracker } from "@/components/recently-viewed-tracker/recently-viewed-tracker";
+import { getRecipeId } from "@/lib/recipe-id";
 
 interface Params {
   categorySlug: string;
@@ -75,6 +77,17 @@ export default async function Layout({ params, children }: Props) {
 
   return (
     <div className="max-w-7xl mx-auto">
+      <RecentlyViewedTracker
+        recipe={{
+          id: getRecipeId(recipe.slug),
+          slug: recipe.slug,
+          title: recipe.title,
+          headline: recipe.headline,
+          preparationTime: recipe.preparationTime,
+          categorySlug: recipe.category.slug,
+          coverImage: recipe.coverImage,
+        }}
+      />
       <Recipe
         title={recipe.title}
         coverImage={recipe.coverImage}

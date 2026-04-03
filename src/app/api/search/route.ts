@@ -1,13 +1,11 @@
 import { unstable_cache as cache } from "next/cache";
 import { search } from "@/lib/search";
+import { getRecipeId } from "@/lib/recipe-id";
 
 const getSearchResults = cache(
   (query: string) => search(query),
   ["search-cache-key"],
 );
-
-const getId = (obj: { slug: string }) =>
-  Buffer.from(`V1-recipe-${obj.slug}`).toString("base64");
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -21,7 +19,7 @@ export async function GET(request: Request) {
   const recipes = await getSearchResults(query);
 
   const data = recipes.map((recipe) => {
-    const id = getId(recipe);
+    const id = getRecipeId(recipe.slug);
     return {
       id,
       label: recipe.title,
