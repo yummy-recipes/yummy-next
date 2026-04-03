@@ -29,7 +29,7 @@
     "@statsig/react-bindings": "3.32.3",
     "@tailwindcss/postcss": "4.2.2",
     "@tanstack/react-query": "5.96.2",
-    "@types/node": "24.12.0",
+    "@types/node": "24.12.2",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "algoliasearch": "5.50.1",
