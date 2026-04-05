@@ -36,7 +36,7 @@
     "arktype": "2.2.0",
     "autoprefixer": "10.4.27",
     "eslint": "9.39.4",
-    "marked": "17.0.5",
+    "marked": "17.0.6",
     "next": "16.2.2",
     "postcss": "8.5.8",
     "prisma": "7.2.0",
