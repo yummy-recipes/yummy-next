@@ -4689,21 +4689,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.98.0":
-  version: 5.98.0
-  resolution: "@tanstack/query-core@npm:5.98.0"
-  checksum: 10/e9560e78ec02ccdc6f323e9051044ec68013b0abd105e6ffeba792cfed5dbbf9689c6efad5a6885bf2274c9b3bb9e445cffa27bb9b01175da64940f5d3eb3a18
+"@tanstack/query-core@npm:5.99.0":
+  version: 5.99.0
+  resolution: "@tanstack/query-core@npm:5.99.0"
+  checksum: 10/752c38122c772a8c511ffd927e003282a23a3ab6979b066d1d8b100a2061a5448096fce4cfc9e2d93a2ef468ffac5440a6181203b1456d12f6e51f69bcdc1a4d
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:5.98.0":
-  version: 5.98.0
-  resolution: "@tanstack/react-query@npm:5.98.0"
+"@tanstack/react-query@npm:5.99.0":
+  version: 5.99.0
+  resolution: "@tanstack/react-query@npm:5.99.0"
   dependencies:
-    "@tanstack/query-core": "npm:5.98.0"
+    "@tanstack/query-core": "npm:5.99.0"
   peerDependencies:
     react: ^18 || ^19
-  checksum: 10/2fac713fcd632c9169855ed41ba54208878d4b91b6169d10599fbdd004433c081f2709ce0877ad4de9178158c7ff5b1ddddd2f14d7692a583245b7fa67049b5f
+  checksum: 10/aafbc87fc9c6c01c8ac8229d42ab209273f39f8284a72b8917c5fab39722b949b8dff2cf3b28487b2ebcb286bb08a377a42ed8a56dabe7f1ac4681c5af338401
   languageName: node
   linkType: hard
 
@@ -15472,7 +15472,7 @@ __metadata:
     "@storybook/addon-onboarding": "npm:10.0.8"
     "@storybook/nextjs": "npm:10.0.8"
     "@tailwindcss/postcss": "npm:4.2.2"
-    "@tanstack/react-query": "npm:5.98.0"
+    "@tanstack/react-query": "npm:5.99.0"
     "@types/node": "npm:24.12.2"
     "@types/react": "npm:19.2.14"
     "@types/react-dom": "npm:19.2.3"
