@@ -33,7 +33,7 @@ jobs:
       attestations: write
       id-token: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
         with:
           fetch-depth: 0
           ref: ${{ inputs.ref || 'latest/production' }}
@@ -44,7 +44,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
+        uses: docker/setup-buildx-action@v4.0.0
 
       - name: Read .nvmrc
         id: nvmrc
@@ -78,7 +78,7 @@ jobs:
           ssh_private_key: ${{ secrets.DOKKU_DEPLOY_KEY }}
           deploy_docker_image: ${{ env.REGISTRY }}/${{ github.repository }}@${{ steps.push.outputs.digest }}
 
-      - uses: rickstaa/action-create-tag@v1
+      - uses: rickstaa/action-create-tag@v1.7.2
         if: inputs.ref && inputs.ref != 'latest/production'
         with:
           commit_sha: ${{ inputs.ref }}
@@ -91,11 +91,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_image
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
         with:
           fetch-depth: 0
           ref: ${{ inputs.ref || 'latest/production' }}
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6.3.0
         with:
           node-version-file: .nvmrc
           cache: "yarn"
