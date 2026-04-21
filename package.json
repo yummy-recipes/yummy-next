@@ -44,7 +44,7 @@
     "react-dom": "19.2.5",
     "react-speech-recognition": "4.0.1",
     "statsig-node": "6.5.1",
-    "tailwindcss": "4.2.2",
+    "tailwindcss": "4.2.3",
     "typescript": "5.9.3",
     "vanilla-cookieconsent": "3.1.0"
   },
