@@ -14231,13 +14231,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:4.2.2":
-  version: 4.2.2
-  resolution: "tailwindcss@npm:4.2.2"
-  checksum: 10/f468b441d32b7278e7e2639b0f95f59fb8a52678e8c3a027f636ec51006ed32f68aeb2e66eaf81b958b234745d2ccae4757e4ba5dda23c5e158065060f90aa78
-  languageName: node
-  linkType: hard
-
 "tailwindcss@npm:4.2.3":
   version: 4.2.3
   resolution: "tailwindcss@npm:4.2.3"
@@ -15483,7 +15476,7 @@ __metadata:
     react-speech-recognition: "npm:4.0.1"
     statsig-node: "npm:6.5.1"
     storybook: "npm:10.0.8"
-    tailwindcss: "npm:4.2.2"
+    tailwindcss: "npm:4.2.3"
     typescript: "npm:5.9.3"
     vanilla-cookieconsent: "npm:3.1.0"
     vite-tsconfig-paths: "npm:6.1.1"
