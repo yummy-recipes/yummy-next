@@ -6672,9 +6672,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:16.8.0":
-  version: 16.8.0
-  resolution: "chromatic@npm:16.8.0"
+"chromatic@npm:16.9.0":
+  version: 16.9.0
+  resolution: "chromatic@npm:16.9.0"
   dependencies:
     semver: "npm:^7.3.5"
   peerDependencies:
@@ -6692,7 +6692,7 @@ __metadata:
     chroma: dist/bin.cjs
     chromatic: dist/bin.cjs
     chromatic-cli: dist/bin.cjs
-  checksum: 10/8b0be7ec5d97ec1a54cd8220491d0d58fee56c3f5887ded6545d64e5ce85152a907a59d9063184d17902a31f4000fb750d18241e3e211b50e0955b09c9d8eb51
+  checksum: 10/0d5cdc508373ff3627431415a60f561f46a3eb2eab56861b0aec5d54a97eaef04851ca60a3bcc3c61af9f3ed752e001df67594f1562dce13ea0c95187fd9552b
   languageName: node
   linkType: hard
 
@@ -15446,7 +15446,7 @@ __metadata:
     algoliasearch: "npm:5.52.1"
     arktype: "npm:2.2.0"
     autoprefixer: "npm:10.5.0"
-    chromatic: "npm:16.8.0"
+    chromatic: "npm:16.9.0"
     dotenv: "npm:17.4.2"
     eslint: "npm:9.39.4"
     eslint-config-next: "npm:16.2.5"
