@@ -190,19 +190,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ark/schema@npm:0.56.0":
-  version: 0.56.0
-  resolution: "@ark/schema@npm:0.56.0"
+"@ark/schema@npm:0.56.1":
+  version: 0.56.1
+  resolution: "@ark/schema@npm:0.56.1"
   dependencies:
-    "@ark/util": "npm:0.56.0"
-  checksum: 10/59d9007ab43ee41814bf3c91acf44fbcff82086eb2b8aa7715ec388f6897ebb6f3ef56ba6b7815fae8d4db702e6a6a3e5897cd48a50112caa3784df0ed4fd7e4
+    "@ark/util": "npm:0.56.1"
+  checksum: 10/ced27639d3450d81e30553d1c58dd3599a9d121016da6732233096012d076e172ef4174c3a0308c3b6175ecb364e64cdc10abc75a3931f3485546a8aaa5a4148
   languageName: node
   linkType: hard
 
-"@ark/util@npm:0.56.0":
-  version: 0.56.0
-  resolution: "@ark/util@npm:0.56.0"
-  checksum: 10/eb3477c6c1c126e708885721dd518d55dac133d642a916535ef0d75403182407cb36729d954181db82a6388b5e71cdeb486ea72dbfa3a58542f8d0435b79fb35
+"@ark/util@npm:0.56.1":
+  version: 0.56.1
+  resolution: "@ark/util@npm:0.56.1"
+  checksum: 10/137611345ebfff7ea3237f36337e9cdbc57234cdd73137236b81ad107dd78ddf74de09960cec94f57753be75e0663012cf4b01512e0f3e3307dacbf6d082a66a
   languageName: node
   linkType: hard
 
@@ -5803,23 +5803,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"arkregex@npm:0.0.5":
-  version: 0.0.5
-  resolution: "arkregex@npm:0.0.5"
+"arkregex@npm:0.0.7":
+  version: 0.0.7
+  resolution: "arkregex@npm:0.0.7"
   dependencies:
-    "@ark/util": "npm:0.56.0"
-  checksum: 10/c5eca109df57639b3245e1e72efe1b43cf881a2234b29736b11f57d29674d9ef78a2dcf54f5381a33690d53ce8989520bc123bb686dcce83f15c44f141c7f8a9
+    "@ark/util": "npm:0.56.1"
+  checksum: 10/2b4926a298453e875c0d2bbd95a24afd8bfa288c50a971aaef5b0064e18ade3435a12de32c6dd013e3b71e068e3cf8d7b5779ff2b15b23787b74e8f61c45c3d0
   languageName: node
   linkType: hard
 
-"arktype@npm:2.2.0":
-  version: 2.2.0
-  resolution: "arktype@npm:2.2.0"
+"arktype@npm:2.2.2":
+  version: 2.2.2
+  resolution: "arktype@npm:2.2.2"
   dependencies:
-    "@ark/schema": "npm:0.56.0"
-    "@ark/util": "npm:0.56.0"
-    arkregex: "npm:0.0.5"
-  checksum: 10/f391a570bd9dd0f39369669ca47c1504fa1969a6f29b60ef1219525c8866ce4b6f8553179b92bf40fc323faa29412ad0b25c03a4a2f16b96f836a1b589aac0b5
+    "@ark/schema": "npm:0.56.1"
+    "@ark/util": "npm:0.56.1"
+    arkregex: "npm:0.0.7"
+  checksum: 10/67bff69bbfe85ae8ca740cfad68b8ac1d61e30ef779f44908999b988f4de17bb32076162d96737c4d5883acf9aa37466779fce50c42915eaf90c863340bd32a9
   languageName: node
   linkType: hard
 
@@ -15480,7 +15480,7 @@ __metadata:
     "@types/react-dom": "npm:19.2.3"
     "@types/react-speech-recognition": "npm:3.9.6"
     algoliasearch: "npm:5.52.1"
-    arktype: "npm:2.2.0"
+    arktype: "npm:2.2.2"
     autoprefixer: "npm:10.5.0"
     chromatic: "npm:16.10.1"
     dotenv: "npm:17.4.2"
