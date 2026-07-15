@@ -60,12 +60,8 @@ export const StatsigProvider = ({
     })();
   }, []);
 
-  if (initialValues === null) {
-    return children;
-  }
-
   return (
-    <StatsigProviderInternal initialValues={initialValues.bootstrapValues}>
+    <StatsigProviderInternal initialValues={initialValues?.bootstrapValues ?? ""}>
       {children}
     </StatsigProviderInternal>
   );
