@@ -3117,28 +3117,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/adapter-better-sqlite3@npm:7.2.0":
-  version: 7.2.0
-  resolution: "@prisma/adapter-better-sqlite3@npm:7.2.0"
+"@prisma/adapter-better-sqlite3@npm:7.10.0":
+  version: 7.10.0
+  resolution: "@prisma/adapter-better-sqlite3@npm:7.10.0"
   dependencies:
-    "@prisma/driver-adapter-utils": "npm:7.2.0"
-    better-sqlite3: "npm:^12.4.5"
-  checksum: 10/9bf034e4b2d88b2ee30fd0d5f1d6edcc98c40ef5d5a357596226f09ec6d2cc46c8a4366c259d4f90ca3b822bfc6517ebee3258dcc9c1304078cca599ca7f2789
+    "@prisma/driver-adapter-utils": "npm:7.10.0"
+    better-sqlite3: "npm:^12.6.0"
+  checksum: 10/443c83100bbdefc28e77bc7ea508545188c138275685588cf74af380a7754768e7d967a07f6a7621d8a74fc160d8bbb782e0ee56245718d148c715566f6abe03
   languageName: node
   linkType: hard
 
-"@prisma/client-runtime-utils@npm:7.2.0":
-  version: 7.2.0
-  resolution: "@prisma/client-runtime-utils@npm:7.2.0"
-  checksum: 10/afcbd08300322379b868073f7a76b2247cf387e2a0b1bbb7d63a7d4ad86f7b6691a7a71f0caf723999b3f64840c980b85562e14174efde190a3c93c711404f5c
+"@prisma/client-runtime-utils@npm:7.10.0":
+  version: 7.10.0
+  resolution: "@prisma/client-runtime-utils@npm:7.10.0"
+  checksum: 10/f802d31e0b4bcc563a78a5fe5e5577018e0ce97a18f1846654a0505a536e80e2641a5e3cfa260ee00a2bcfe12430e0a26cbcbe2f4082434e7e0bb794251fb05f
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:7.2.0":
-  version: 7.2.0
-  resolution: "@prisma/client@npm:7.2.0"
+"@prisma/client@npm:7.10.0":
+  version: 7.10.0
+  resolution: "@prisma/client@npm:7.10.0"
   dependencies:
-    "@prisma/client-runtime-utils": "npm:7.2.0"
+    "@prisma/client-runtime-utils": "npm:7.10.0"
   peerDependencies:
     prisma: "*"
     typescript: ">=5.4.0"
@@ -3147,7 +3147,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10/0bc17fc8834b30dccbac8e3e9050af6b720bbd29be095202c11e5f41dda82cd5441b2502a4f6ed7d2d719bcedd6fe6f3526170c6a314f58e98125d7e8fee6355
+  checksum: 10/9dae91743d5948340ad990ed49531cabfad694870e1668f9ca16415ab9d68462dbb6e1640fbbdeb1877b066dff63d4f86aa1089df0787976014d42ff31d06c4e
   languageName: node
   linkType: hard
 
@@ -3167,6 +3167,13 @@ __metadata:
   version: 6.8.2
   resolution: "@prisma/debug@npm:6.8.2"
   checksum: 10/3d57de92f95bc87505444a60bb805a9f5bc6c8ff68fe0bc7c9f605256a03b3c179d6d14cf2e3999332a06cf5833032940886b898a30543acb82e089df1ed28c8
+  languageName: node
+  linkType: hard
+
+"@prisma/debug@npm:7.10.0":
+  version: 7.10.0
+  resolution: "@prisma/debug@npm:7.10.0"
+  checksum: 10/526d3081efacbfd8f01543694442c1fab02fde5d14dc6cd983c59e3b307fdfa3b2abf0b3952c8aa63a91ab0b2dd1e93b1d76609ff3ae08ae263cfd8f31766080
   languageName: node
   linkType: hard
 
@@ -3202,12 +3209,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/driver-adapter-utils@npm:7.2.0":
-  version: 7.2.0
-  resolution: "@prisma/driver-adapter-utils@npm:7.2.0"
+"@prisma/driver-adapter-utils@npm:7.10.0":
+  version: 7.10.0
+  resolution: "@prisma/driver-adapter-utils@npm:7.10.0"
   dependencies:
-    "@prisma/debug": "npm:7.2.0"
-  checksum: 10/061cd1d8c799ea6e5d90772a28e62befd3f20b9ea8c2ca40f60d4ce684f0556c4284da932365d5f44d00b3ae0f5f286443026e038f4e6a330d439cb78c27b22d
+    "@prisma/debug": "npm:7.10.0"
+  checksum: 10/6ce3e55febd69db38aa920a428c555d0caf2f821ab8dc20b38ed406f99fc413fc61fca8d5ec341bf78a58eb3fcbfbd7a4b483f7fae41aadd4265cbc582805eb9
   languageName: node
   linkType: hard
 
@@ -16611,8 +16618,8 @@ __metadata:
     "@headlessui/react": "npm:2.2.10"
     "@heroicons/react": "npm:2.2.0"
     "@playwright/test": "npm:1.62.1"
-    "@prisma/adapter-better-sqlite3": "npm:7.2.0"
-    "@prisma/client": "npm:7.2.0"
+    "@prisma/adapter-better-sqlite3": "npm:7.10.0"
+    "@prisma/client": "npm:7.10.0"
     "@sentry/nextjs": "npm:10.64.0"
     "@statsig/react-bindings": "npm:3.33.5"
     "@storybook/addon-docs": "npm:10.0.8"
