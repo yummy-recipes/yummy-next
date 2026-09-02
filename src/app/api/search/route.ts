@@ -18,22 +18,32 @@ export async function GET(request: Request) {
 
   const recipes = await getSearchResults(query);
 
-  const data = recipes.map((recipe) => {
-    const id = getRecipeId(recipe.slug);
-    return {
-      id,
-      label: recipe.title,
-      value: `/${recipe.category.slug}/${recipe.slug}`,
-      recipe: {
+  const data = recipes.flatMap((recipe) => {
+    let id: string;
+    try {
+      id = getRecipeId(recipe.slug);
+    } catch (error) {
+      // A single recipe with a bad slug shouldn't take down the whole
+      // search response — skip it and keep the rest of the results.
+      console.error(`Skipping recipe with invalid slug in search results:`, error);
+      return [];
+    }
+    return [
+      {
         id,
-        slug: recipe.slug,
-        title: recipe.title,
-        headline: recipe.headline,
-        preparationTime: recipe.preparationTime,
-        categorySlug: recipe.category.slug,
-        coverImage: recipe.coverImage,
+        label: recipe.title,
+        value: `/${recipe.category.slug}/${recipe.slug}`,
+        recipe: {
+          id,
+          slug: recipe.slug,
+          title: recipe.title,
+          headline: recipe.headline,
+          preparationTime: recipe.preparationTime,
+          categorySlug: recipe.category.slug,
+          coverImage: recipe.coverImage,
+        },
       },
-    };
+    ];
   });
 
   return new Response(JSON.stringify({ data }));
