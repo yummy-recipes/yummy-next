@@ -234,7 +234,7 @@ export type RecipeGroupByOutputType = {
   _max: RecipeMaxAggregateOutputType | null;
 };
 
-type GetRecipeGroupByPayload<T extends RecipeGroupByArgs> =
+export type GetRecipeGroupByPayload<T extends RecipeGroupByArgs> =
   Prisma.PrismaPromise<
     Array<
       Prisma.PickEnumerable<RecipeGroupByOutputType, T["by"]> & {
@@ -296,9 +296,7 @@ export type RecipeWhereUniqueInput = Prisma.AtLeast<
     NOT?: Prisma.RecipeWhereInput | Prisma.RecipeWhereInput[];
     coverImage?: Prisma.StringFilter<"Recipe"> | string;
     coverImageBlurDataUrl?:
-      | Prisma.StringNullableFilter<"Recipe">
-      | string
-      | null;
+      Prisma.StringNullableFilter<"Recipe"> | string | null;
     title?: Prisma.StringFilter<"Recipe"> | string;
     headline?: Prisma.StringFilter<"Recipe"> | string;
     preparationTime?: Prisma.IntFilter<"Recipe"> | number;
@@ -345,9 +343,7 @@ export type RecipeScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"Recipe"> | string;
   coverImage?: Prisma.StringWithAggregatesFilter<"Recipe"> | string;
   coverImageBlurDataUrl?:
-    | Prisma.StringNullableWithAggregatesFilter<"Recipe">
-    | string
-    | null;
+    Prisma.StringNullableWithAggregatesFilter<"Recipe"> | string | null;
   title?: Prisma.StringWithAggregatesFilter<"Recipe"> | string;
   headline?: Prisma.StringWithAggregatesFilter<"Recipe"> | string;
   preparationTime?: Prisma.IntWithAggregatesFilter<"Recipe"> | number;
@@ -390,9 +386,7 @@ export type RecipeUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -409,9 +403,7 @@ export type RecipeUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -439,9 +431,7 @@ export type RecipeUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -453,9 +443,7 @@ export type RecipeUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -988,9 +976,7 @@ export type RecipeUpdateWithoutIngredientsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1006,9 +992,7 @@ export type RecipeUncheckedUpdateWithoutIngredientsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1080,9 +1064,7 @@ export type RecipeUpdateWithoutInstructionsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1098,9 +1080,7 @@ export type RecipeUncheckedUpdateWithoutInstructionsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1172,9 +1152,7 @@ export type RecipeUpdateWithoutGalleryImagesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1190,9 +1168,7 @@ export type RecipeUncheckedUpdateWithoutGalleryImagesInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1207,9 +1183,7 @@ export type RecipeUpdateWithoutTagsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1225,9 +1199,7 @@ export type RecipeUncheckedUpdateWithoutTagsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1243,9 +1215,7 @@ export type RecipeUncheckedUpdateManyWithoutTagsInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1268,9 +1238,7 @@ export type RecipeUpdateWithoutCategoryInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1286,9 +1254,7 @@ export type RecipeUncheckedUpdateWithoutCategoryInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1304,9 +1270,7 @@ export type RecipeUncheckedUpdateManyWithoutCategoryInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string;
   coverImageBlurDataUrl?:
-    | Prisma.NullableStringFieldUpdateOperationsInput
-    | string
-    | null;
+    Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   title?: Prisma.StringFieldUpdateOperationsInput | string;
   headline?: Prisma.StringFieldUpdateOperationsInput | string;
   preparationTime?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1994,9 +1958,9 @@ export interface RecipeDelegate<
       Prisma.Extends<"skip", Prisma.Keys<T>>,
       Prisma.Extends<"take", Prisma.Keys<T>>
     >,
-    OrderByArg extends Prisma.True extends HasSelectOrTake
+    OrderByArg extends (Prisma.True extends HasSelectOrTake
       ? { orderBy: RecipeGroupByArgs["orderBy"] }
-      : { orderBy?: RecipeGroupByArgs["orderBy"] },
+      : { orderBy?: RecipeGroupByArgs["orderBy"] }),
     OrderFields extends Prisma.ExcludeUnderscoreKeys<
       Prisma.Keys<Prisma.MaybeTupleToUnion<T["orderBy"]>>
     >,
@@ -2004,8 +1968,8 @@ export interface RecipeDelegate<
     ByValid extends Prisma.Has<ByFields, OrderFields>,
     HavingFields extends Prisma.GetHavingFields<T["having"]>,
     HavingValid extends Prisma.Has<ByFields, HavingFields>,
-    ByEmpty extends T["by"] extends never[] ? Prisma.True : Prisma.False,
-    InputErrors extends ByEmpty extends Prisma.True
+    ByEmpty extends (T["by"] extends never[] ? Prisma.True : Prisma.False),
+    InputErrors extends (ByEmpty extends Prisma.True
       ? `Error: "by" must not be empty.`
       : HavingValid extends Prisma.False
         ? {
@@ -2046,7 +2010,7 @@ export interface RecipeDelegate<
                   [P in OrderFields]: P extends ByFields
                     ? never
                     : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
-                }[OrderFields],
+                }[OrderFields]),
   >(
     args: Prisma.SubsetIntersection<T, RecipeGroupByArgs, OrderByArg> &
       InputErrors,
@@ -2139,13 +2103,9 @@ export interface Prisma__RecipeClient<
    */
   then<TResult1 = T, TResult2 = never>(
     onfulfilled?:
-      | ((value: T) => TResult1 | PromiseLike<TResult1>)
-      | undefined
-      | null,
+      ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
     onrejected?:
-      | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-      | undefined
-      | null,
+      ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
   /**
    * Attaches a callback for only the rejection of the Promise.
@@ -2154,9 +2114,7 @@ export interface Prisma__RecipeClient<
    */
   catch<TResult = never>(
     onrejected?:
-      | ((reason: any) => TResult | PromiseLike<TResult>)
-      | undefined
-      | null,
+      ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
   ): runtime.Types.Utils.JsPromise<T | TResult>;
   /**
    * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
@@ -2398,6 +2356,11 @@ export type RecipeFindManyArgs<
    * Skip the first `n` Recipes.
    */
   skip?: number;
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   *
+   * Filter by unique combinations of Recipes.
+   */
   distinct?: Prisma.RecipeScalarFieldEnum | Prisma.RecipeScalarFieldEnum[];
 };
 
@@ -2686,8 +2649,7 @@ export type Recipe$tagsArgs<
   include?: Prisma.TagInclude<ExtArgs> | null;
   where?: Prisma.TagWhereInput;
   orderBy?:
-    | Prisma.TagOrderByWithRelationInput
-    | Prisma.TagOrderByWithRelationInput[];
+    Prisma.TagOrderByWithRelationInput | Prisma.TagOrderByWithRelationInput[];
   cursor?: Prisma.TagWhereUniqueInput;
   take?: number;
   skip?: number;
