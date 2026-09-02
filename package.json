@@ -20,7 +20,9 @@
     "heroku-postbuild": "echo OK",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "checkly:test": "checkly test",
+    "checkly:deploy": "checkly deploy"
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "7.2.0",
@@ -52,11 +54,13 @@
     "@chromatic-com/storybook": "4.1.3",
     "@headlessui/react": "2.2.10",
     "@heroicons/react": "2.2.0",
+    "@playwright/test": "1.62.1",
     "@storybook/addon-docs": "10.0.8",
     "@storybook/addon-links": "10.0.8",
     "@storybook/addon-onboarding": "10.0.8",
     "@storybook/nextjs": "10.0.8",
     "@types/react-speech-recognition": "3.9.6",
+    "checkly": "9.0.0",
     "chromatic": "16.10.1",
     "dotenv": "17.4.2",
     "eslint-config-next": "16.2.10",
