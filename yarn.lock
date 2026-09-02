@@ -6866,15 +6866,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:16.10.1":
-  version: 16.10.1
-  resolution: "chromatic@npm:16.10.1"
+"chromatic@npm:18.7.2":
+  version: 18.7.2
+  resolution: "chromatic@npm:18.7.2"
   dependencies:
     semver: "npm:^7.3.5"
   peerDependencies:
     "@chromatic-com/cypress": ^0.*.* || ^1.0.0
     "@chromatic-com/playwright": ^0.*.* || ^1.0.0
     "@chromatic-com/vitest": ^0.*.* || ^1.0.0
+  dependenciesMeta:
+    "@sentry/cli":
+      built: true
+    esbuild:
+      built: true
   peerDependenciesMeta:
     "@chromatic-com/cypress":
       optional: true
@@ -6886,7 +6891,7 @@ __metadata:
     chroma: dist/bin.cjs
     chromatic: dist/bin.cjs
     chromatic-cli: dist/bin.cjs
-  checksum: 10/838530978d949833115daa4b62a34dd58bf59dc15b9eb2cc9863c5a3df8f3841e224cb174ae34ef8ec5b5650c2bdebbba92e0c14d68459435fa0faf5cce64353
+  checksum: 10/12651bbab1ab68fb97ae31d8b55ca046241e9d2d37b9020dfca980912a24830067f0d215964fcde57f7035867d6336fb312b564b8fa7ea1270cfcd160c56557b
   languageName: node
   linkType: hard
 
@@ -16799,7 +16804,7 @@ __metadata:
     arktype: "npm:2.2.3"
     autoprefixer: "npm:10.5.2"
     checkly: "npm:9.0.0"
-    chromatic: "npm:16.10.1"
+    chromatic: "npm:18.7.2"
     dotenv: "npm:17.4.2"
     eslint: "npm:9.39.4"
     eslint-config-next: "npm:16.2.10"

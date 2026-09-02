@@ -61,7 +61,7 @@
     "@storybook/nextjs": "10.0.8",
     "@types/react-speech-recognition": "3.9.6",
     "checkly": "9.0.0",
-    "chromatic": "16.10.1",
+    "chromatic": "18.7.2",
     "dotenv": "17.4.2",
     "eslint-config-next": "16.2.10",
     "eslint-config-prettier": "10.1.8",
