@@ -60,7 +60,7 @@
     "@storybook/addon-onboarding": "10.6.0",
     "@storybook/nextjs": "10.6.0",
     "@types/react-speech-recognition": "3.9.6",
-    "checkly": "9.0.0",
+    "checkly": "9.1.0",
     "chromatic": "18.7.2",
     "dotenv": "17.4.2",
     "eslint-config-next": "16.2.12",
