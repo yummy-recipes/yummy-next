@@ -7585,9 +7585,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"checkly@npm:9.1.0":
-  version: 9.1.0
-  resolution: "checkly@npm:9.1.0"
+"checkly@npm:9.2.0":
+  version: 9.2.0
+  resolution: "checkly@npm:9.2.0"
   dependencies:
     "@oclif/core": "npm:^4.14.0"
     "@oclif/plugin-help": "npm:^6.3.0"
@@ -7629,7 +7629,7 @@ __metadata:
     yaml: "npm:^2.9.0"
   bin:
     checkly: bin/run.cjs
-  checksum: 10/9cb611e0fa3415ef9880e261df5564a2718e810a021ff3ed18a6031dc9ad880fd9b4f290aaa154ac09cb4335a500580ef092831c3f49c5318c984e80f664a083
+  checksum: 10/e4631ca3a70329035f7c00e81d712bff485ba00c887d79c76c272b4bf6014d2850ab9cae454b9af61eeaac6cee2992cb21996609d901974f0cc09e8143cd2c59
   languageName: node
   linkType: hard
 
@@ -17814,7 +17814,7 @@ __metadata:
     algoliasearch: "npm:5.57.0"
     arktype: "npm:2.2.3"
     autoprefixer: "npm:10.5.5"
-    checkly: "npm:9.1.0"
+    checkly: "npm:9.2.0"
     chromatic: "npm:18.7.2"
     dotenv: "npm:17.4.2"
     eslint: "npm:9.39.5"
