@@ -32,8 +32,8 @@
     "@tailwindcss/postcss": "4.3.2",
     "@tanstack/react-query": "5.101.4",
     "@types/node": "24.13.3",
-    "@types/react": "19.2.17",
-    "@types/react-dom": "19.2.3",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
     "algoliasearch": "5.55.2",
     "arktype": "2.2.3",
     "autoprefixer": "10.5.4",
@@ -42,8 +42,8 @@
     "next": "16.2.10",
     "postcss": "8.5.28",
     "prisma": "7.10.0",
-    "react": "19.2.7",
-    "react-dom": "19.2.7",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "react-speech-recognition": "4.0.1",
     "statsig-node": "6.5.2",
     "tailwindcss": "4.3.2",
@@ -74,8 +74,8 @@
     "vitest": "4.1.11"
   },
   "resolutions": {
-    "@types/react": "19.2.17",
-    "@types/react-dom": "19.2.3",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
     "better-sqlite3": "12.11.1"
   }
 }
