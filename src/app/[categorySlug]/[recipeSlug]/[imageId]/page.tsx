@@ -15,9 +15,15 @@ interface Props {
 export default async function Page({ params }: Props) {
   const { categorySlug, recipeSlug, imageId } = await params;
 
+  const parsedImageId = parseInt(imageId, 10);
+
+  if (Number.isNaN(parsedImageId)) {
+    return notFound();
+  }
+
   const galleryImage = await prisma.recipeGalleryImage.findUnique({
     where: {
-      id: parseInt(imageId) ?? -1,
+      id: parsedImageId,
     },
   });
 
