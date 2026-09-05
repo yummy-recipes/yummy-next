@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   useClientBootstrapInit,
   StatsigProvider as OriginalStatsigProvider,
@@ -10,19 +10,23 @@ const StatsigProviderInternal = ({
   initialValues,
   children,
 }: {
-  initialValues: any;
+  initialValues: string;
   children: React.ReactNode;
 }) => {
-  const stableID =
-    document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("stableID="))
-      ?.split("=")[1] || "anonymous";
-  const user = {
-    customIDs: {
-      stableID,
-    },
-  };
+  const user = useMemo(() => {
+    const stableID =
+      document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("stableID="))
+        ?.split("=")[1] || "anonymous";
+
+    return {
+      customIDs: {
+        stableID,
+      },
+    };
+  }, []);
+
   const client = useClientBootstrapInit(
     process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!,
     user,
@@ -31,6 +35,23 @@ const StatsigProviderInternal = ({
       environment: { tier: process.env.NODE_ENV ?? "development" },
     },
   );
+
+  // useClientBootstrapInit only ever applies the `initialValues` it received
+  // on its first call - the client it returns is memoized once and never
+  // recreated. This component now mounts before the real bootstrap payload
+  // has loaded (so the tree stays stable and `children` never gets
+  // remounted), so the client is created seeded with the "" placeholder.
+  // Once the real values arrive, feed them in manually so gates/experiments
+  // reflect the server-computed bootstrap instead of being stuck on empty
+  // data for the rest of the session.
+  useEffect(() => {
+    if (!initialValues) {
+      return;
+    }
+
+    client.dataAdapter.setData(initialValues);
+    client.updateUserSync(user);
+  }, [client, initialValues, user]);
 
   return (
     <OriginalStatsigProvider client={client}>
@@ -46,7 +67,7 @@ export const StatsigProvider = ({
 }) => {
   const [initialValues, setInitialValues] = useState<{
     stableID: string;
-    bootstrapValues: any;
+    bootstrapValues: string;
   } | null>(null);
 
   useEffect(() => {
