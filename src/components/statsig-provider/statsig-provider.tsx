@@ -6,6 +6,13 @@ import {
   StatsigProvider as OriginalStatsigProvider,
 } from "@statsig/react-bindings";
 
+// A validly-parseable "no updates yet" placeholder for the window before the
+// real bootstrap payload has loaded. Statsig's EvaluationResponse parsing
+// requires valid JSON with a `has_updates` field - passing "" instead makes
+// JSON.parse throw and logs a "Failed to parse EvaluationResponse" error on
+// every page load, even though the client handles it gracefully either way.
+const EMPTY_BOOTSTRAP_VALUES = '{"has_updates":false}';
+
 const StatsigProviderInternal = ({
   initialValues,
   children,
@@ -40,12 +47,12 @@ const StatsigProviderInternal = ({
   // on its first call - the client it returns is memoized once and never
   // recreated. This component now mounts before the real bootstrap payload
   // has loaded (so the tree stays stable and `children` never gets
-  // remounted), so the client is created seeded with the "" placeholder.
+  // remounted), so the client is created seeded with EMPTY_BOOTSTRAP_VALUES.
   // Once the real values arrive, feed them in manually so gates/experiments
   // reflect the server-computed bootstrap instead of being stuck on empty
   // data for the rest of the session.
   useEffect(() => {
-    if (!initialValues) {
+    if (initialValues === EMPTY_BOOTSTRAP_VALUES) {
       return;
     }
 
@@ -82,7 +89,9 @@ export const StatsigProvider = ({
   }, []);
 
   return (
-    <StatsigProviderInternal initialValues={initialValues?.bootstrapValues ?? ""}>
+    <StatsigProviderInternal
+      initialValues={initialValues?.bootstrapValues ?? EMPTY_BOOTSTRAP_VALUES}
+    >
       {children}
     </StatsigProviderInternal>
   );
