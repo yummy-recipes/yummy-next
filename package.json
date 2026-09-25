@@ -62,7 +62,7 @@
     "@types/react-speech-recognition": "3.9.6",
     "checkly": "9.5.0",
     "chromatic": "18.9.4",
-    "dotenv": "17.4.2",
+    "dotenv": "18.0.4",
     "eslint-config-next": "16.2.12",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-storybook": "10.6.0",
