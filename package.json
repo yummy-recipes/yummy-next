@@ -25,7 +25,7 @@
     "checkly:deploy": "checkly deploy"
   },
   "dependencies": {
-    "@prisma/adapter-better-sqlite3": "7.10.0",
+    "@prisma/adapter-better-sqlite3": "7.10.1",
     "@prisma/client": "7.10.0",
     "@sentry/nextjs": "10.75.0",
     "@statsig/react-bindings": "3.33.5",
