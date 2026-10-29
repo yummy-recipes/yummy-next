@@ -190,19 +190,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ark/schema@npm:0.56.2":
-  version: 0.56.2
-  resolution: "@ark/schema@npm:0.56.2"
+"@ark/schema@npm:0.56.8":
+  version: 0.56.8
+  resolution: "@ark/schema@npm:0.56.8"
   dependencies:
-    "@ark/util": "npm:0.56.2"
-  checksum: 10/f90af0c649c2ee9e9d28b229e9250b6a5f30b6c322023224e8a0dd20aa85c6f232bf8142acd2edcc9a1085a76a9a727cbbdbeb6e8a1c7f972caf90e986da0a2a
+    "@ark/util": "npm:0.56.8"
+  checksum: 10/b2afe42893fd89848292275dfb30a6c3fb92e9ed0ae101d23cdd0aa9cdffae9d067b639c19b1e4ed5fa4dc5b3872fea9fc5837fe1a913ce205e17112592330c0
   languageName: node
   linkType: hard
 
-"@ark/util@npm:0.56.2":
-  version: 0.56.2
-  resolution: "@ark/util@npm:0.56.2"
-  checksum: 10/36fc36544397e307b4d21e7b959daab9b55f678050718939d5de84b8f48dae18e19e8100f988c68dbf9503c3a7a402b741e78297f347881dee486ba0926ce7ea
+"@ark/util@npm:0.56.8":
+  version: 0.56.8
+  resolution: "@ark/util@npm:0.56.8"
+  checksum: 10/80f498e18728646284a0217d87c1439b47e9103be38f90244787664deec357081cceca7e52f57036209f764e34d457615ccf189328c9b0077558782debd57a67
   languageName: node
   linkType: hard
 
@@ -6596,23 +6596,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"arkregex@npm:0.0.8":
-  version: 0.0.8
-  resolution: "arkregex@npm:0.0.8"
+"arkregex@npm:0.0.14":
+  version: 0.0.14
+  resolution: "arkregex@npm:0.0.14"
   dependencies:
-    "@ark/util": "npm:0.56.2"
-  checksum: 10/ca3655a7431080cb6f60eedb0171f3a2eaa9150b03a89fb6aa494a9435b5d652c0ffba32bc332bc5db1662231ada8899aae3ea07af85e6cb2b502cfae4f73983
+    "@ark/util": "npm:0.56.8"
+  checksum: 10/2bbcb2ca19bf2311e6b5ae72fef1f704d8c4d459eb83750a0a1e660e21fb9becbbb5cba528a537f1b7c72def938ba47674226ce9bcc90233c92225c246c0e43b
   languageName: node
   linkType: hard
 
-"arktype@npm:2.2.3":
-  version: 2.2.3
-  resolution: "arktype@npm:2.2.3"
+"arktype@npm:2.2.9":
+  version: 2.2.9
+  resolution: "arktype@npm:2.2.9"
   dependencies:
-    "@ark/schema": "npm:0.56.2"
-    "@ark/util": "npm:0.56.2"
-    arkregex: "npm:0.0.8"
-  checksum: 10/e7815275bb3bb6cac3e4ad0bdad37a5c3400da5c580363948661da4d9dcdf4f7cf31b64adc0c25579ea197ac176e739780af9724a143de354025ccab55849fab
+    "@ark/schema": "npm:0.56.8"
+    "@ark/util": "npm:0.56.8"
+    arkregex: "npm:0.0.14"
+  checksum: 10/726baab3c0bf9e86fb8f77a896df6ea1135b201e1dda14a24274b67c0add2cd31663980dd9909b73c0938cdb4a9d075ae3de044e53d8f0b0314d45f2d7db7aef
   languageName: node
   linkType: hard
 
@@ -17898,7 +17898,7 @@ __metadata:
     "@types/react-dom": "npm:19.3.0"
     "@types/react-speech-recognition": "npm:3.9.6"
     algoliasearch: "npm:5.59.0"
-    arktype: "npm:2.2.3"
+    arktype: "npm:2.2.9"
     autoprefixer: "npm:10.6.1"
     checkly: "npm:9.5.0"
     chromatic: "npm:18.9.4"
