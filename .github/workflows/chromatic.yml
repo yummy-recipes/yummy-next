@@ -19,6 +19,6 @@ jobs:
         run: yarn --immutable
 
       - name: Publish to Chromatic
-        uses: chromaui/action@v18.9.6
+        uses: chromaui/action@v18.13.6
         with:
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
