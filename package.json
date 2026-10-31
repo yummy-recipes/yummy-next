@@ -27,7 +27,7 @@
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "7.10.1",
     "@prisma/client": "7.10.1",
-    "@sentry/nextjs": "10.75.3",
+    "@sentry/nextjs": "10.78.0",
     "@statsig/react-bindings": "3.33.7",
     "@tailwindcss/postcss": "4.3.2",
     "@tanstack/react-query": "5.103.3",
