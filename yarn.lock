@@ -12610,12 +12610,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:18.0.14":
-  version: 18.0.14
-  resolution: "marked@npm:18.0.14"
+"marked@npm:18.2.1":
+  version: 18.2.1
+  resolution: "marked@npm:18.2.1"
   bin:
     marked: bin/marked.js
-  checksum: 10/d97c79d605ef9f786a379fc86893421f9598f7f05a8e837206279b3a50e9e1f3666769876ea7d8b58b378325da47d2d63758f9d28347440ae25feefbfcf2aeac
+  checksum: 10/0996e98ccdf3c241cdca607cd6aa1d708033f40d242424ca773f1851fbaa7c50d3b6b88855d380ffdd794298698442316da6e7522348cd5fa29777cdc542632a
   languageName: node
   linkType: hard
 
@@ -17912,7 +17912,7 @@ __metadata:
     eslint-plugin-storybook: "npm:10.6.8"
     husky: "npm:9.1.7"
     lint-staged: "npm:17.6.1"
-    marked: "npm:18.0.14"
+    marked: "npm:18.2.1"
     next: "npm:16.2.12"
     postcss: "npm:8.5.33"
     prettier: "npm:3.9.10"
